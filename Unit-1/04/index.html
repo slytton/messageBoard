@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" media="screen" title="no title" charset="utf-8">
+
+    <script type="text/javascript">
+      angular.module('myApp', []).controller("MadLibController", function($scope){
+        $scope.data = {};
+        $scope.funcs = {};
+        $scope.data.showing = false;
+
+        $scope.funcs.toggleMadLib = function(){
+          $scope.data.showing = !$scope.data.showing;
+        }
+
+        $scope.funcs.resetMadLib = function(){
+          $scope.data = {};
+        }
+      })
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      {{3.14159265359 | currency:'€'}}
+      <hr>
+      <h4>Please Say Something</h4>
+      <input type='text' ng-model="data.something">
+      <p>Yelling: <span ng-bind='data.something | uppercase'></span></p>
+      <p>Whispering: <i ng-bind='data.something | lowercase'></i></p>
+
+      <hr>
+
+      <h3>Digits of PI</h3>
+      <p>
+        How many digits of pi do you want?
+        <select name="digits" ng-init='data.digits = 0' ng-model='data.digits'>
+          <option value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+          <option value=4>4</option>
+          <option value=5>5</option>
+          <option value=6>6</option>
+          <option value=7>7</option>
+        </select>
+      </p>
+      <p>
+        Here you go! The first <span ng-bind='data.digits'></span> <ng-pluralize count='data.digits'
+                                             when='{0: "digits",
+                                                   1: "digit",
+                                                   "other": "digits"}''
+                                             >
+      </p>
+      <p ng-bind='3.1415927 | number:data.digits'></p>
+
+      <hr>
+
+      <h3>Super Useful Tip Calculator:</h3>
+      <p>
+        How much did your meal cost? <input type="text" class="u" ng-model="data.mealCost">
+      </p>
+      <p>
+        How much do you want to tip?
+        <select name="tip" ng-model="data.tipPercent">
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+      </p>
+      <h4>Subtotal: <span ng-bind='data.mealCost | currency'></span></h4>
+      <h4>Tip: <span ng-bind='data.mealCost * (data.tipPercent / 100) | currency'></span></h4>
+
+      <hr>
+
+      <div>{{this}}</div>
+      <p>
+        This shows that angular expressions use the $SCOPE object to locate their values.
+      </p>
+
+      <hr>
+
+
+      <div ng-controller="MadLibController">
+
+        <h4>Mad Libs</h4>
+
+        <h4>Please fill out the following!</h4>
+
+        <label for="boys-name">Boy's Name</label>
+        <input class="u-full-width" id="boys-name" type="text" name="boysName" placeholder="Enter a boy's name ..." ng-model="data.boysName">
+
+        <label for="adjective">Adjective</label>
+        <input class="u-full-width" id="adjective" type="text" name="adjective" placeholder="Enter an adjective ..." ng-model="data.adjective">
+
+        <label for="plural-noun-1">Plural Noun</label>
+        <input class="u-full-width" id="plural-noun-1" type="text" name="pluralNoun1" placeholder="Enter a plural noun ..." ng-model="data.pluralNoun1">
+
+        <label for="plural-noun-2">Plural Noun</label>
+        <input class="u-full-width" id="plural-noun-2" type="text" name="pluralNoun2" placeholder="Enter a plural noun ..." ng-model="data.pluralNoun2">
+
+        <label for="insect">An insect, plural</label>
+        <input class="u-full-width" id="insect" type="text" name="insect" placeholder="Enter an insect, plural ..." ng-model="data.insect">
+
+        <label for="plural-noun-3">Plural Noun</label>
+        <input class="u-full-width" id="plural-noun-3" type="text" name="pluralNoun3" placeholder="Enter a plural noun ..." ng-model="data.pluralNoun3">
+
+        <label for="verb">A verb ending in "s"</label>
+        <input class="u-full-width" id="verb" type="text" name="verb" placeholder="Enter a verb ending in 's' ..." ng-model="data.verb">
+
+        <input ng-click="funcs.toggleMadLib()" type="button" class="button primary" name="name" value="Generate!">
+
+        <div ng-show="data.showing">
+          <h3>I'm in love with <span ng-bind='data.boysName | uppercase'></span>. He's so <span ng-bind="data.adjective | uppercase"></span>! He has big flat <span ng-bind="data.pluralNoun1 | uppercase"></span>, and when our <span ng-bind="data.pluralNoun2 | uppercase"></span> meet, I get <span ng-bind="data.insect | uppercase"></span> in my stomach. I've fallen for him like a ton of <span ng-bind="data.pluralNoun3 | uppercase"></span>, and he <span ng-bind="data.verb | uppercase"></span> for me, too. But I think he's got another girlfriend. What should I do?</h3>
+
+          <button ng-click="funcs.resetMadLib()" name="button">Reset</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
