@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html ng-app='myapp' ng-cloak>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" media="screen" title="no title" charset="utf-8">
+
+    <style media="screen">
+      .highlight {
+        background-color: yellow;
+      }
+
+      .invalid {
+        color: red;
+      }
+
+      .valid {
+        color: green;
+      }
+
+      .sale {
+        color: orange;
+      }
+    </style>
+
+    <script type="text/javascript">
+      angular.module('myapp', [])
+        .controller('MainCtrl', function($scope, $sce){
+          var symbols=['Spades', 'Clubs', 'Hearts', 'Diamonds'];
+
+          $scope.duplicates = [1,1,2,5,6,9,9,9];
+          $scope.object = {a: "Test", b: "Test2", c: "Test3"}
+          $scope.data = {};
+          $scope.funcs = {};
+          $scope.data.pass = "";
+
+          $scope.symbols = symbols.map(function(symbol){
+            if(symbol === 'Diamonds') symbol = 'diams';
+            return $sce.trustAsHtml('&' + symbol.toLowerCase() + ';');
+          });
+
+          $scope.funcs.validPass = function(){
+            return $scope.data.pass.length >= 6;
+          }
+
+        })
+        .controller('CameraShopController', function($scope){
+          $scope.cameras = [
+            {
+              title: 'Nikon D3100 DSLR',
+              image: 'http://ecx.images-amazon.com/images/I/713u2gDQqML._SX522_.jpg',
+              rating: 3.4,
+              price: 369.99,
+              onSale: true
+            },
+            {
+              title: 'Canon EOS 70D',
+              image: 'http://ecx.images-amazon.com/images/I/81U00AkAUWL._SX522_.jpg',
+              rating: 2.0,
+              price: 1099.0,
+              onSale: false
+            },
+            {
+              title: 'Nikon D810A',
+              image:'http://ecx.images-amazon.com/images/I/91wtXIfLl2L._SX522_.jpg',
+              rating: 4.2,
+              price: 3796.95,
+              onSale: true
+            }
+          ]
+        })
+    </script>
+    <title></title>
+  </head>
+  <body>
+    <div class="container" ng-controller='MainCtrl'>
+      <h3>Card Suits</h3>
+      <ul>
+        <li ng-repeat="symbol in symbols" ng-bind-html='symbol'></li>
+      </ul>
+
+      <hr>
+
+      <h3>Duplicate Values in Array</h3>
+      <ul>
+        <li ng-repeat="duplicate in duplicates track by $index" ng-bind="duplicate"></li>
+      </ul>
+
+      <hr>
+
+      <h3>Itereate Over Objects</h3>
+      <ul>
+        <li ng-repeat="(key, value) in object" ng-bind="key"></li>
+      </ul>
+
+      <hr>
+
+      <h3>ng Data Binding</h3>
+      <div ng-show="3 + 4 == 5">
+        3 + 4 isn't 5, don't show
+      </div>
+
+      <div ng-show="3 + 4 == 7">
+        3 + 4 is 7, don't show
+      </div>
+
+      <div ng-hide="3 + 4 == 5">
+        3 + 4 isn't 5, don't hide
+      </div>
+
+      <div ng-hide="3 + 4 == 7">
+        3 + 4 is 7, do hide
+      </div>
+
+      <p>
+        Angular changes the display value to none.
+      </p>
+
+      <hr>
+
+      <h2>Password Validator</h2>
+      <h3>Sign up page</h3>
+      <input type="password" name="name" ng-model="data.pass">
+      <p>
+        Your password is <span ng-bind="data.pass.length"></span>
+        <ng-pluralize count='data.pass.length'
+                                             when='{1: "character",
+                                                   "other": "characters"}''
+                                             >
+      </p>
+      <p ng-show="data.pass.length < 6">
+        Password is invalid!
+      </p>
+      <button ng-hide="data.pass.length < 6">Sign Up!</button>
+
+      <hr>
+
+      <h3>ng-class</h3>
+      <div ng-class="{highlight: 4 + 4 == 8}">4 + 4 = 8</div>
+      <div ng-class="{highlight: 4 + 4 == 10}">4 + 4 = 10</div>
+
+      <hr>
+
+      <h2>Password Validator With Highlighting</h2>
+      <h3>Sign up page</h3>
+      <input ng-class="{valid: funcs.validPass(), invalid: !funcs.validPass()}" type="password" name="name" ng-model="data.pass">
+      <p ng-class="{valid: funcs.validPass(), invalid: !funcs.validPass()}">
+        Your password is <span ng-bind="data.pass.length"></span>
+        <ng-pluralize count='data.pass.length'
+                                             when='{1: "character",
+                                                   "other": "characters"}''
+                                             >
+      </p>
+      <p ng-hide="funcs.validPass()">
+        Password is invalid!
+      </p>
+      <button ng-show="funcs.validPass()">Sign Up!</button>
+
+      <hr>
+
+      <div ng-controller='CameraShopController'>
+        <h2>Final Exercise</h2>
+        <h3>Camera Shop</h3>
+
+        <select name="sort" ng-model="sort">
+          <option value="rating">Rating</option>
+          <option value="price">Price</option>
+        </select>
+
+        <div ng-repeat="camera in cameras | orderBy:sort">
+          <h6 ng-bind="camera.title"></h6>
+          <p ng-class="{sale: camera.onSale}">
+            Price: <span ng-bind="camera.price | currency"></span>
+          </p>
+          <p>
+            Rating: <span ng-bind="camera.rating"></span>
+          </p>
+          <img ng-src="{{camera.image}}" width='150' alt="{{camera.title}}" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
