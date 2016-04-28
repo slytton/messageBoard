@@ -3,10 +3,12 @@
   <head>
     <meta charset="utf-8">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
     <title>Exercise 09</title>
     <script type="text/javascript">
-      var app = angular.module('exercise09', []);
+      var app = angular.module('exercise09', ['ngMessages']);
       app.controller('validationController', function($scope){
         $scope.view = {};
         $scope.view.users = [];
@@ -46,10 +48,18 @@
                  ng-maxlength=12
                  required
                  ng-model="form.username" >
-
-          <p ng-show='firstForm.username.$invalid && firstForm.username.$dirty'>
-            Enter a username that is between 3 &amp; 12 characters.
-          </p>
+          <div ng-messages="firstForm.username.$error"
+               ng-show='firstForm.username.$invalid && firstForm.username.$dirty'>
+            <p ng-message='minlength'>
+              Enter a username that is longer than 3 characters.
+            </p>
+            <p ng-message='maxlength'>
+              Enter a username that is shorter than 12 characters.
+            </p>
+            <p ng-message='required'>
+              Enter a username.
+            </p>
+          </div>
         </div>
 
         <div class="form-group"
@@ -64,9 +74,18 @@
                  ng-minlength=3
                  ng-maxlength=12
                  ng-model="form.password">
-          <p ng-show='firstForm.password.$invalid && firstForm.password.$dirty'>
-            Enter a password that is between 3 &amp; 12 characters.
-          </p>
+          <div ng-messages="firstForm.password.$error"
+               ng-show='firstForm.password.$invalid && firstForm.password.$dirty'>
+            <p ng-message='minlength'>
+              Enter a password that is longer than 3 characters.
+            </p>
+            <p ng-message='maxlength'>
+              Enter a password that is shorter than 12 characters.
+            </p>
+            <p ng-message='required'>
+              Enter a password.
+            </p>
+          </div>
         </div>
 
         <div class="form-group"
@@ -80,9 +99,15 @@
                  ng-pattern="/.+@.+\..+/i"
                  required
                  ng-model="form.email">
-          <p ng-show='firstForm.email.$invalid && firstForm.email.$dirty'>
-            Enter a valid email address with the form email@example.com
-          </p>
+          <div ng-messages="firstForm.email.$error"
+               ng-show='firstForm.email.$invalid && firstForm.email.$dirty'>
+            <p ng-message='pattern'>
+              Enter a valid email matching the form person@example.com
+            </p>
+            <p ng-message='required'>
+              Enter an email.
+            </p>
+          </div>
         </div>
 
         <div class="form-group"
@@ -98,9 +123,18 @@
                  required
                  ng-model="form.zip">
 
-          <p ng-show='firstForm.zip.$invalid && firstForm.zip.$dirty'>
-            Please enter a valid 5 number zipcode.
-          </p>
+          <div ng-messages="firstForm.zip.$error"
+               ng-show='firstForm.zip.$invalid && firstForm.zip.$dirty'>
+            <p ng-message='minlength'>
+              Enter a 5 digit zipcode.
+            </p>
+            <p ng-message='maxlength'>
+              Enter a 5 digit zipcode.
+            </p>
+            <p ng-message='required'>
+              Enter a zipcode.
+            </p>
+          </div>
         </div>
 
         <input class="btn btn-primary" type="submit" value="Click me!" ng-disabled='firstForm.$invalid'>
