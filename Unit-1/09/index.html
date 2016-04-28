@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app='exercise09'>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <title>Exercise 09</title>
+    <script type="text/javascript">
+      var app = angular.module('exercise09', []);
+      app.controller('validationController', function($scope){
+        $scope.view = {};
+        $scope.view.users = [];
+        $scope.submitForm = function() {
+          if ($scope.firstForm.$valid){
+            $scope.view.users.push($scope.form);
+            $scope.form = {};
+            $scope.firstForm.$setPristine();
+          }
+        }
+      })
+    </script>
+    <style media="screen">
+      .has-success {
+        color: rgb(58, 189, 79);
+      }
+      .has-error {
+        color: rgb(191, 67, 67);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" ng-controller="validationController">
+      <h3>Here are our users</h3>
+      <h4 ng-bind="view.users | json"></h4>
+      <form novalidate name="firstForm" ng-submit="submitForm()">
+        <div class="form-group"
+             ng-class="{'has-error': firstForm.username.$invalid && firstForm.username.$dirty,
+                        'has-success': firstForm.username.$valid}">
+
+          <label for="username">Username: </label>
+          <input class="form-control"
+                 type="text"
+                 id="username"
+                 name="username"
+                 ng-minlength=3
+                 ng-maxlength=12
+                 required
+                 ng-model="form.username" >
+
+          <p ng-show='firstForm.username.$invalid && firstForm.username.$dirty'>
+            Enter a username that is between 3 &amp; 12 characters.
+          </p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': firstForm.password.$invalid && firstForm.password.$dirty,
+                        'has-success': firstForm.password.$valid}">
+          <label for="password">Password: </label>
+          <input class="form-control"
+                 type="password"
+                 id="password"
+                 name="password"
+                 required
+                 ng-minlength=3
+                 ng-maxlength=12
+                 ng-model="form.password">
+          <p ng-show='firstForm.password.$invalid && firstForm.password.$dirty'>
+            Enter a password that is between 3 &amp; 12 characters.
+          </p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': firstForm.email.$invalid && firstForm.email.$dirty,
+                        'has-success': firstForm.email.$valid}">
+          <label for="email">Email: </label>
+          <input class="form-control"
+                 type="email"
+                 id="email"
+                 name='email'
+                 ng-pattern="/.+@.+\..+/i"
+                 required
+                 ng-model="form.email">
+          <p ng-show='firstForm.email.$invalid && firstForm.email.$dirty'>
+            Enter a valid email address with the form email@example.com
+          </p>
+        </div>
+
+        <div class="form-group"
+             ng-class="{'has-error': firstForm.zip.$invalid && firstForm.zip.$dirty,
+                        'has-success': firstForm.zip.$valid}">
+          <label for="zip">Zip: </label>
+          <input class="form-control"
+                 type="number"
+                 id="zip"
+                 name="zip"
+                 ng-minlength=5
+                 ng-maxlength=5
+                 required
+                 ng-model="form.zip">
+
+          <p ng-show='firstForm.zip.$invalid && firstForm.zip.$dirty'>
+            Please enter a valid 5 number zipcode.
+          </p>
+        </div>
+
+        <input class="btn btn-primary" type="submit" value="Click me!" ng-disabled='firstForm.$invalid'>
+      </form>
+    </div>
+  </body>
+</html>
