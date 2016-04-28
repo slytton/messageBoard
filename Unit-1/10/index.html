@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app='exercise10'>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" charset="utf-8"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <title>Exercise 09</title>
+    <script type="text/javascript">
+      var app = angular.module('exercise10', ['ngAnimate']);
+      app.controller('animateController1', function($scope){
+      })
+      app.controller("animateController2", function($scope){
+        $scope.view = {};
+        $scope.view.instructors = ["Tim", "Ian", "Matt", "Elie"];
+      });
+    </script>
+
+    <style media="screen">
+    .ng-enter {
+      animation: fadeInRight .5s;
+    }
+
+    .ng-leave {
+      animation: fadeOutRight .5s;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container" ng-controller="animateController1">
+      <div ng-if="toggleBoolean">
+        Fade me!
+      </div>
+      <input type="text" ng-model="name">
+      <div ng-hide="name == 'Elie'">
+        You're not Elie!
+      </div>
+      <div ng-show="name == 'Elie'">
+        Hi Elie!
+      </div>
+      <button ng-click="toggleBoolean = !toggleBoolean">Toggle fade</button>
+    </div>
+
+    <hr>
+    <div ng-controller='animateController2'>
+      <input type="text" ng-model="view.search">
+      <div ng-repeat ="instructor in view.instructors | filter:view.search">
+        {{instructor}}
+      </div>
+    </div>
+  </body>
+</html>

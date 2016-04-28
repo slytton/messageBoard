@@ -46,10 +46,11 @@
                  name="username"
                  ng-minlength=3
                  ng-maxlength=12
+                 maxlength=12
                  required
                  ng-model="form.username" >
           <div ng-messages="firstForm.username.$error"
-               ng-show='firstForm.username.$invalid && firstForm.username.$dirty'>
+               ng-show='firstForm.username.$dirty'>
             <p ng-message='minlength'>
               Enter a username that is longer than 3 characters.
             </p>
@@ -115,16 +116,20 @@
                         'has-success': firstForm.zip.$valid}">
           <label for="zip">Zip: </label>
           <input class="form-control"
-                 type="number"
+                 type=“text”
                  id="zip"
                  name="zip"
+                 maxlength="5"
                  ng-minlength=5
-                 ng-maxlength=5
+                 pattern='[0-9]*'
                  required
                  ng-model="form.zip">
 
           <div ng-messages="firstForm.zip.$error"
-               ng-show='firstForm.zip.$invalid && firstForm.zip.$dirty'>
+               ng-show='firstForm.zip.$dirty'>
+            <p ng-message='pattern'>
+              Please use only numbers in the zipcode.
+            </p>
             <p ng-message='minlength'>
               Enter a 5 digit zipcode.
             </p>
