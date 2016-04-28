@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app='RedditClone'>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js" charset="utf-8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <title>Redit Clone</title>
+  </head>
+  <body>
+    <main class="container" ng-controller='PostsController'>
+      <form class="form-inline"
+            name='addPostForm'
+            ng-submit="addPost()"
+            novalidate>
+        <div class="form-group"
+             ng-class="{'has-error': addPostForm.title.$invalid && addPostForm.title.$dirty,
+                        'has-success': addPostForm.title.$valid}" >
+          <input type="text"
+                 class="form-control"
+                 id="title"
+                 placeholder="Post Title"
+                 name="title"
+                 required
+                 ng-model="vm.postsForm.title">
+          <div ng-messages='addPostForm.title.$error'
+               ng-show='addPostForm.title.$dirty'>
+            <p ng-message='required'>
+              Please enter a title.
+            </p>
+          </div>
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error': addPostForm.author.$invalid && addPostForm.author.$dirty,
+                        'has-success': addPostForm.author.$valid}" >
+          <input type="text"
+                 class="form-control"
+                 id="author"
+                 placeholder="Author"
+                 name="author"
+                 required
+                 ng-model='vm.postsForm.author'>
+          <div ng-messages='addPostForm.author.$error'
+               ng-show='addPostForm.author.$dirty'>
+            <p ng-message='required'>
+              Please enter an author.
+            </p>
+          </div>
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error': addPostForm.image.$invalid && addPostForm.image.$dirty,
+                        'has-success': addPostForm.image.$valid}" >
+
+          <input type="text"
+                 class="form-control"
+                 id="image"
+                 placeholder="Image"
+                 name="image"
+                 required
+                 ng-model="vm.postsForm.image">
+          <div ng-messages='addPostForm.image.$error'
+               ng-show='addPostForm.image.$dirty'>
+            <p ng-message='required'>
+              Please enter an image.
+            </p>
+          </div>
+        </div>
+        <div class="form-group"
+             ng-class="{'has-error': addPostForm.description.$invalid && addPostForm.description.$dirty,
+                        'has-success': addPostForm.description.$valid}" >
+
+          <input type="text"
+                 class="form-control"
+                 id="description"
+                 placeholder="Description"
+                 name="description"
+                 required
+                 ng-model="vm.postsForm.description">
+          <div ng-messages='addPostForm.description.$error'
+               ng-show='addPostForm.description.$dirty'>
+            <p ng-message='required'>
+              Please enter a description.
+            </p>
+          </div>
+        </div>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Add Post">
+      </form>
+
+      <article ng-repeat='post in vm.posts'>
+        <section class='unselectabel row'>
+
+          <div class="col-sm-3">
+            <img ng-src='{{post.image}}' alt="" />
+          </div>
+          <div class="col-sm-9">
+            <div class="row">
+              <div class="col-md-10">
+                <h4 ng-bind='post.title'></h4>
+              </div>
+              <div class="col-md-2">
+                <i ng-click='post.downVote()' class='fa fa-angle-down'></i>
+                <span ng-class="{'has-error': post.getVotes() < 0,
+                'has-success': post.getVotes() > 0}"
+                ng-bind='post.getVotes()'></span>
+                <i ng-click='post.upVote()' class='fa fa-angle-up'></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <p ng-bind="post.description">
+
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                
+              </div>
+              <div class="col-md-2">
+                <i class="author">By: <span ng-bind="post.author"></span></i>
+              </div>
+            </div>
+          </div>
+
+        </section>
+      </article>
+    </main>
+  </body>
+</html>

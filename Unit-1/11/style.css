@@ -1,0 +1,29 @@
+.has-success {
+  color: #5cb85c;
+}
+.has-error {
+  color: #d9534f;
+}
+
+.unselectabel {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.form-group {
+  vertical-align: top !important;
+}
+
+article img {
+  width: 100%;
+}
+
+article {
+  padding-top: 30px;
+}
+
+
+.author {
+  font-size: 10px;
+}
