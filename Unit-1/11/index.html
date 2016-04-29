@@ -8,6 +8,8 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
     <!-- load angular-moment -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
+    <!-- load ng-animate -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="app.js" charset="utf-8"></script>
@@ -34,11 +36,11 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li ng-class="{'active': vm.showAddPostForm}" ng-click="vm.showAddPostForm = !vm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
+            <li ng-init="vm.sort = '-votes'" ng-class="{'active': vm.showAddPostForm}" ng-click="vm.showAddPostForm = !vm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
             <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Filter <span class="caret"></span></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li ng-class="{'active': vm.sort === 'votes'}" ng-click="vm.sort = '-votes'" ><a href="">Votes</a></li>
+                <li ng-class="{'active': vm.sort === '-votes'}" ng-click="vm.sort = '-votes'" ><a href="">Votes</a></li>
                 <li ng-class="{'active': vm.sort === 'title'}" ng-click="vm.sort = 'title'" ><a href="">Title</a></li>
                 <li ng-class="{'active': vm.sort === 'createdAt'}" ng-click="vm.sort = 'createdAt'" ><a href="">Date</a></li>
               </ul>
@@ -46,26 +48,13 @@
           </ul>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-              <label class="sr-only" for="exampleInputAmount"></label>
+              <label class="sr-only"></label>
               <div class="input-group">
                 <div class="input-group-addon"><i class='fa fa-search'></i></div>
-                <input type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
+                <input ng-model='vm.search' type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
               </div>
             </div>
           </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
-          </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
@@ -111,18 +100,18 @@
         <input class="btn btn-primary" type="submit" value="Add Post">
       </form>
 
-      <article ng-repeat='post in vm.posts | orderBy: vm.sort'>
+      <article ng-repeat='post in vm.posts | filter: vm.search | orderBy: vm.sort'>
         <section class='unselectabel row'>
 
-          <div class="col-sm-3">
-            <img ng-src='{{post.image}}' alt=""/>
+          <div class="col-sm-3 .center-cropped">
+            <img class='' ng-src='{{post.image}}' alt=""/>
           </div>
           <div class="col-sm-9">
             <div class="row">
               <div class="col-xs-10">
                 <h4 ng-bind='post.title'></h4>
               </div>
-              <div class="col-xs-2">
+              <div class="col-sm-2 voting">
                 <i ng-click='post.downVote()' class='fa fa-angle-down'></i>
                 <span ng-class="{'has-error': post.getVotes() < 0,
                                  'has-success': post.getVotes() > 0}"
@@ -152,22 +141,24 @@
               </div>
 
               <div class="col-sm-3">
-                <i class='fa fa-comment-o comments-button' on-click></i>
-                <span ng-bind='post.comments.length'></span>
-                <ng-pluralize count="post.comments.length"
-                              when="{1: 'comment',
-                              'other': 'comments'}"></ng-pluralize>
+                <span ng-click="showComments = !showComments" class='show-comments'>
+                  <i class='fa fa-comment-o'></i>
+                  <span ng-bind='post.comments.length'></span>
+                  <ng-pluralize count="post.comments.length"
+                  when="{1: 'comment',
+                  'other': 'comments'}"></ng-pluralize>
+                </span>
               </div>
 
               <div class="col-sm-3">
-                <i class='fa fa-pencil'></i> comment
+                <span class='show-add-comments' ng-click="myState.showAddComments = !myState.showAddComments"><i class='fa fa-pencil'></i> comment</span>
               </div>
             </div>
-            <div class="row add-comments">
-              <form class='form-inline' ng-show="vm.showAddComments" class="" name='addCommentForm' ng-submit="addPost()" novalidate>
+            <div class="row add-comments" ng-show="myState.showAddComments">
+              <form class='form-inline'  class="" name='addCommentForm' ng-submit="addComment(post.id, this); " novalidate>
                 <div class="form-group" ng-class="{'has-error': addCommentForm.author.$invalid && addCommentForm.author.$dirty,
                 'has-success': addCommentForm.author.$valid}">
-                  <input type="text" class="form-control" id="author" placeholder="Author" name="author" required ng-model='vm.postsForm.author'>
+                  <input type="text" class="form-control" id="author" placeholder="Author" name="author" required ng-model='commentsForm.author'>
                   <div ng-messages='addCommentForm.author.$error' ng-show='addCommentForm.author.$dirty'>
                     <p ng-message='required'>
                       Please enter an author.
@@ -176,17 +167,17 @@
                 </div>
                 <div class="form-group" ng-class="{'has-error': addCommentForm.comment.$invalid && addCommentForm.comment.$dirty,
                                 'has-success': addCommentForm.comment.$valid}">
-                  <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="vm.postsForm.comment">
+                  <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.comment">
                   <div ng-messages='addCommentForm.comment.$error' ng-show='addCommentForm.comment.$dirty'>
                     <p ng-message='required'>
                       Please enter a comment.
                     </p>
                   </div>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Add Post">
+                <input class="btn btn-primary" type="submit" value="Add Comment">
               </form>
             </div>
-            <div class="comments">
+            <div ng-show='showComments' class="comments">
               <div class="row comment" ng-repeat="comment in post.comments">
                 <div class="col-sm-2">
                   <strong ng-bind="comment.author"></strong>:
