@@ -5,7 +5,7 @@
   color: #d9534f;
 }
 
-.unselectabel {
+.unselectabel nav {
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
@@ -26,4 +26,18 @@ article {
 
 .author {
   font-size: 10px;
+}
+
+
+.comments, .add-comments{
+  margin-top: 30px;
+}
+
+.comment {
+  padding: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.comment:nth-child(2n+1){
+  background-color: rgb(205, 205, 205);
 }
