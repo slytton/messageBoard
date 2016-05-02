@@ -9,11 +9,12 @@
     <!-- load angular-moment -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
     <!-- load ng-animate -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="app.js" charset="utf-8"></script>
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css" media="screen" title="no title" charset="utf-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-hQpvDQiCJaD2H465dQfA717v7lu5qHWtDbWNPvaTJ0ID5xnPUlVXnKzq7b8YUkbN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
@@ -30,7 +31,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">RC</a>
+          <a class="navbar-brand" href="">RC</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -38,7 +39,7 @@
           <ul class="nav navbar-nav">
             <li ng-init="vm.sort = '-votes'" ng-class="{'active': vm.showAddPostForm}" ng-click="vm.showAddPostForm = !vm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
             <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By <span class="caret"></span></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <strong ng-bind=""></strong> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li ng-class="{'active': vm.sort === '-votes'}" ng-click="vm.sort = '-votes'" ><a href="">Votes</a></li>
                 <li ng-class="{'active': vm.sort === 'title'}" ng-click="vm.sort = 'title'" ><a href="">Title</a></li>
@@ -60,7 +61,7 @@
     </nav>
 
     <main class="container">
-      <form ng-show="vm.showAddPostForm" class="" name='addPostForm' ng-submit="addPost()" novalidate>
+      <form ng-show="vm.showAddPostForm" class="add-post" name='addPostForm' ng-submit="addPost()" novalidate>
         <div class="form-group" ng-class="{'has-error': addPostForm.title.$invalid && addPostForm.title.$dirty,
                         'has-success': addPostForm.title.$valid}">
           <input type="text" class="form-control" id="title" placeholder="Post Title" name="title" required ng-model="vm.postsForm.title">
@@ -97,7 +98,7 @@
             </p>
           </div>
         </div>
-        <input class="btn btn-primary" type="submit" value="Add Post">
+        <input class="btn btn-primary" type="submit" ng-disabled="addPostForm.$invalid" value="Add Post">
       </form>
 
       <article ng-repeat='post in vm.posts | filter: vm.search | orderBy: vm.sort'>
@@ -112,12 +113,12 @@
                 <h4 ng-bind='post.title'></h4>
               </div>
               <div class="col-sm-2 voting">
-                <i ng-click='post.downVote()' class='fa fa-angle-down'></i>
-                <span ng-class="{'has-error': post.getVotes() < 0,
-                                 'has-success': post.getVotes() > 0}"
+                <i ng-click='post.votes = post.votes - 1' class='fa fa-angle-down'></i>
+                <span ng-class="{'has-error': post.votes < 0,
+                                 'has-success': post.votes > 0}"
 
-                      ng-bind='post.getVotes()'></span>
-                <i ng-click='post.upVote()' class='fa fa-angle-up'></i>
+                      ng-bind='post.votes'></span>
+                <i ng-click='post.votes = posts.votes + 1' class='fa fa-angle-up'></i>
               </div>
             </div>
             <div class="row">
@@ -135,7 +136,7 @@
             <div class="row">
               <div class="col-sm-4">
                 <i class='fa fa-calendar'></i>
-                <time title="{{ post.createdAt | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
+                  <time title="{{ post.createdAt | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
                   {{ post.createdAt | amCalendar }}
                 </time>
               </div>
@@ -167,14 +168,14 @@
                 </div>
                 <div class="form-group" ng-class="{'has-error': addCommentForm.comment.$invalid && addCommentForm.comment.$dirty,
                                 'has-success': addCommentForm.comment.$valid}">
-                  <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.comment">
+                  <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.text">
                   <div ng-messages='addCommentForm.comment.$error' ng-show='addCommentForm.comment.$dirty'>
                     <p ng-message='required'>
                       Please enter a comment.
                     </p>
                   </div>
                 </div>
-                <input class="btn btn-primary" type="submit" value="Add Comment">
+                <input class="btn btn-primary" type="submit" ng-disabled="addCommentForm.$invalid" value="Add Comment">
               </form>
             </div>
             <div ng-show='showComments' class="comments">

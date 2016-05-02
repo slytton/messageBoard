@@ -52,6 +52,48 @@ article {
   padding-top: 8px;
 }
 
+.container {
+  padding-bottom: 50px;
+}
+
 /*Animations*/
 
-.ng-enter
+.ng-enter {
+  animation: bounceInRight .75s;
+}
+
+.ng-leave {
+  animation: hinge 1s;
+}
+
+.form-group p.ng-leave {
+  animation: none;
+}
+
+.form-group p.ng-enter {
+  animation: shake .5s;
+}
+
+.add-post.ng-hide-remove, .add-comments.ng-hide-remove{
+  animation: lightSpeedIn .75s;
+}
+
+.add-post.ng-hide-add, .add-comments.ng-hide-add{
+  animation: lightSpeedOut .75s;
+}
+
+.comments.ng-hide-remove {
+  animation: flipInX 1s;
+}
+.comments.ng-hide-add {
+  animation: flipOutX 1s;
+}
+
+.ng-move {
+  animation: fadeIn 1s;
+}
+
+.ng-enter-stagger, .ng-leave-stagger {
+  animation-delay: .2s;
+  animation-duration: 0;
+}
