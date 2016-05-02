@@ -39,6 +39,7 @@ app.controller('PostsController', function($scope, $timeout){
     newPost.id = $scope.vm.posts.length,
     newPost.createdAt = new Date();
     newPost.comments = [];
+    newPost.votes = 0;
 
     $scope.vm.postsForm = {};
     $scope.vm.posts.push(newPost);
