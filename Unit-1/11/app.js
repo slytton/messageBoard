@@ -29,8 +29,9 @@ var app = angular.module('RedditClone', ['ui.router','ngAnimate', 'ngMessages', 
 
 app.controller('PostsController', function($scope, $timeout){
 
-
   $scope.vm = {};
+  $scope.vm.filters = {};
+  $scope.vm.filters.sort = '-votes';
   $scope.vm.showAddComments = false;
 
 });

@@ -16,6 +16,7 @@
     <script src="app.js" charset="utf-8"></script>
     <script src="directives/comments/comments.js"></script>
     <script src="directives/posts/posts.js"></script>
+    <script src="directives/header/header.js"></script>
     <script src="services/post.service.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css" media="screen" title="no title" charset="utf-8">
@@ -25,88 +26,9 @@
     <title>Reddit Clone</title>
   </head>
   <body ng-controller='PostsController'>
-    <nav class="navbar navbar-default unselectabel">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="">RC</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li ng-init="vm.sort = '-votes'" ng-class="{'active': vm.showAddPostForm}" ng-click="vm.showAddPostForm = !vm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
-            <li class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <strong ng-bind=""></strong> <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li ng-class="{'active': vm.sort === '-votes'}" ng-click="vm.sort = '-votes'" ><a href="">Votes</a></li>
-                <li ng-class="{'active': vm.sort === 'title'}" ng-click="vm.sort = 'title'" ><a href="">Title</a></li>
-                <li ng-class="{'active': vm.sort === 'createdAt'}" ng-click="vm.sort = 'createdAt'" ><a href="">Date</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-              <label class="sr-only"></label>
-              <div class="input-group">
-                <div class="input-group-addon"><i class='fa fa-search'></i></div>
-                <input ng-model='vm.search' type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
-              </div>
-            </div>
-          </form>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-
-    <rc-posts />
-    <!-- <div ng-view='posts'></div> -->
-    <!-- <main class="container">
-      <form ng-show="vm.showAddPostForm" class="add-post" name='addPostForm' ng-submit="addPost()" novalidate>
-        <div class="form-group" ng-class="{'has-error': addPostForm.title.$invalid && addPostForm.title.$dirty,
-                        'has-success': addPostForm.title.$valid}">
-          <input type="text" class="form-control" id="title" placeholder="Post Title" name="title" required ng-model="vm.postsForm.title">
-          <div ng-messages='addPostForm.title.$error' ng-show='addPostForm.title.$dirty'>
-            <p ng-message='required'>
-              Please enter a title.
-            </p>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': addPostForm.author.$invalid && addPostForm.author.$dirty,
-                        'has-success': addPostForm.author.$valid}">
-          <input type="text" class="form-control" id="author" placeholder="Author" name="author" required ng-model='vm.postsForm.author'>
-          <div ng-messages='addPostForm.author.$error' ng-show='addPostForm.author.$dirty'>
-            <p ng-message='required'>
-              Please enter an author.
-            </p>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': addPostForm.image.$invalid && addPostForm.image.$dirty,
-                        'has-success': addPostForm.image.$valid}">
-          <input type="text" class="form-control" id="image" placeholder="Image" name="image" required ng-model="vm.postsForm.image">
-          <div ng-messages='addPostForm.image.$error' ng-show='addPostForm.image.$dirty'>
-            <p ng-message='required'>
-              Please enter an image.
-            </p>
-          </div>
-        </div>
-        <div class="form-group" ng-class="{'has-error': addPostForm.description.$invalid && addPostForm.description.$dirty,
-                        'has-success': addPostForm.description.$valid}">
-          <textarea class="form-control" id="description" placeholder="Description" name="description" required ng-model="vm.postsForm.description"></textarea>
-          <div ng-messages='addPostForm.description.$error' ng-show='addPostForm.description.$dirty'>
-            <p ng-message='required'>
-              Please enter a description.
-            </p>
-          </div>
-        </div>
-        <input class="btn btn-primary" type="submit" ng-disabled="addPostForm.$invalid" value="Add Post">
-      </form>
-
-    </main> -->
+    <rc-header filters='vm.filters'></rc-header>
+    <main class="container">
+      <rc-posts filters='vm.filters'></rc-posts>
+    </main>
   </body>
 </html>

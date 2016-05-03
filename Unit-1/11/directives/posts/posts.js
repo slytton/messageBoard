@@ -6,10 +6,10 @@ angular.module('RedditClone')
         templateUrl: '/directives/posts/posts.html',
         //controller: 'PostsController as PostsCtrl',
         scope: {
-          search: "=",
-          sort: "="
+          filters: '='
         },
         link: function(scope, element){
+          console.log(scope.filters);
           scope.vm = {};
           scope.vm.posts = PostsService.posts
           //console.log(scope.vm.posts);

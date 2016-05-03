@@ -27,21 +27,14 @@ angular.module('RedditClone').factory('postsService', function() {
               comments:    [{author: 'Bruce', text: "I don't know what Bob and Steve are talking about.", createdAt: new Date()}]}];
 
   var postsService = {
-    addPost: function(){
-      var newPost = angular.copy($scope.vm.postsForm);
-      newPost.id = $scope.vm.posts.length,
+    posts: posts,
+    addPost: function(newPost){
+      newPost.id = this.posts.length,
       newPost.createdAt = new Date();
       newPost.comments = [];
       newPost.votes = 0;
-
-      $scope.vm.postsForm = {};
-      $scope.vm.posts.push(newPost);
-      $scope.addPostForm.$setPristine();
-      $scope.vm.showAddPostForm = false;
+      this.posts.push(newPost);
     },
-
-    posts: posts,
-
     getPost: function(postId){
       return $scope.vm.posts.filter(function(post){
         console.log(post.id);

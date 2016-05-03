@@ -1,5 +1,7 @@
 <div>
-<article ng-repeat='post in vm.posts'>
+<article ng-repeat='post in vm.posts |
+                    filter:filters.search |
+                    orderBy:filters.sort'>
   <section class='unselectabel row'>
 
     <div class="col-sm-3 .center-cropped">

@@ -5,6 +5,9 @@
   color: #d9534f;
 }
 
+.add-post {
+  margin: 0 20px;
+}
 time {
   display: inline-block;
 }

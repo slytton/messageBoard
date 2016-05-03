@@ -13,7 +13,7 @@ angular.module('RedditClone')
         console.log(scope.post);
 
         scope.addComment = function(postId, subScope){
-          var post = $scope.vm.posts.filter(function(post){
+          var post = postsService.posts.filter(function(post){
             console.log(post.id);
             return post.id === postId;
           })[0];
