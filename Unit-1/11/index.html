@@ -14,8 +14,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.js" charset="utf-8"></script>
     <script src="app.js" charset="utf-8"></script>
-    <script src="services/post.service.js"></script>
+    <script src="directives/comments/comments.js"></script>
     <script src="directives/posts/posts.js"></script>
+    <script src="services/post.service.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css" media="screen" title="no title" charset="utf-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -63,7 +64,7 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <posts></posts>
+    <rc-posts />
     <!-- <div ng-view='posts'></div> -->
     <!-- <main class="container">
       <form ng-show="vm.showAddPostForm" class="add-post" name='addPostForm' ng-submit="addPost()" novalidate>

@@ -40,8 +40,15 @@ angular.module('RedditClone').factory('postsService', function() {
       $scope.vm.showAddPostForm = false;
     },
 
-    posts: posts
-  }
+    posts: posts,
 
+    getPost: function(postId){
+      return $scope.vm.posts.filter(function(post){
+        console.log(post.id);
+        return post.id === postId;
+      })[0];
+    }
+
+  }
   return postsService;
 })

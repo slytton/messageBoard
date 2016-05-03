@@ -5,6 +5,9 @@
   color: #d9534f;
 }
 
+time {
+  display: inline-block;
+}
 .unselectabel nav {
   -webkit-user-select: none; /* Chrome/Safari */
   -moz-user-select: none; /* Firefox */
