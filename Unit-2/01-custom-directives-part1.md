@@ -27,7 +27,7 @@ Our `index.html` would look like this:
 <html ng-app="simpleDirectiveApp">
 <head>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" type="text/javascript"></script>
   <script src="app.js" type="text/javascript"></script>
 </head>
 <body>
@@ -46,7 +46,7 @@ These observations lead to a few topics:
 
 **Normalization of Html**
 
-When angular looks over your html document, it goes through a process called normalization.  The process essentially goes over each tag, looks for angular directives, and then normalizes the name from dash-delimited name to a camel case name.  For example, angular translates `gs-angular-logo` into `gsAngularLogo`.  This process is necessary becuase dash delimited names are not the only possiblity for directives.  For example, `gs_angular_logo` would also be valid.
+When angular looks over your html document, it goes through a process called normalization.  The process essentially goes over each tag, looks for angular directives, and then normalizes the name from dash-delimited name to a camel case name.  For example, angular translates `gs-angular-logo` into `gsAngularLogo`.  This process is necessary because dash delimited names are not the only possiblity for directives.  For example, `gs_angular_logo` would also be valid.
 
 **EXERCISE**
 
@@ -90,13 +90,13 @@ Let's add some data to a controller and see how it interacts with the directive.
 ```js
 var app = angular.module('yoyoDirectiveApp', [])
 
-app.controller('YoyoController', ['$scope', function($scope) {
+app.controller('YoyoController', function($scope) {
   $scope.view = {};
   $scope.view.yoyo = {
     name: 'Duncan Metal Drifter',
     img: "http://www.toysrus.com/graphics/tru_prod_images/Duncan-Metal-Drifter-Pro-Yo-Yo--pTRU1-8444206dt.jpg"
   };
-}]);
+});
 
 app.directive('gsYoyoDetails', function() {
   return {
@@ -119,7 +119,7 @@ app.directive('gsYoyoDetails', function() {
 <html ng-app="yoyoDirectiveApp">
 <head>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" type="text/javascript"></script>
 <script src="app.js" type="text/javascript"></script>
 </head>
 <body ng-controller="YoyoController">
@@ -139,13 +139,13 @@ The work around is to create an `isolated scope` for the directive.
 ```js
 var app = angular.module('yoyoDirectiveApp', [])
 
-app.controller('YoyoController', ['$scope', function($scope) {
+app.controller('YoyoController', function($scope) {
   $scope.view = {};
   $scope.view.yoyo = {
     name: 'Duncan Metal Drifter',
     img: "http://www.toysrus.com/graphics/tru_prod_images/Duncan-Metal-Drifter-Pro-Yo-Yo--pTRU1-8444206dt.jpg"
   };
-}]);
+});
 
 app.directive('gsYoyoDetails', function() {
   return {
@@ -164,7 +164,7 @@ app.directive('gsYoyoDetails', function() {
 <html ng-app="yoyoDirectiveApp">
 <head>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js" type="text/javascript"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" type="text/javascript"></script>
   <script src="app.js" type="text/javascript"></script>
 </head>
 <body ng-controller="YoyoController">

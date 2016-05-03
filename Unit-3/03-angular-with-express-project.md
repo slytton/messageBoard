@@ -26,7 +26,7 @@ First thing's first: let's add AngularJS, Bootstrap, and any other supporting fi
     <meta charset="utf-8">
     <title>Ice Cream Shop</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
     <script src="/js/angular/app.js"></script>
   </head>
 ```

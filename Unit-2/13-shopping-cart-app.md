@@ -168,7 +168,7 @@ Let's add a custom directive to graphically display the amount of caffeine in ea
 
  The CSS for the caffeine meter can be obtained from here: [Caffeine Meter CSS](http://codepen.io/Sambego/pen/zKLar)
 
-**The code should look someting like this:**
+**The code should look something like this:**
 
 ```html
 <caffeine-meter caffeinemg="tea.caffeineScale" id="tea._id"></caffeine-meter>

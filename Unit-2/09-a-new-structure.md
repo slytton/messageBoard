@@ -19,7 +19,7 @@ app
 This structure is pretty simple. We have an `app.js` file where we will declare our Angular app and all dependencies. For now it will just look like:
 
 ```javascript
-var app = angular.module("whateverYourModuleNameIs")
+var app = angular.module("whateverYourModuleNameIs", []);
 ```
 
 We also have files like `controllers.js` and `directives.js`, which contain all of our controllers or custom directives (we'll get there soon). Basically, instead of writing everything inside of `app.js`, we've broken it out into separate files grouped by functionality.

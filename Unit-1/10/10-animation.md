@@ -2,7 +2,7 @@
 
 To get started with animations we need to include a module which our application will depend on (this is also called a dependency). The name of our module is ngAnimate and it is not directly part of the angular script that we are using, so we need to do 2 things:
 
-1 - make sure we add `<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.js"></script>` to our `html` file (make sure this script is BELOW the `angular.js` script).
+1 - make sure we add `<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>` to our `html` file (make sure this script is BELOW the `angular.js` script).
 
 2 - inside of our JavaScript file, we need to include this dependency when we create our module, so our code should look something like this
 `angular.module('animateApp', ['ngAnimate'])`
@@ -99,8 +99,8 @@ Also note, for these examples I am including JavaScript in our HTML - this is NO
     Hi Elie!
   </div>
   <button ng-click="toggleBoolean = !toggleBoolean">Toggle fade</button>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate..js"></script>
   <script>
     angular.module('animateApp',['ngAnimate']);
   </script>
@@ -153,8 +153,8 @@ In our `style.css`:
   <div ng-repeat ="instructor in view.instructors | filter:view.search">
     {{instructor}}
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate..js"></script>
   <script>
     angular.module('animateApp',['ngAnimate']).controller("MainController", function($scope){
       $scope.view = {};

@@ -31,7 +31,7 @@ Wondering what the difference between remove and delete are? See [here](http://s
 
 In order to get started using these methods, we need to first include the script for ngResource
 
-`<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-resource.js"></script>`
+`<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-resource.js"></script>`
 
 We then need to include `ngResource` as a dependency to our application 
 
