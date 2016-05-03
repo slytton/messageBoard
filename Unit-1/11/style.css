@@ -17,6 +17,14 @@ time {
   -ms-user-select: none; /* IE10+ */
 }
 
+nav .fa-angle-up, nav .fa-angle-down {
+  font-size: 1.5em;
+}
+
+.bold {
+  font-weight:bold;
+}
+
 .form-group {
   vertical-align: top !important;
 }

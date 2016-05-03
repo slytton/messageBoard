@@ -12,7 +12,6 @@ angular.module('RedditClone')
           console.log(scope.filters);
           scope.vm = {};
           scope.vm.posts = PostsService.posts
-          //console.log(scope.vm.posts);
         }
       };
     }
