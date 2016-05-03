@@ -10,10 +10,7 @@ angular.module('RedditClone')
       },
       link: function(scope, element){
         scope.addComment = function(postId, subScope){
-          var post = postsService.posts.filter(function(post){
-            console.log(post.id);
-            return post.id === postId;
-          })[0];
+          var post = postsService.getPost(postId);
 
           var copiedComment = angular.copy(subScope.commentsForm);
           Object.keys(subScope.commentsForm).map(function(key){

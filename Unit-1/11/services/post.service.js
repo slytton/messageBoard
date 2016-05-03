@@ -36,7 +36,7 @@ angular.module('RedditClone').factory('postsService', function() {
       this.posts.push(newPost);
     },
     getPost: function(postId){
-      return $scope.vm.posts.filter(function(post){
+      return posts.filter(function(post){
         console.log(post.id);
         return post.id === postId;
       })[0];
