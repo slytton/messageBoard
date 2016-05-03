@@ -1,4 +1,3 @@
-console.log('hello');
 angular.module('RedditClone')
   .directive('rcComments', ['postsService', function(postsService){
     return {
@@ -10,8 +9,6 @@ angular.module('RedditClone')
         showingAddComment: "="
       },
       link: function(scope, element){
-        console.log(scope.post);
-
         scope.addComment = function(postId, subScope){
           var post = postsService.posts.filter(function(post){
             console.log(post.id);

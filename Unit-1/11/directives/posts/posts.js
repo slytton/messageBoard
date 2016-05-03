@@ -9,7 +9,6 @@ angular.module('RedditClone')
           filters: '='
         },
         link: function(scope, element){
-          console.log(scope.filters);
           scope.vm = {};
           scope.vm.posts = PostsService.posts
         }

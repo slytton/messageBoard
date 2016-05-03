@@ -8,7 +8,6 @@ angular.module('RedditClone')
       },
       link: function(scope, element){
         scope.vm = {};
-        console.log(scope.filters);
       }
     };
   }]);
