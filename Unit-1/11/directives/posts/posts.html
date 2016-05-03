@@ -1,0 +1,97 @@
+<div>
+<h1>hello!</h1>
+<article ng-repeat='post in vm.posts '>
+  <section class='unselectabel row'>
+
+    <div class="col-sm-3 .center-cropped">
+      <img class='' ng-src='{{post.image}}' alt=""/>
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+        <div class="col-xs-10">
+          <h4 ng-bind='post.title'></h4>
+        </div>
+        <div class="col-sm-2 voting">
+          <i ng-click='post.votes = post.votes - 1' class='fa fa-angle-down'></i>
+          <span ng-class="{ 'has-error': post.votes < 0,
+                            'has-success': post.votes > 0 }"
+                ng-bind='post.votes'></span>
+          <i ng-click='post.votes = posts.votes + 1' class='fa fa-angle-up'></i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p ng-bind="post.description"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-offset-10 col-sm-2">
+          <i class="author">By:
+            <span ng-bind="post.author"></span>
+          </i>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-4">
+          <i class='fa fa-calendar'></i>
+            <time title="{{ post.createdAt | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
+            {{ post.createdAt | amCalendar }}
+          </time>
+        </div>
+
+        <div class="col-sm-3">
+          <span ng-click="showComments = !showComments" class='show-comments'>
+            <i class='fa fa-comment-o'></i>
+            <span ng-bind='post.comments.length'></span>
+            <ng-pluralize count="post.comments.length"
+            when="{1: 'comment',
+            'other': 'comments'}"></ng-pluralize>
+          </span>
+        </div>
+
+        <div class="col-sm-3">
+          <span class='show-add-comments' ng-click="myState.showAddComments = !myState.showAddComments"><i class='fa fa-pencil'></i> comment</span>
+        </div>
+      </div>
+      <div class="row add-comments" ng-show="myState.showAddComments">
+        <form class='form-inline'  class="" name='addCommentForm' ng-submit="addComment(post.id, this); " novalidate>
+          <div class="form-group" ng-class="{'has-error': addCommentForm.author.$invalid && addCommentForm.author.$dirty,
+          'has-success': addCommentForm.author.$valid}">
+            <input type="text" class="form-control" id="author" placeholder="Author" name="author" required ng-model='commentsForm.author'>
+            <div ng-messages='addCommentForm.author.$error' ng-show='addCommentForm.author.$dirty'>
+              <p ng-message='required'>
+                Please enter an author.
+              </p>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{'has-error': addCommentForm.comment.$invalid && addCommentForm.comment.$dirty,
+                          'has-success': addCommentForm.comment.$valid}">
+            <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.text">
+            <div ng-messages='addCommentForm.comment.$error' ng-show='addCommentForm.comment.$dirty'>
+              <p ng-message='required'>
+                Please enter a comment.
+              </p>
+            </div>
+          </div>
+          <input class="btn btn-primary" type="submit" ng-disabled="addCommentForm.$invalid" value="Add Comment">
+        </form>
+      </div>
+      <div ng-show='showComments' class="comments">
+        <div class="row comment" ng-repeat="comment in post.comments">
+          <div class="col-sm-2">
+            <strong ng-bind="comment.author"></strong>:
+          </div>
+          <div class="col-sm-5">
+            <span ng-bind="comment.text"></span>
+          </div>
+          <div class="col-sm-offset-1 col-sm-3">
+            <time title="{{ comment.createdAt | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
+              {{ comment.createdAt | amCalendar }}
+            </time>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+</div>
