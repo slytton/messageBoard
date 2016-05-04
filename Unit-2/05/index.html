@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app='05'>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+
+    <!-- Controllers -->
+    <script src="/controllers/httpController.js" charset="utf-8"></script>
+    <script src="/controllers/itunesController.js" charset="utf-8"></script>
+    <script src="/controllers/railsController.js" charset="utf-8"></script>
+
+    <!-- Services -->
+    <script src="/services/railsService.js" charset="utf-8"></script>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <title>Exercise-04</title>
+  </head>
+  <body class="container">
+    <h1>HTTP</h1>
+    <hr>
+    <h3>Zen Data</h3>
+    <div ng-controller="HttpController">
+      <span ng-bind="view.zenData | json"></span>
+    </div>
+    <hr>
+    <h3>Itunes Data</h3>
+    <div ng-controller="ItunesController">
+      <span ng-bind="view.zenData | json"></span>
+    </div>
+    <hr>
+    <h3>Rails Data</h3>
+    <div ng-controller="RailsController">
+      {{vm.messages}}
+      <span ng-bind="vm.messages | json"></span>
+    </div>
+  </body>
+</html>
