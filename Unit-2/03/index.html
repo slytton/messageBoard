@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app='03'>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+    <script src="filters.js" charset="utf-8"></script>
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <title>Exercise-03</title>
+  </head>
+  <body class="containter">
+
+    <h3>Filters: </h3>
+    <p>{{'hello_class' | kebab}}</p>
+    <p>{{'1234' | kebab}}</p>
+    <p>{{'hello-class' | camel}}</p>
+    <p>{{'hello_class' | camel}}</p>
+    <p>{{'my name is seth and seth is a person' | redact: 'seth'}}
+  </body>
+</html>

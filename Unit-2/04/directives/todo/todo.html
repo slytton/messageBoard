@@ -1,0 +1,13 @@
+<span class="todo">
+  <span ng-bind="todo"></span>
+  <button class="btn btn-primary" ng-click="removeTodo({todoId: todo.id})">Delete</button>
+  <button class="btn btn-primary" ng-click="vm.showEdit = !vm.showEdit">Edit</button>
+  <form class="form form-inline" ng-show="vm.showEdit" ng-submit="update(todo.id, vm.todo)">
+    <div class="input-group">
+      <span class="input-group-addon">Update Todo:</span>
+      <input ng-model="vm.todo" type="text" class="form-control" placeholder="">
+    </div>
+    <button class="btn btn-primary" type='submit'>Submit</button>
+
+  </form>
+</span>

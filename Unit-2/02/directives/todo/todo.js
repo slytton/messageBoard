@@ -8,7 +8,6 @@ angular.module('02')
         removeTodo: '&'
       },
       link: function(scope, element){
-        console.log(scope.removeTodo);
       }
     }
   });

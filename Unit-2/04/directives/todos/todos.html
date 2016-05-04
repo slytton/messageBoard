@@ -1,0 +1,14 @@
+<div class="todos-container">
+  <h1>Todos</h1>
+  <form class="form form-inline" ng-submit="todoService.addTodo(vm.newTodo)">
+    <div class="input-group">
+      <input ng-model="vm.newTodo" type="text" class="form-control" placeholder="Enter a todo...">
+    </div>
+    <input class="btn btn-primary" type="submit" name="name" value="Submit">
+  </form>
+  <ul>
+    <li ng-repeat='todo in todoService.todos track by $index'>
+      <gs-todo todo='todo' update-todo='todoService.updateTodo(todoId, todo)', remove-todo='todoService.removeTodo(todoId)'><gs-todo>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app='04'>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.min.js"></script>
+    <script src="app.js" charset="utf-8"></script>
+
+    <!-- Controllers -->
+    <script src="/controllers/singleController.js" charset="utf-8"></script>
+    <script src="/controllers/calcController.js" charset="utf-8"></script>
+
+    <!-- Directives -->
+    <script src="/directives/todos/todos.js" charset="utf-8"></script>
+    <script src="/directives/todo/todo.js" charset="utf-8"></script>
+
+    <!-- Services -->
+    <script src="/services/todoService.js" charset="utf-8"></script>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <title>Exercise-04</title>
+  </head>
+  <body class="container">
+    <h1>Singletons</h1>
+    <hr>
+    <div ng-controller="SingleController">
+      <h3>JS Singleton</h3>
+      <span ng-bind='singleton.people | json'></span>
+      <span ng-click='singleton.people.push("bob"); console.log("singleton")'>Click Me</span>
+    </div>
+    <hr>
+    <div ng-controller='CalcController'>
+      <form name="calc-form" class="form calc-form" ng-submit='calculate();' ng-submit="calculate()">
+        <div class="form-group">
+          <label for="op">Operation: </label>
+          <select ng-model='vm.op' name='op' class="form-control" id="op">
+            <option value='divide'>divide</option>
+            <option value='multiply'>multiply</option>
+            <option value='add'>add</option>
+            <option value='subtract'>subtract</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="first">First: </label>
+          <input ng-model='vm.first' name='first' type="number" class="form-control" id="first" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="second">Second: </label>
+          <input ng-model='vm.second' name='second' type="number" class="form-control" id="second" placeholder="">
+        </div>
+        <input class="btn btn-primary" type="submit" value="Calculate" >
+      </form>
+      <h4>The value is: <span ng-bind="vm.total"></span></h4>
+    </div>
+    <hr>
+    <div class="">
+      <h3>Add a new Todo</h3>
+      <gs-todos></gs-todos>
+    </div>
+  </body>
+</html>
