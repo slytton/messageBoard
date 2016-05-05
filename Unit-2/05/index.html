@@ -33,8 +33,19 @@
     <hr>
     <h3>Rails Data</h3>
     <div ng-controller="RailsController">
-      {{vm.messages}}
-      <span ng-bind="vm.messages | json"></span>
-    </div>
+      {{service | json}}
+      <form class="form form-inline" ng-submit="sendMessage(message)">
+        <div class="form-group">
+          <input ng-model="message.name" type="text" class="form-control" id="" placeholder="User Name">
+        </div>
+        <div class="form-group">
+          <input ng-model="message.content" type="text" class="form-control" id="" placeholder="Message">
+        </div>
+        <input class="btn btn-primary" type="submit">
+      </form>
+        <p ng-repeat="message in vm.messages">
+          <strong ng-bind="message.name"></strong>: <span ng-bind="message.content"></span>
+        </p>
+      </div>
   </body>
 </html>

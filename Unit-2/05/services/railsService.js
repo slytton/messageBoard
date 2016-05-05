@@ -1,29 +1,37 @@
+'use strict';
 angular.module('05')
-  .service('railsService', ['$http', 'MY_API', function($http, MY_API){
-
-    // this.getMessages
-    //
-    // this.messages;
-    // this.getMessages = function(){
-    //   $http.get(MY_API).then(function(data){
-    //     console.log('getMessages', data.data);
-    //     this.messages = data.data;
-    //   })
-    // };
-    // var self = this;
-    // this.messages = (function(){return messages || self.getMessages();})();
+  .service('railsService', ['$http', '$q', 'MY_API', function($http, $q, MY_API){
+    var messageCache = {
+      messages: null,
+      fetched: new Date()
+    };
 
     var service = {
-      messages: null,
-      updateMessages: function(){
-        $http.get(MY_API).then(function(data){
-            service.messages = data.data;
-        });
+      getMessages: function(o){
+        return $q(function(resolve, reject){
+          var mc = messageCache.fetched-0;
+          if(messageCache.messages || (new Date() - mc > 2000) ){
+            resolve(messageCache.messages);
+          } else {
+            $http.get(MY_API).then(function(res){
+              messageCache.messages = res.data;
+              messageCache.fetched = new Date();
+              resolve(messageCache.messages);
+            }).catch(function(error){
+              reject(error);
+            });
+          }
+        })
+      },
+      sendMessage: (message) => {
+        console.log('in send');
+        message = angular.toJson(message);
+        return $http.post( MY_API, message )
+        .catch(function(err){
+          console.log(err);
+        })
       }
     }
-
-    service.updateMessages();
-    console.log(service.messages);
     return service;
 
   }])
