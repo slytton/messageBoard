@@ -4,10 +4,11 @@ angular.module('teaApp')
       restrict: 'E',
       templateUrl: '/directives/teas/teas.html',
       scope: {
-        teas: "="
+        teas: "=",
+        filters: "="
       },
       link: function(scope, element){
-        
+        console.log(scope);
       }
     }
   })

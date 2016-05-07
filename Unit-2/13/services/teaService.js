@@ -1,5 +1,5 @@
 angular.module('teaApp')
-  .service('teaService', ['$http', '$q', 'STOCK_URL', function($http, $q, STOCK_URL){
+  .service('teaService', ['$http', '$q', function($http, $q){
     var _teas = [
       {
           "_id": "55c8ee82152165d244b98300",

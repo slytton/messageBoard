@@ -1,5 +1,4 @@
 <div class="teas">
-  <h1>hello</h1>
   <table>
     <thead>
       <tr>
@@ -8,13 +7,13 @@
         </th>
         <th>
           Information
-
           <div class="form form-inline">
             Sort By Price:
             <div class="input-group">
-              <select type="text" class="form-control">
-                <option value="descending">Highest</option>
-                <option value="ascending">Lowest</option>
+              <select ng-model="filters.price.name" class="form-control">
+                <option value=""></option>
+                <option value='-price'>Highest</option>
+                <option value='price'>Lowest</option>
               </select>
             </div>
           </div>
@@ -22,7 +21,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="tea in teas">
+      {{filters}}
+      <tr ng-repeat="tea in teas |
+                     orderBy:filters.price.name:filters.price.reverse |
+                     filter:{name: filters.search} |
+                     orderBy:
+                     ">
         <td>
           <img ng-src="{{tea.imageUrl}}" alt="{{tea.name}}" />
         </td>
@@ -30,7 +34,7 @@
           <div class="col-sm-8">
             <h3 ng-bind="tea.name"></h3>
             <p>
-              <strong>Price: </strong><span ng-bind="tea.price"></span>
+              <strong>Price: </strong><span ng-bind="tea.price | toUSD | currency"></span>
             </p>
             <p>
               <strong>Caffeine Scale: </strong><span ng-bind="tea.caffeineScale"></span>
@@ -42,7 +46,16 @@
               <strong>Rating: </strong><span ng-bind="tea.rating"></span>
             </p>
             <p>
-              <strong>In Stock: </strong><span ng-bind="tea.inStock"></span>
+              <strong>In Stock: </strong><span ng-bind="tea.inStock | yesNo"></span>
+            </p>
+            <p>
+              <strong>In Stock: </strong><span ng-bind="tea.inStock | yesNo"></span>
+            </p>
+            <p>
+              <strong>Categories: </strong>
+              <ul>
+                <li ng-repeat="category in tea.categories" ng-bind="category"></li>
+              </ul>
             </p>
           </div>
           <div class="col-sm-4">
