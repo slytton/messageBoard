@@ -1,0 +1,14 @@
+<div>
+  <h1>Results</h1>
+  <div class="my-container">
+    <a ui-sref="movie({movieId: movie.imdbID})" class="movie" ng-repeat="movie in movies">
+      <img class="" ng-src="{{movie.Poster}}"/>
+      <div>
+        <span class="title" ng-bind="movie.Title"></span>
+        <span class="year" ng-bind="movie.Year"></span>
+      </div>
+    </a>
+    <img autoplay ng-if='!movies' src="/media/giphy.gif" widht='500' height='300'/>
+  </div>
+
+</div>

@@ -5,13 +5,19 @@ angular.module('movieApp')
       .state('home', {
         url: '/',
         controllerAs: 'vm',
-        controller: 'AppController',
+        controller: 'HomeController',
         templateUrl: 'partials/homeTemplate.html'
       })
-      .state('movie', {
-        url: '/:movieId',
+      .state('results', {
+        url: '/movie/:movieName?mediaType',
         controllerAs: 'vm',
-        controller: 'AppController',
+        controller: 'MoviesController',
+        templateUrl: 'partials/movieTemplate.html'
+      })
+      .state('movie', {
+        url: '/show/:movieId/',
+        controllerAs: 'vm',
+        controller: 'ShowController',
         templateUrl: 'partials/show.html'
       })
 

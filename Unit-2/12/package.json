@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "superstatic"
+    "start": "superstatic --config superstatic.json"
   },
   "keywords": [],
   "author": "",
