@@ -11,8 +11,9 @@ angular.module('teaApp')
   })
   .filter('byCategory', function(){
     return function(teas, category){
-      teas.filter(function(tea){
-        return tea.categories.includes(category)
+      if(!category) return teas;
+      return teas.filter(function(tea){
+        return tea.categories.includes(category);
       })
     }
   })

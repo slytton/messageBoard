@@ -21,11 +21,10 @@
       </tr>
     </thead>
     <tbody>
-      {{filters}}
       <tr ng-repeat="tea in teas |
                      orderBy:filters.price.name:filters.price.reverse |
                      filter:{name: filters.search} |
-                     orderBy:
+                     byCategory:filters.category
                      ">
         <td>
           <img ng-src="{{tea.imageUrl}}" alt="{{tea.name}}" />

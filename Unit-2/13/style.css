@@ -29,3 +29,15 @@
 .teas td:first-child, .teas th:first-child {
   width: 1%;
   white-space: nowrap; }
+
+.btn-red {
+  background-color: #d9534f;
+  color: white; }
+
+.btn-red:hover {
+  background-color: #ba433f;
+  color: white; }
+
+.main .row:first-child {
+  display: flex;
+  align-items: flex-end; }
