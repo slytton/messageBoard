@@ -58,7 +58,15 @@
             </p>
           </div>
           <div class="col-sm-4">
-
+            <div class="form form-inline">
+              <div class="form-group">
+                <h3>Quantity: </h3>
+                <select class="form-control" ng-model="vm.quantity">
+                  <option ng-repeat="num in numbers | range:10" ng-value="{{num}}" ng-bind="num"></option>
+                </select>
+                <a class="btn btn-orange" ng-click="addToBag(tea.id)">Add To Bag!</a>
+              </div>
+            </div>
           </div>
         </td>
       </tr>

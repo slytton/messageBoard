@@ -17,3 +17,12 @@ angular.module('teaApp')
       })
     }
   })
+  .filter('range', function(){
+    return function(teas, end){
+      var array = [];
+      for (var i = 1; i <= end; i++) {
+        array.push(i);
+      }
+      return array;
+    }
+  })

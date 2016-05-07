@@ -30,12 +30,23 @@
   width: 1%;
   white-space: nowrap; }
 
+.btn {
+  outline: none; }
+
 .btn-red {
   background-color: #d9534f;
   color: white; }
 
 .btn-red:hover {
   background-color: #ba433f;
+  color: white; }
+
+.btn-orange {
+  background-color: #ff9a32;
+  color: white; }
+
+.btn-orange:hover {
+  background-color: #da842b;
   color: white; }
 
 .main .row:first-child {
