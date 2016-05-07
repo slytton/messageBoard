@@ -1,0 +1,55 @@
+<div class="teas">
+  <h1>hello</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Tea
+        </th>
+        <th>
+          Information
+
+          <div class="form form-inline">
+            Sort By Price:
+            <div class="input-group">
+              <select type="text" class="form-control">
+                <option value="descending">Highest</option>
+                <option value="ascending">Lowest</option>
+              </select>
+            </div>
+          </div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="tea in teas">
+        <td>
+          <img ng-src="{{tea.imageUrl}}" alt="{{tea.name}}" />
+        </td>
+        <td>
+          <div class="col-sm-8">
+            <h3 ng-bind="tea.name"></h3>
+            <p>
+              <strong>Price: </strong><span ng-bind="tea.price"></span>
+            </p>
+            <p>
+              <strong>Caffeine Scale: </strong><span ng-bind="tea.caffeineScale"></span>
+            </p>
+            <p>
+              <strong>Ingredients: </strong><span ng-bind="tea.ingredients"></span>
+            </p>
+            <p>
+              <strong>Rating: </strong><span ng-bind="tea.rating"></span>
+            </p>
+            <p>
+              <strong>In Stock: </strong><span ng-bind="tea.inStock"></span>
+            </p>
+          </div>
+          <div class="col-sm-4">
+
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

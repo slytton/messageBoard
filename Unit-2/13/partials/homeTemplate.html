@@ -1,0 +1,14 @@
+<div class="form form-inline">
+  <div class="input-group">
+    <label for="category">Search by category:</label>
+    <select class="form-control" ng-model:'vm.filters.category'>
+      <option ng-repeat="(category, blank) in vm.categories" ng-value="{{category}}" ng-bind="category"></option>
+    </select>
+  </div>
+  <div class="input-group">
+    <label for="category">Search by name:</label>
+    <input type="text" class="form-control" ng-bind:'vm.filters.search' />
+  </div>
+</div>
+<hr>
+<gs-teas teas="vm.teas"/>

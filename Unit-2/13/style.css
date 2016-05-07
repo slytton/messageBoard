@@ -1,0 +1,31 @@
+.nav .top-bar {
+  background-color: #ff9a32;
+  color: white;
+  text-align: center;
+  padding: 5px; }
+
+.nav .banner {
+  color: #ff9a32;
+  font-size: 50px; }
+
+.teas table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #d0d0d0; }
+
+.teas td, .teas th {
+  border: 1px solid #d0d0d0; }
+
+.teas th {
+  padding: 10px 10px 10px 15px; }
+  .teas th form {
+    float: right; }
+
+.teas th:nth-child(2) {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.teas td:first-child, .teas th:first-child {
+  width: 1%;
+  white-space: nowrap; }

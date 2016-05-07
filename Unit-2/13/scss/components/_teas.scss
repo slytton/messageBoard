@@ -1,0 +1,28 @@
+.teas {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid $light-gray;
+  }
+  td {
+    border: 1px solid $light-gray;
+  }
+  th {
+    @extend td;
+    padding: 10px 10px 10px 15px;
+    form{
+      float: right;
+    }
+  }
+  th:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  td:first-child{
+
+    width:1%;
+    white-space:nowrap;
+  }
+
+}
