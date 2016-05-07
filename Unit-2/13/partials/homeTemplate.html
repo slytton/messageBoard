@@ -14,12 +14,12 @@
         <input type="text" class="form-control" ng-model='vm.filters.search' />
       </div>
     </div>
-    <a ui-sref="checkout" class='btn btn-red col-sm-3'>
+    <a ui-sref="checkout()" class='btn btn-red col-sm-3'>
       <strong>Checkout</strong> | Bag:
-      <span ng-if="vm.cart.quantity" ng-bind="vm.cart.quantity"></span>
-      <span ng-if="!vm.cart.quantity">Empty!</span>
+      <span ng-if="vm.cart.numItems" ng-bind="vm.cart.numItems"></span>
+      <span ng-if="!vm.cart.numItems">Empty!</span>
     </a>
   </div>
   <hr>
-  <gs-teas teas="vm.teas" filters = "vm.filters"/>
+  <gs-teas teas="vm.teas" filters="vm.filters" add-to-bag="vm.addToBag"/>
 </div>

@@ -5,7 +5,8 @@ angular.module('teaApp')
       templateUrl: '/directives/teas/teas.html',
       scope: {
         teas: "=",
-        filters: "="
+        filters: "=",
+        addToBag: "="
       },
       link: function(scope, element){
         console.log(scope);

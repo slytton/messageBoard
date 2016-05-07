@@ -7,7 +7,7 @@ angular.module('teaApp')
         controller: 'HomeController',
         templateUrl: 'partials/homeTemplate.html'
       })
-      .state('cart', {
+      .state('checkout', {
         url: '/checkout',
         controllerAs: 'vm',
         controller: 'CheckoutController',

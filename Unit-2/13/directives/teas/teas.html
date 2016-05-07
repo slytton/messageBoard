@@ -61,10 +61,10 @@
             <div class="form form-inline">
               <div class="form-group">
                 <h3>Quantity: </h3>
-                <select class="form-control" ng-model="vm.quantity">
+                <select class="form-control" ng-model="vm.quantity" ng-init="vm.quantity = 1;">
                   <option ng-repeat="num in numbers | range:10" ng-value="{{num}}" ng-bind="num"></option>
                 </select>
-                <a class="btn btn-orange" ng-click="addToBag(tea.id)">Add To Bag!</a>
+                <a class="btn btn-orange" ng-click="addToBag(tea, vm.quantity); console.log('test', vm.quantity)">Add To Bag!</a>
               </div>
             </div>
           </div>
