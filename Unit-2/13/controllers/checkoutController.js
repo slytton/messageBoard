@@ -1,5 +1,15 @@
 angular.module('teaApp')
-  .controller('CheckoutController', ['$scope', '$stateParams', 'cartService', function($scope, $stateParams, cartService){
+  .controller('CheckoutController', ['$scope', '$state', '$stateParams', 'cartService', function($scope, $state, $stateParams, cartService){
     this.cart = cartService.getCart();
-
+    this.update = function(teaId, quantity){
+      this.cart = cartService.updateTeaQuantity(teaId, quantity);
+    }
+    this.remove = function(teaId){
+      this.cart = cartService.removeTea(teaId);
+    }
+    this.checkout = function(){
+      console.log("in checkout");
+      cartService.checkout();
+      $state.go('thanks');
+    }
   }])

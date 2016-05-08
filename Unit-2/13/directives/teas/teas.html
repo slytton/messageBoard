@@ -3,11 +3,11 @@
     <thead>
       <tr>
         <th>
-          Tea
+          <div class="col-sm-6"><span>Tea</span></div>
         </th>
         <th>
-          Information
-          <div class="form form-inline">
+          <div class="col-sm-6 information"><span>Information</span></div>
+          <div class="form form-inline col-sm-6">
             Sort By Price:
             <div class="input-group">
               <select ng-model="filters.price.name" class="form-control">
@@ -62,7 +62,7 @@
               <div class="form-group">
                 <h3>Quantity: </h3>
                 <select class="form-control" ng-model="vm.quantity" ng-init="vm.quantity = 1;">
-                  <option ng-repeat="num in numbers | range:10" ng-value="{{num}}" ng-bind="num"></option>
+                  <option ng-repeat="num in numbers | range:2:10" ng-value="{{num}}" ng-bind="num"></option>
                 </select>
                 <a class="btn btn-orange" ng-click="addToBag(tea, vm.quantity); console.log('test', vm.quantity)">Add To Bag!</a>
               </div>

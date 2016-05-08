@@ -1,9 +1,14 @@
 angular.module('teaApp')
   .service('cartService', [function(){
-    var _cart = {
-      numItems: 0,
-      total: 0
-    };
+
+    function Cart(){
+      var cart = {};
+      Object.defineProperty(cart, 'numItems', { value: 0, writable: true });
+      Object.defineProperty(cart, 'total', { value: 0, writable: true });
+      return cart;
+    }
+    var _cart = new Cart()
+    console.log(_cart);
     var cartService = {
       getCart: function(){
         return _cart
@@ -14,23 +19,34 @@ angular.module('teaApp')
         }else{
           tea.quantity = quantity;
           _cart[tea._id] = tea;
-          _cart.numItems++;
+          console.log(_cart.numItems);
+          _cart.numItems += 1;
         }
         _updateItemTotal(tea);
         console.log('addToCart', _cart);
         return _updateCartTotal();
       },
-      updateTeaQuantity: function(tea, quantity){
+      updateTeaQuantity: function(teaId, quantity){
+        console.log("in update, quantity: ", quantity);
+        quantity = +quantity;
 
         if(quantity === 0) {
-          delete _cart[tea._id];
-          _cart.numItems--;
+          this.removeTea(teaId);
         }else{
-          _cart[tea._id].quantity = quantity;
-          _updateItemTotal(tea);
+          _cart[teaId].quantity = quantity;
+          _updateItemTotal(_cart[teaId]);
         }
 
         return _updateCartTotal();
+      },
+
+      removeTea: function(teaId){
+        delete _cart[teaId];
+        _cart.numItems--;
+      },
+
+      checkout: function(){
+        _cart = new Cart();
       }
     }
 

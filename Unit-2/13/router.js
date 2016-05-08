@@ -13,6 +13,11 @@ angular.module('teaApp')
         controller: 'CheckoutController',
         templateUrl: '/partials/checkout.html'
       })
+      .state('thanks', {
+        url: '/thanks',
+
+        templateUrl: '/partials/thanks.html'
+      })
 
       $urlRouterProvider.otherwise('/');
       $locationProvider.html5Mode(true);

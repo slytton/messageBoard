@@ -17,9 +17,9 @@ angular.module('teaApp')
     }
   })
   .filter('range', function(){
-    return function(teas, end){
+    return function(teas, start, end){
       var array = [];
-      for (var i = 1; i <= end; i++) {
+      for (var i = start; i <= end; i++) {
         array.push(i);
       }
       return array;

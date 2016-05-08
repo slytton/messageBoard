@@ -6,7 +6,11 @@ angular.module('teaApp')
       scope: {},
       link: function(scope, element){
         scope.vm = {};
-        scope.vm.location = $location.$$path;
+        scope.$on('$stateChangeSuccess', function(){
+          scope.vm.location = $location.$$path;
+        })
+
+        console.log(scope.vm.location);
         console.log($location);
       }
     };

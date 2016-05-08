@@ -1,1 +1,2 @@
-<h2>My Shopping Bag</h2>
+<gs-cart ng-if="vm.cart.numItems > 0" cart="vm.cart" update="vm.update" remove="vm.remove" checkout="vm.checkout"></gs-cart>
+<h3 ng-if="vm.cart.numItems === 0">Add some tea to your bag...</h3>
