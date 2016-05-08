@@ -9,9 +9,6 @@ angular.module('teaApp')
         scope.$on('$stateChangeSuccess', function(){
           scope.vm.location = $location.$$path;
         })
-
-        console.log(scope.vm.location);
-        console.log($location);
       }
     };
   }]);

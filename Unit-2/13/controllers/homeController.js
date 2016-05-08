@@ -5,8 +5,6 @@ angular.module('teaApp')
     this.teas = teaService.getTeas();
     this.cart = cartService.getCart();
     this.addToBag = function(tea, quantity){
-      console.log('calling addToBag, quantity: ', quantity);
       this.cart = cartService.addToCart(tea, quantity);
-      console.log(this.cart);
     }
   }])

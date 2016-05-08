@@ -8,7 +8,6 @@ angular.module('teaApp')
       return cart;
     }
     var _cart = new Cart()
-    console.log(_cart);
     var cartService = {
       getCart: function(){
         return _cart
@@ -19,15 +18,12 @@ angular.module('teaApp')
         }else{
           tea.quantity = quantity;
           _cart[tea._id] = tea;
-          console.log(_cart.numItems);
           _cart.numItems += 1;
         }
         _updateItemTotal(tea);
-        console.log('addToCart', _cart);
         return _updateCartTotal();
       },
       updateTeaQuantity: function(teaId, quantity){
-        console.log("in update, quantity: ", quantity);
         quantity = +quantity;
 
         if(quantity === 0) {

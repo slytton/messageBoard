@@ -9,7 +9,6 @@ angular.module('teaApp')
         addToBag: "="
       },
       link: function(scope, element){
-        console.log(scope);
       }
     }
   })

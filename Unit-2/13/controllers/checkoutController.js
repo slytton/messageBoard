@@ -8,7 +8,6 @@ angular.module('teaApp')
       this.cart = cartService.removeTea(teaId);
     }
     this.checkout = function(){
-      console.log("in checkout");
       cartService.checkout();
       $state.go('thanks');
     }
