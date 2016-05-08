@@ -4,9 +4,8 @@ angular.module('teaApp')
   })
   .filter('toUSD', function(){
     return function(price){
-      var price = price.toString().split("")
-      price.splice(2,0,'.');
-      return price.join("");
+      var price = (price/100)
+      return price;
     }
   })
   .filter('byCategory', function(){
