@@ -1,6 +1,6 @@
 # Custom Directives: Part 2
 
-## DOM Manipulation 
+## DOM Manipulation
 
 Directives become much more powerful when they start manipulating the DOM.  Typically, you will be controlling the DOM with Angular's `link` method. (There's a related method, called `compile`, which we won't cover. Research it on your own if you're curious!)
 
@@ -35,7 +35,7 @@ app.directive('gsChangeBackground', function() {
 <!DOCTYPE html>
 <html ng-app="mouseOverDirectiveApp">
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" type="text/javascript"></script>
 <script src="app.js" type="text/javascript"></script>
 </head>
 <body>
@@ -64,7 +64,7 @@ Here's the syntax for defining a controller from within your directive:
 <!DOCTYPE html>
 <html ng-app="circleApp">
 <head>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" type="text/javascript"></script>
 <script src="app.js" type="text/javascript"></script>
 <style>
   .circle {
@@ -90,19 +90,19 @@ var app = angular.module('circleApp', []);
 
 app.directive('gsBigRedCircle', function() {
   return {
-    controller: ['$scope', function($scope) {
+    controller: function($scope) {
       $scope.view = {};
       $scope.view.sayHi = function() {
         alert("Hi! Thanks for clicking on me!");
       };
-    }],
+    },
     template: '<div class="circle">Click me!</div>',
     link: function(scope, element, attrs) {
 
       element.on('click', function() {
         scope.view.sayHi();
       });
-      
+
     }
   };
 });
@@ -116,7 +116,7 @@ Create a simple dice rolling app in angular:
 
 [![https://gyazo.com/09b4a777a7049846b6ba0976e6972fe6](https://i.gyazo.com/09b4a777a7049846b6ba0976e6972fe6.gif)](https://gyazo.com/09b4a777a7049846b6ba0976e6972fe6)
 
-When the user hovers over the square, the cursor should change to a pointer, and when the user clicks, a random number between 1 and 6 should display. 
+When the user hovers over the square, the cursor should change to a pointer, and when the user clicks, a random number between 1 and 6 should display.
 
 Use a custom directive for the die, and include a controller for your directive which encapsulates the logic of generating the random number. Include a `link` method to handle all DOM manipulation. Note: you should not have a `controllers.js` file for this exercise!
 
@@ -126,20 +126,20 @@ Use a custom directive for the die, and include a controller for your directive 
 
 ## Nested Directives
 
-Sometimes you may want to include one directive inside of another; in such a case, you might also want the child directive to have access to the parent directive's controller. In order to do this, you need to use the `require` property on the child directive. 
+Sometimes you may want to include one directive inside of another; in such a case, you might also want the child directive to have access to the parent directive's controller. In order to do this, you need to use the `require` property on the child directive.
 
-For example, suppose you have a custom directive called `gs-parent`, and another custom directive called `gs-child`, and that your template for `gs-parent` includes a `gs-child` directive inside of it. If the parent directive's controller has a method you want to access from the child directive, you can do something like this in your `directives.js`: 
+For example, suppose you have a custom directive called `gs-parent`, and another custom directive called `gs-child`, and that your template for `gs-parent` includes a `gs-child` directive inside of it. If the parent directive's controller has a method you want to access from the child directive, you can do something like this in your `directives.js`:
 
 ```js
 app.directive('gsParent', function() {
   return {
     templateUrl: 'partials/parent.html',
-    controller: ['$scope', function($scope) {
+    controller: function($scope) {
       $scope.view = {};
       $scope.view.parentMessage = function() {
         alert("I live on the parent!");
       };
-    }],
+    },
   };
 });
 
@@ -190,7 +190,7 @@ Suppose you're building a photo sharing app, and that each displayed photo can h
   <gs-photo src="'http://lorempixel.com/output/abstract-q-c-640-480-1.jpg'">
     <p><em>This</em> picture is <strong>terrible.</strong></p>
   </gs-photo>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script src="js/app.js"></script>
   <script src="js/directives.js"></script>
 </body>
@@ -251,7 +251,7 @@ If we want our directives to _wrap around_ HTML content, we need to use transclu
     });
     ```
 
-2. Add an <ng-transclude> element in your partial, wherever you want the HTML content to appear. For example, a modified partial might look like this: 
+2. Add an <ng-transclude> element in your partial, wherever you want the HTML content to appear. For example, a modified partial might look like this:
 
 `partials/photo.html`
 
@@ -270,6 +270,6 @@ If we want our directives to _wrap around_ HTML content, we need to use transclu
 
 Tranclusion is a huge topic, and it's easy to get lost down confusing rabbit holes. But if you'd like to push yourself, [here's](http://teropa.info/blog/2015/06/09/transclusion.html) a good place to start.
 
-**EXERCISE** 
+**EXERCISE**
 
-Using everything you've learned about custom directives, refactor your Reddit clone to use them and clean up your HTML! Your refactor should use at least two custom directives: one for the add post form, and one for an individual post. If you want to push yourself, you should also add a custom directive for the comment area of a post, which should be nested inside of your custom post directive. 
+Using everything you've learned about custom directives, refactor your Reddit clone to use them and clean up your HTML! Your refactor should use at least two custom directives: one for the add post form, and one for an individual post. If you want to push yourself, you should also add a custom directive for the comment area of a post, which should be nested inside of your custom post directive.

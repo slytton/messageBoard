@@ -18,7 +18,7 @@ Angular provides solutions for all of the above issues through it's router.  We 
 
 We'll see how to use the `$routeProvider`, to make use of the browser’s history navigation and allow users to bookmark and share specific pages based off of the current URL.  Let's get started.
 
-**First we need to include the `ngRoute` module.** It's a separate module that we need to include on our own. You can download the module or link to this CDN: "http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"
+**First we need to include the `ngRoute` module.** It's a separate module that we need to include on our own. You can download the module or link to this CDN: "http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"
 
 Next, we need to load the `ngRoute` module by adding it as a dependent module.
 
@@ -135,27 +135,27 @@ Make sure the second route works correctly by visiting `http://localhost:8080/#/
 
 Create an html file and use Bower or CDNs to link to angular and another for angular routes
 ```html
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.js"></script>
 ```
 Add ng-app="myApp" to the html tag of your file
 ```
 <html ng-app="myApp">
 ```
 Add ng-view to your HTML page that will be used later to inject your partials into.
-EX: 
+EX:
 ```html
 <body>
   <div ng-view></div>
 </body>
 ```
-Create an angular module and inject the 'ngRoute' dependency 
-EX: 
+Create an angular module and inject the 'ngRoute' dependency
+EX:
 ```
 angular.module('myApp', ['ngRoute'])
 ```
 Create .config section under your module to set up your routes
-EX: 
+EX:
 ```js
 .config(function($routeProvider) {
   $routeProvider
@@ -169,7 +169,7 @@ EX:
 Remove Hashtags from urls :
 
 Add $locationProvider.html5Mode(true) to your .config
-EX: 
+EX:
 ```js
 .config(function($routeProvider, $locationProvider) {
   $routeProvider
@@ -181,12 +181,12 @@ EX:
 })
 ```
 
-Then Add a base tag to the bottom of the head of your main HTML file:
-EX: 
+Then add a base tag to the bottom of the head of your main HTML file:
+EX:
 ```
 <base href="/">
 ```
-Then create a divshot.json file and add this code:
+Then create a superstatic.json file and add this code:
 ```js
 {
   "rewrites": [
@@ -194,8 +194,10 @@ Then create a divshot.json file and add this code:
   ]
 }
 ```
+
 Create your partial HTML file and the controller you added to the route and you should be good to go
 
-
-
-
+Run a local static server with superstatic
+```
+$ superstatic
+```

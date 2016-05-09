@@ -93,7 +93,7 @@ Make sure all of your new controller methods are working.  First, make a few con
 
 Next, we'll set up angular in our app.  There is a gem for doing this called [angularjs-rails](https://github.com/hiravgandhi/angularjs-rails), but we're going to do it manually to get an idea of what is going on.
 
-First, create the following directories if they don't exist:  `app/assets/javascripts/angular/lib`.  Next, download the latest angular js script file and put it into the following path:  `app/assets/javascripts/angular/lib/angular.min.js`.
+First, create the following directories if they don't exist:  `app/assets/javascripts/angular/lib`.  Next, download the latest angular js script file and put it into the following path:  `app/assets/javascripts/angular/lib/angular.js`.
 
 Now we want the angular library to be loaded before other scripts.  To achieve this, make your `app/assets/javascripts/application.js` look like the following:
 
@@ -116,7 +116,7 @@ Also, since we are not using rails views from our controllers, remove the `<%= y
 <head>
   <title>ContactsApp</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -159,8 +159,8 @@ Your `routes.rb` file should look like this:
 
 ```ruby
 Rails.application.routes.draw do
-  root to: 'statics#index' 
-  resources :contacts, only: [:index, :show, :create, :update, :destroy] 
+  root to: 'statics#index'
+  resources :contacts, only: [:index, :show, :create, :update, :destroy]
 end
 ```
 
@@ -168,7 +168,7 @@ Add a new `StaticsController` like this:
 
 ```
 class StaticsController < ApplicationController
-  
+
   def index
   	render "layouts/application"
   end
@@ -181,7 +181,7 @@ Now your rails app should return your layout page when you visit the root route 
 
 ### Adding Angular Code
 
-Next, we want to add some angular code to our rails app.  Inside 
+Next, we want to add some angular code to our rails app.  Inside
 the `app/assets/javascript/angular` directory, create the normal files you'll need for an angular app.  You'll also have to make sure that the `app.js` file you created is the first angular file that gets loaded.  Your `app/assets/javascripts/application.js` file should look similar to this:
 
 ```js
@@ -221,7 +221,7 @@ Lastly, in your `app/views/layouts/application.html.erb`, modify the layout to l
 <head>
   <title>ContactsApp</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
 </head>

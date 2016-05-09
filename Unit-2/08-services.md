@@ -32,7 +32,7 @@ A factory is a lot like a service in the sense that it is a singleton and depend
 ```js
 angular.module("learnServices", [])
 
-.factory('personFactory', [function(){
+.factory('personFactory', function(){
   return {
     name: "Matt",
     job: "Instructor",
@@ -40,11 +40,11 @@ angular.module("learnServices", [])
       return "Hello!"
     }
   }
-}])
+})
 
-.controller('personController', ["personFactory", function(personFactory){
+.controller('personController', function(personFactory){
   // I now have access to all the methods/properties returned from the factory!
-}])
+})
 ```
 
 You can use services just like factories or when you need just a simple object and services can make use of the keyword `this` when used. Here is a quick example of a simple service.
@@ -52,14 +52,14 @@ You can use services just like factories or when you need just a simple object a
 ```js
 angular.module("learnServices", [])
 
-.service('person', [function(){
+.service('person', function(){
 	this.name = "Elie"
 	this.favoriteColor = "Purple"
-}])
+})
 
-.controller('personController', ['person', function(person){
+.controller('personController', function(person){
 	// I now have access to the person object!
-}]);
+});
 ```
 
 A provider is the most complex method and is used less frequently. It is a factory that can be configured before the application starts, which allows for more flexibility, but for the applications we are going to build, you will not need this level of complexity.
@@ -89,7 +89,7 @@ These values should **NEVER** be changed!
 To create a service, let's make sure we are using our new layout and have a `services.js` file. The syntax to create a service looks like this:
 
 ```js
-angular.module("learningServices").service("firstService", [function(){
+angular.module("learningServices").service("firstService", function(){
   // outside of the return block, we can declare private variables and functions
 
   // we must return an object, everything we return can be accessed externally
@@ -107,17 +107,17 @@ angular.module("learningServices").service("firstService", [function(){
       // another AJAX call to our database to add a user
     }
   }
-}]);
+});
 ```
 
 Now in our controller, we can inject this service:
 
 ```js
-angular.module("learningServices").controller("FirstController", ["$scope", "firstService", function($scope, firstService) {
+angular.module("learningServices").controller("FirstController", function($scope, firstService) {
   $scope.view = {};
   $scope.view.greeting = firstService.sayHi(); 
   $scope.view.users = firstService.getAllUsers();
-}]);
+});
 ```
 
 ### Answer the following questions:
@@ -129,7 +129,7 @@ angular.module("learningServices").controller("FirstController", ["$scope", "fir
 
 **EXERCISE 2: mathService**
 
-For this exercise you will be building a simple application which contains a form where a user can selects an operation (add, subtract, multiply, divide and power) and two numbers and when the form is submitted, the value expression is returned.
+For this exercise you will be building a simple application which contains a form where a user can select an operation (add, subtract, multiply, divide and power) and two numbers and when the form is submitted, the value expression is returned.
 
 All of your calculation logic for the operations should be contained in a service - your controller should have a **very** minimal amount of code.
 
@@ -160,7 +160,7 @@ It should function like (and look far better than) this:
 Revisit your contacts app from previous lessons. In contact app, add the following code to a new service inside `service.js`:
 
 ```js
-app.service('ContactList', [function() {
+app.service('ContactList', function() {
   var ContactList = {};
 
   ContactList.contactList = [];
@@ -178,18 +178,18 @@ app.service('ContactList', [function() {
   };
 
   return ContactList;
-}]);
+});
 ```
 
 Now in your controller you can inject the contact service you created as a dependency.  For example, your controller might look like this:
 
 ```js
-app.controller('ContactController', ["$scope", "ContactList", function($scope, ContactList) {
+app.controller('ContactController', function($scope, ContactList) {
   $scope.view = {};
   $scope.view.contactData = ContactList.contactList;
 
   // TODO: Your ContactList controller code here.
-}]);
+});
 ```
 
 - Refactor your contacts app to use a ContactList service.  Remember to stick with best practices and use the inline array annotation.
@@ -200,4 +200,6 @@ app.controller('ContactController', ["$scope", "ContactList", function($scope, C
 
 Use the [Giphy Api](https://github.com/Giphy/GiphyAPI) to add a feature to to the contacts application.  Whenever a new user is submitted, do a search for a gif using the person's name.  If you get a result, save that along with the users name email and phone number.  Show the user's gif on the show page.  HINT: you will NOT want to use the embedded url from the giphy search resutls.
 
+# Resources
 
+[Putting Angular Code in the Right Place](http://datamelon.io/blog/2016/putting-angular-code-in-the-right-place.html)

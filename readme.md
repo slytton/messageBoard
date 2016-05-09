@@ -9,9 +9,9 @@
  0. [Built-In Directives](/Unit-1/05-built-in-directives.md)
  0. [Intro to Controllers](/Unit-1/06-intro-to-controllers.md)
  0. [Scope](/Unit-1/07-intro-to-scope.md)
- 0. [Angular Events](/Unit-1/08-intro-to-events.md) 
- 0. [Form Validation](/Unit-1/09-form-validation.md) 
- 0. [Animations](/Unit-1/10-animation.md) 
+ 0. [Angular Events](/Unit-1/08-intro-to-events.md)
+ 0. [Form Validation](/Unit-1/09-form-validation.md)
+ 0. [Animations](/Unit-1/10-animation.md)
  0. [Unit 1 Assessment Reddit Clone](/Unit-1/11-reddit-clone.md)
 
 ## Unit 2
@@ -31,13 +31,13 @@
 
 ## Unit 3
 
- 0. [Express/Mongo Review](/Unit-3/01-express-mongo-review.md)
+ 0. [Express / Angular](/Unit-3/01-express-postgres-angular.md)
  0. [Routing and Postman](/Unit-3/02-routing-and-postman.md)
  0. [Angular Express Project](/Unit-3/03-angular-with-express-project.md)
- 0. [MEAN CRUD](/Unit-3/04-mean-crud.md)
+ 0. [Fullstack CRUD](/Unit-3/04-fullstack-crud.md)
  0. [CRUD with ngResource](/Unit-3/05-crud-with-ngResource.md)
- 0. [MEAN Auth](/Unit-3/06-mean-auth.md)
- 0. [MEAN Testing](/Unit-3/07-angular-node-testing.md)
+ 0. [Token-Based Auth](/Unit-3/06-token-based-auth.md)
+ 0. [Testing](/Unit-3/07-angular-node-testing.md)
  0. [ui-router](/Unit-3/08-ui-router.md)
  0. [Unit 3 Assessment Reddit Clone Redux](/Unit-3/09-unit-3-assessment.md)
 

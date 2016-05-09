@@ -47,7 +47,7 @@ index.html
 	
 ```
 
-We're using [John Papa's Angular Styleguide](https://github.com/johnpapa/angular-styleguide#single-responsibility) as a jumping off point for structuring our applications.  Here are some of the most important changes:
+We're using [John Papa's Angular Styleguide](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) as a jumping off point for structuring our applications.  Here are some of the most important changes:
 
 
 1. **Define 1 component per file.**  No more `controllers.js` or `filters.js`.  Instead, move components into individual files like `AuthController.js`.

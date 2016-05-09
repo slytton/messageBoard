@@ -96,9 +96,8 @@ When a user adds text to any of the form inputs, the text at the bottom should u
 
 Be sure to define all of the Angular code within a single `index.html` file. The final project should look like this:
 
-![](./examples/ngmadlibs-p1.png)
-
-![](./examples/ngmadlibs-p2.png)
+![](https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/109/ngmadlibs-p1.png)
+![](https://students-gschool-production.s3.amazonaws.com/uploads/asset/file/108/ngmadlibs-p2.png)
 
 > Grab the text [here](./examples/madlibs-text.md)
 
@@ -117,4 +116,3 @@ Be sure to define all of the Angular code within a single `index.html` file. The
 
 - https://docs.angularjs.org/guide/expression
 - <b id="f1">https://docs.angularjs.org/guide/filter</b> [↩](#a1)
-

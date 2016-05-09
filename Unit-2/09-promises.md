@@ -1,34 +1,101 @@
-# Deferreds and Promises
+# Promises Refresher
 
-In jQuery you saw promises often.  The most common use case was an ajax call.  For example, you might have some code like this in jQuery:
+>A promise represents a value that may not be available yet. i.e. an action that is being executed asynchronously.
+
+For example, you might have seen some `knex` code like this:
 
 ```js
-$.get("/puppies").done(function() {
-  // do something here
-}).fail(function() {
-  // do something here
+knex('puppies')
+  .where('breed', 'labrador')
+  .then(function(puppies){
+    console.log(puppies);
+  }).catch(function(error){
+    console.log(error);
+  });
+```
+
+A `knex` query builder returns a promise.  If the query succeeds, the function specified by then will be called, otherwise, the catch function will be called.
+
+A promise can either be:
+
+`resolved` - the asynchronous action completed successfully
+
+`rejected` - the asynchronous action failed
+
+Promises can also be chained:
+
+```js
+getUserData()
+  .then(function (userData) {
+    return getUserMessages(userData.id).then(function(userMessages){
+      return { userData: userData, userMessages: userMessages }
+    });
+  }).then(function (result) {
+    return getUserLocation(result.userData.id).then(function(userLocation){
+      result.userLocation = userLocation;
+      return result;
+    });
+  }).then(function(result){
+    renderData(result.userData, result.userMessages, result.userLocation)
+  }).catch(function(error){
+    console.log(error);
+  });
+```
+
+In this example, getUserData, getUserMessages and getUserLocation all return a promise.
+
+For example, getUserData might be implemented like so:
+
+```js
+
+function getUserData() {
+  return new Promise(function(resolve, reject){
+    someAsyncThing(function(error, userData){
+      if(error) {
+        reject(error);
+      } else {
+        resolve(userData);
+      }
+    });
+  });
+}
+```
+
+We chain promises by returning the resulting promise of each successive function call. Using promises in this way prevents what is known as `callback hell`, the `pyramid of doom` or `rightward drift`
+
+For example, to do the same thing with callbacks:
+
+```js
+getUserData(function(userData){
+  getUserMessages(userData.id, function(userMessages){
+    getUserLocation(userData.id, function(userLocation){
+      renderData(userData, userMessages, userLocation);
+    });
+  });
 });
 ```
 
-The object returned from the `$.get` method is jQuery's version of a promise.  A promise is an object that represents an action that is being executed asynchronously.  The promise can either be fulfilled (the asynchronous action completed successfully) or rejected (the asychronous action failed for some reason).  In the example above, if the ajax request to get puppies succeeds, the function specified by done will be called, otherwise, the fail function will be called.
+This is a simple example, but the more asynchronous functions we have that depend on previous asynchronous values, the farther right the code drifts.
 
-So what is the advantage of a promise over a plain old callback? Well, you can think of a promise as something like a callback, but the great advantage of the promises is that we can decouple the actions that need to be taken after some asynchronous task.  In other words, a promise allows the implementer to chain methods together in a flat, more readable way.
+Promises allow the implementer to chain methods together in a flat, more readable way.
 
-Promises are native to the browser.  The implementation for promises in the browser is not 100% complete, but progress is being made. Take a look at the [MDN docs for promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
+Promises are native to the browser.  All popular browsers except for [IE11 and below](http://caniuse.com/#search=promise) have full support for promises. Take a look at the [MDN docs for promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise).
 
-**EXERCISE**: What does Promise.all do?  When would that be useful?
+**EXERCISE:** Why would you prefer to use a promise over a callback?  What advantage does it have?
 
-In angular, the promise library that is used is [q](https://github.com/kriskowal/q).  (Another popular promise library that you may run into is [bluebird](http://bluebirdjs.com/docs/getting-started.html)).
+For more practice with promises, checkout the [promise-challenges repo](https://github.com/gSchool/promise-challenges).
 
-**EXERCISE:** Read the docs for [the q promise library](https://github.com/kriskowal/q).  Why would you prefer to use a promise over a callback?  What advantage does it have?
+# Promises in Angular
 
-Next, we'll look at an example in angular that uses promises.  Let's create a service to catch a specific pokemon using the [pokemon api](http://pokeapi.co/docs/).
+Recall from [Unit 2: Section 6](06-http-service.md) that the `$http` service method `get` returns a promise.
+
+Let's create a service that uses `$http` to catch a specific pokemon using the [pokemon api](http://pokeapi.co/docs/).
 
 The example below is a possible way to implement a service that
 gets the first move for a pokemon and the first ability.  **THERE IS A MUCH BETTER WAY TO IMPLEMENT THE FOLLOWING CODE**.
 
 ```js
-app.service("Pokemon", ['$http', function($http) {
+app.service("Pokemon", function($http) {
 
   var baseUrl = 'http://pokeapi.co/';
 
@@ -58,34 +125,78 @@ app.service("Pokemon", ['$http', function($http) {
       });
     }
   };
-}]);
+});
 ```
 
 This deeply nested code is very hard to maintain and it doesn't really provide much benefit over normal callbacks.  The code above also has the problem that client of the service doesn't have a good way of knowing when all of the data has been loaded.  How can we make this better?
 
-**EXERCISE**: Take a look at [this link about flattening promise chains](http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/).  Apply your newly found promise knowledge to improving the pokemon service.  Make the promise chain in the service not deeply nested.  Also, return a promise to the client so that the client can use `.then` to figure out when all of the data is done loading.  Also keep in mind that the get request for moves and the get request for abilities are not dependent on each other.
+**EXERCISE**: Take a look at [this link about flattening promise chains](http://solutionoptimist.com/2013/12/27/javascript-promise-chains-2/).  Apply your newly found promise knowledge to improving the pokemon service.  Make the promise chain in the service not deeply nested. Remember that $http returns a promise.  Also, return a promise to the client so that the client can use `.then` to figure out when all of the data is done loading.  Also keep in mind that the get request for moves and the get request for abilities are not dependent on each other.
 
 **EXERCISE** Now that we have a better idea of how to use promises, improve the code so that all move data, all ability data, and all sprite data gets returned by the service.  Create a page to display the results.
 
-### Using Deferred Objects
+# $q
 
-A deferred object is a way of creating your own promise from scratch.  You will not be creating deferreds too much in the code you write, but it's good to get an idea of what it does in case you run into the code somewhere.
+When learning about the [digest cycle](02-digest-cycle.md), you learned that changes to `$scope` using asynchronous APIs such as setTimeout, setInterval or XMLHttpRequest do _not_ automatically update the UI. This is because they are external to the angular digest cycle. i.e. Angular does not know when these asynchronous APIs are done executing, so you *must* manually call `$scope.$apply()` or `$scope.$digest()` to let angular know that some things have changed and the UI should be updated.
 
-In the example below, a deferred object is created.  The deferred gets resolved by providing the result of getting the movie data from our movie cache or from an ajax request. The code demonstrates a good way to allow controllers to fetch data from services that may (or may not) need to fetch that data from an external source. In the following example, we'll cache the OMDB response for a search term, and avoid making calls to the API for the same data more than once. Our controller can treat the response the same way in both cases, it doesn't care where the data comes from, only that the search function will return a promise.
+As you may recall, promises represent an asynchronous value. $q is angular's implementation of promises/deferred objects inspired by the [q](https://github.com/kriskowal/q) library. $q allows us to use promises within the digest cycle of angular without the need to call `$scope.$apply()` or `$scope.$digest()`
+
+### Using $q
+
+`$q` has a similar API to native promises.
+
+Recall our example from earlier that returns a native promise:
 
 ```js
-app.controller('OmdbController', ['$scope', 'omdbapi', function($scope, omdbapi) {
+function getUserData() {
+  return new Promise(function(resolve, reject){
+    someAsyncThing(function(error, userData){
+      if(error) {
+        reject(error);
+      } else {
+        resolve(userData);
+      }
+    });
+  });
+}
+```
+
+The same function on an angular service would return the invocation of $q instead of a new instance of a promise:
+
+```js
+app.factory('UserService', function($q){
+  return {
+    getUserData: function() {
+      return $q(function(resolve, reject){
+        someAsyncThing(function(error, userData){
+          if(error) {
+            reject(error);
+          } else {
+            resolve(userData);
+          }
+        });
+      });
+    }
+  }
+});
+```
+
+**EXERCISE** What would happen if the `UserService` in the above example used a new `Promise` instead of $q?
+
+In the example below, a $q promise is resolved by providing the result of getting the movie data from our movie cache or from an ajax request. The code demonstrates a good way to allow controllers to fetch data from services that may (or may not) need to fetch that data from an external source. In the following example, we'll cache the OMDB response for a search term, and avoid making calls to the API for the same data more than once. Our controller can treat the response the same way in both cases, it doesn't care where the data comes from, only that the search function will return a promise.
+
+```js
+app.controller('OmdbController', function($scope, omdbapi) {
   $scope.view = {};
   $scope.view.term = '';
-  
+
   $scope.view.queryOmdb = function() {
-    omdbapi.search($scope.term).then(function(data) {
+    omdbapi.search($scope.view.term).then(function(data) {
       $scope.view.results = data;
     })
   }
-}]);
+});
 
-app.factory('omdbapi', ["$http", "$q", function($http, $q) {
+app.factory('omdbapi', function($http, $q) {
   var omdbservice = {};
   var baseUrl = "http://www.omdbapi.com/?r=json&plot=long&s=";
 
@@ -94,22 +205,22 @@ app.factory('omdbapi', ["$http", "$q", function($http, $q) {
   omdbservice.search = function(term) {
     var url = baseUrl + encodeURIComponent(term);
 
-    var deferred = $q.defer();
-
-    if (cachedMovies[term]) {
-      deferred.resolve(cachedMovies[term]);
-    } else {
-      $http.get(url).success(function(data) {
-        cachedMovies[term] = data.Search;
-        deferred.resolve(cachedMovies[term]);
-      }).error(function() {
-        deferred.reject("Error!")
-      });
-    }
-
-    return deferred.promise;
+    return $q(function(resolve, reject){
+      if (cachedMovies[term]) {
+        resolve(cachedMovies[term]);
+      } else {
+        $http.get(url).success(function(data) {
+          cachedMovies[term] = data.Search;
+          resolve(cachedMovies[term]);
+        }).error(function(error) {
+          reject(error)
+        });
+      }
+    })
   }
 
   return omdbservice;
-}]);
+});
 ```
+
+**EXERCISE** What are some advantages of caching the data? What role does `$q` play in caching the data?

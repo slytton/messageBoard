@@ -56,7 +56,7 @@ Let's take a look at this example:
       {{data}}
     </div>
   </div>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
 <script>
   angular.module("myApp", []).controller("ScopeController", function($scope) { });
 </script>
@@ -90,7 +90,7 @@ One way to solve our previous challenge would be to assign each ng-model to a pr
       {{view.info}}
     </div>
   </div>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
 <script>
   angular.module("myApp", []).controller("ScopeController", function($rootScope) {
     $rootScope.view = {};
@@ -119,7 +119,7 @@ Let's take a look at the following code:
       Secret Message: <input type="text" ng-model="message">
     </div>
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
@@ -239,7 +239,7 @@ Here is a solution to our previous issue with the secret message and the number 
       Secret Message: <input type="text" ng-model="view.message">
     </div>
   </div>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

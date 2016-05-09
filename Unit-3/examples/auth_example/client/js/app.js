@@ -90,7 +90,6 @@ app.service("AuthInterceptor", function($window,$location,$q){
 });
 
 app.run(function ($rootScope, $location, $window, UserService) {
-  UserService.setFromLocal()
   $rootScope.$on('$routeChangeStart', function (event, next, current) {
     // if you try access a restricted page without logging in
     if (next.restricted && !$window.localStorage.getItem("token")) {

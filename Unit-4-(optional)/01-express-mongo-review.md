@@ -18,7 +18,8 @@ In this unit, we'll be building an AngularJS app on top of Node and Express:
 Let's start in terminal and create a new node and express app.
 
 ```
-$ take angular-express-icecream-app
+$ mkdir angular-express-icecream-app
+$ cd angular-express-icecream-app
 $ touch server.js
 $ npm init
 ```

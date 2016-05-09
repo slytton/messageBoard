@@ -2,23 +2,23 @@
 
 #### What is it?
 
-It's an alternative to `ngRoute`. It provides far more functionality for us in terms of our routing and is used quite frequently in production apps. You will see many examples with UI router as it has become the preferred choice for most (esspecially larger scale) angular applications as well as tools like [Ionic](http://ionicframework.com/). Note that everything you can do with `ngRoute` you can also do with `ui-router` - so all we are doing here is expanding our knowledge of routing in angular. 
+It's an alternative to `ngRoute`. It provides far more functionality for us in terms of our routing and is used quite frequently in production apps. You will see many examples with UI router as it has become the preferred choice for most (esspecially larger scale) angular applications as well as tools like [Ionic](http://ionicframework.com/). Note that everything you can do with `ngRoute` you can also do with `ui-router` - so all we are doing here is expanding our knowledge of routing in angular.
 
 #### ui-router vs ngRoute
 
 The biggest difference when you start working with `ui-router` is the concept of `state`. The key tenant of `ui-router` is that state is a place in your application and that is how parts of your application should be defined, not by a URL (like `ngRoute`), but by a state.
 
-###States vs Routes
+### States vs Routes
 
 From a Tim Kindberg (co-creator of ui-router) [presentation](https://www.youtube.com/watch?v=dqJRoh8MnBo):
 
-| State  | Route  | 
+| State  | Route  |
 |---|---|
 | A **place** in your app  | A **url** within your app  |
 | **Nested** hierarchy  | **Flat** hierarchy  |
 | Names are **names**  | Names are **urls**  |
-| Navigate are **name or url**  | Navigate **url only**  |
-| **Multiple** views(ui-view)  | **Single** view (ng-view)  |
+| Navigate **name or url**  | Navigate **url only**  |
+| **Multiple** views (ui-view)  | **Single** view (ng-view)  |
 | Populate **any** view  | Populate **one** view |
 | **State** populates parts of your app  | Directives (ng-include / ng-show/hide) populate parts of your app  |
 
@@ -59,9 +59,9 @@ Notice that we are not using `$routeProvider`, we use `$stateProvider` instead. 
 In ui-router there are three ways to change state in your application
 
 1. Use the $state.go() method - read more about it [here](https://github.com/angular-ui/ui-router/wiki/Quick-Reference#stategoto--toparams--options)
-2. Use a ui-sref directive - read more about it [here](https://github.com/angular-ui/ui-router/wiki/Quick-Reference#ui-sref)
-3. URL routing - read more about it [here](https://github.com/angular-ui/ui-router/wiki/URL-Routing)). 
- 
+2. Use a `ui-sref` directive - read more about it [here](https://github.com/angular-ui/ui-router/wiki/Quick-Reference#ui-sref)
+3. URL routing - read more about it [here](https://github.com/angular-ui/ui-router/wiki/URL-Routing)).
+
 ### Exercise
 
 Read through [this](http://www.funnyant.com/angularjs-ui-router/) tutorial for a better understanding of `ui-router` and build the app in the tutorial.
@@ -84,7 +84,7 @@ Answer the following questions
 
 ### Assignment
 
-- Refactor your todo app from the previous unit to use `ui-router`. Use resolve for loading all of your todos as well. 
+- Refactor your todo app from the previous unit to use `ui-router`. Use resolve for loading all of your todos as well.
 
 - Read through some of the additional resources below and watch the videos - they are incredibly valuable resources for your understanding of `ui-router`!
 

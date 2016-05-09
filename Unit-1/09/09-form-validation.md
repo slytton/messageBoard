@@ -138,7 +138,7 @@ Your form should work like this:
 
 ## Bonus - refactor using ngMessages
 
-Our HTML is getting a bit messy, it would be nice to have an easier way to deal with error messages, that's where ng-messages comes in. Walk through [this](https://scotch.io/tutorials/angularjs-form-validation-with-ngmessages) tutorial and refactor your form to use ng-messages.
+Our HTML is getting a bit messy, it would be nice to have an easier way to deal with error messages, that's where ng-messages comes in. Walk through [this](https://scotch.io/tutorials/angularjs-form-validation-with-ngmessages) or [this](http://www.yearofmoo.com/2014/05/how-to-use-ngmessages-in-angularjs.html) tutorial and refactor your form to use ng-messages.
 
 ## Additional Resources
 

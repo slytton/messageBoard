@@ -8,10 +8,6 @@ app.service("UserService", function($http, $window){
       var service = this;
       return $http.post('/api/login', user)
     },
-    setFromLocal: function () {
-      user = JSON.parse($window.localStorage.getItem("user"));
-      console.log('just setFromLocal', user);
-    },
     logout: function(){
       user = null;
       console.log('just logged out', user);
