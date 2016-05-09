@@ -1,0 +1,33 @@
+<div class="dice-container">
+  <h3>Dice Counter:</h3>
+  <div class="dice row">
+    <div ng-repeat='die in vm.dice' class="die" ng-click='repeater.value = roll(repeater.value)'><span ng-bind='die.value'></span></div>
+  </div>
+
+  <div class="form-inline form-group">
+    <label for="num-dice">Dice to roll: </label>
+    <select class='form-control' id="num-dice" name="num-dice" ng-model="vm.numDice">
+      <option ng-repeat="num in [] | range:0:vm.numDicePossible" value="{{$index + 1}}"> {{ $index + 1 }} </option>
+    </select>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>
+            Number
+          </th>
+          <th>
+            Times Repeated
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(number, count) in vm.counts" >
+          <td ng-bind="number"></td>
+          <td ng-bind="count"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

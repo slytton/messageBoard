@@ -1,0 +1,23 @@
+.btn {
+  outline: none;
+}
+
+.btn-red {
+  background-color: $red;
+  color: white;
+}
+
+.btn-red:hover {
+  background-color: $red-hover;
+  color: white;
+}
+
+.btn-orange {
+  background-color: $orange;
+  color: white;
+}
+
+.btn-orange:hover {
+  background-color: $orange-hover;
+  color: white;
+}

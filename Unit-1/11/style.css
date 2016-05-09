@@ -1,0 +1,113 @@
+.has-success {
+  color: #5cb85c;
+}
+.has-error {
+  color: #d9534f;
+}
+
+.add-post {
+  margin: 0 20px;
+}
+time {
+  display: inline-block;
+}
+.unselectabel nav {
+  -webkit-user-select: none; /* Chrome/Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+
+nav .fa-angle-up, nav .fa-angle-down {
+  font-size: 1.5em;
+}
+
+.bold {
+  font-weight:bold;
+}
+
+.form-group {
+  vertical-align: top !important;
+}
+
+article img {
+  width: 100%;
+}
+
+article {
+  padding-top: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid rgb(189, 189, 189);
+}
+
+
+.author {
+  font-size: 10px;
+}
+
+
+.comments, .add-comments{
+  margin-top: 30px;
+}
+
+.show-comments, .show-add-comments {
+  cursor: pointer;
+}
+
+.comment {
+  padding: 10px;
+  border-bottom: 1px solid gray;
+}
+
+.comment:nth-child(2n+1){
+  background-color: rgb(205, 205, 205);
+}
+
+.voting {
+  padding-top: 8px;
+}
+
+.container {
+  padding-bottom: 50px;
+}
+
+/*Animations*/
+
+.ng-enter {
+  animation: bounceInRight .75s;
+}
+
+.ng-leave {
+  animation: hinge 1s;
+}
+
+.form-group p.ng-leave {
+  animation: none;
+}
+
+.form-group p.ng-enter {
+  animation: shake .5s;
+}
+
+.add-post.ng-hide-remove, .add-comments.ng-hide-remove{
+  animation: lightSpeedIn .75s;
+}
+
+.add-post.ng-hide-add, .add-comments.ng-hide-add{
+  animation: lightSpeedOut .75s;
+}
+
+.comments.ng-hide-remove {
+  animation: flipInX 1s;
+}
+.comments.ng-hide-add {
+  animation: flipOutX 1s;
+}
+
+.ng-move {
+  animation: fadeIn 1s;
+}
+
+.ng-enter-stagger, .ng-leave-stagger {
+  animation-delay: .2s;
+  animation-duration: 0;
+}

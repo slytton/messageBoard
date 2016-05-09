@@ -1,0 +1,25 @@
+
+<div class="main">
+  <div class="row">
+    <div class="form form-inline col-sm-9">
+      <div class="input-group">
+        <label for="category">Search by category:</label>
+        <select class="form-control" ng-model='vm.filters.category'>
+          <option value=""></option>
+          <option ng-repeat="(category, blank) in vm.categories" ng-value="{{category}}" ng-bind="category"></option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="category">Search by name:</label>
+        <input type="text" class="form-control" ng-model='vm.filters.search' />
+      </div>
+    </div>
+    <a ui-sref="checkout()" class='btn btn-red col-sm-3'>
+      <strong>Checkout</strong> | Bag:
+      <span ng-if="vm.cart.numItems" ng-bind="vm.cart.numItems"></span>
+      <span ng-if="!vm.cart.numItems">Empty!</span>
+    </a>
+  </div>
+  <hr>
+  <gs-teas teas="vm.teas" filters="vm.filters" add-to-bag="vm.addToBag"/>
+</div>
