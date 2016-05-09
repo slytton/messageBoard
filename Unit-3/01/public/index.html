@@ -3,10 +3,16 @@
   <head>
     <title>{{title}}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js" charset="utf-8"></script>
+
+    <!-- App -->
     <script src="/javascripts/app.js" charset="utf-8"></script>
 
     <!-- Controllers -->
     <script src="/javascripts/controllers/piratesController.js" charset="utf-8"></script>
+
+    <!-- Routes -->
+    <script src="/javascripts/routes.js" charset="utf-8"></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -22,5 +28,6 @@
       </div>
     </nav>
     {{vm.hello}}
+    <ui-view />
   </body>
 </html>

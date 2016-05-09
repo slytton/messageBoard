@@ -1,1 +1,1 @@
-angular.module('pirates', []);
+angular.module('pirates', ['ui.router']);
