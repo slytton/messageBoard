@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app='pirates'>
   <head>
     <title>{{title}}</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="/javascripts/app.js" charset="utf-8"></script>
+
+    <!-- Controllers -->
+    <script src="/javascripts/controllers/piratesController.js" charset="utf-8"></script>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
+  <body ng-controller="PiratesController as vm">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -16,6 +21,6 @@
         </div>
       </div>
     </nav>
-    {{1+3}}
+    {{vm.hello}}
   </body>
 </html>
