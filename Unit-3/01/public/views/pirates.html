@@ -1,1 +1,55 @@
 <h1>Pirates</h1>
+
+<form ng-submit='vm.addPirate()' class="form">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input ng-model="vm.newPirate.name" type="text" class="form-control" id="name" placeholder="Name">
+  </div>
+  <div class="form-group">
+    <label for="poison">Poison:</label>
+    <input ng-model="vm.newPirate.poison" type="text" class="form-control" id="poison" placeholder="Poison">
+  </div>
+  <div class="form-group">
+    <label for="accessory">Accessory:</label>
+    <input ng-model="vm.newPirate.accessory" type="text" class="form-control" id="accessory" placeholder="Accessory">
+  </div>
+  <div class="form-group">
+    <label for="image">Image URL:</label>
+    <input ng-model="vm.newPirate.image_url" type="text" class="form-control" id="image" placeholder="Image URL">
+  </div>
+  <input type="submit" class="btn btn-primary" value="Submit">
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Poison
+      </th>
+      <th>
+        Accessory
+      </th>
+      <th>
+        Image
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="pirate in vm.pirates">
+      <td>
+        <span ng-bind="pirate.name"></span>
+      </td>
+      <td>
+        <span ng-bind="pirate.poison"></span>
+      </td>
+      <td>
+        <span ng-bind="pirate.accessory"></span>
+      </td>
+      <td>
+        <img ng_src="{{pirate.image_url}}" alt="" />
+      </td>
+    </tr>
+  </tbody>
+</table>

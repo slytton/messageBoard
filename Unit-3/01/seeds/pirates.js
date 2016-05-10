@@ -17,6 +17,5 @@ exports.seed = function(knex, Promise) {
                             poison: 'Vodka',
                             accessory: 'back sweat',
                             image_url: 'http://2.bp.blogspot.com/-WSKMEi_MH5U/U-AdUnMNuvI/AAAAAAAABI8/fv0BXLICx8c/s1600/Anne_Bonny_color.jpg'})
-
   );
 };
