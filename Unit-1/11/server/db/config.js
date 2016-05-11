@@ -1,4 +1,4 @@
 var knex = require('knex');
 var config = require('../knexfile.js');
 
-return knex(config['development']);
+module.exports = knex(config['development']);

@@ -2,25 +2,17 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var users = require('./routes/reddit.api.users.js');
-var posts = require('./routes/reddit.api.posts.js');
-var comments = require('./routes/reddit.api.comments.js');
+var users = require('./routes/users.js');
+var posts = require('./routes/posts.js');
+var comments = require('./routes/comments.js');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
-
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
 
 app.use('/api/v1/users', users);

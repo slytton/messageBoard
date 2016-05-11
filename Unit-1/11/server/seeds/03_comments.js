@@ -16,7 +16,6 @@ exports.seed = function(knex, Promise) {
       comment.author_id = user.id;
       return knex('posts').where('title', postTitle).first();
     }).then(function(post){
-      console.log(post);
       comment.post_id = post.id;
       return knex('comments').insert(comment);
     })

@@ -5,7 +5,7 @@ var knex = require('../db/config');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.json();
+  res.json({message: 'route not yet available'});
 });
 
 module.exports = router;
