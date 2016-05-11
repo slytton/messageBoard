@@ -1,8 +1,8 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var users = require('./routes/users.js');
 var posts = require('./routes/posts.js');
@@ -10,6 +10,7 @@ var comments = require('./routes/comments.js');
 
 var app = express();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

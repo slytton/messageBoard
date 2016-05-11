@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('posts', function(table){
     table.increments();
     table.string('title');
-    table.string('image_url');
+    table.text('image_url');
     table.text('description');
     table.integer('votes').defaultTo(0);
     table.timestamp('created_at').defaultTo(knex.fn.now())

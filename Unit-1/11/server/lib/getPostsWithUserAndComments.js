@@ -6,7 +6,7 @@ module.exports = getSinglePostWithUserAndComments
 function getSinglePostWithUserAndComments() {
   return knex('posts').select('posts.id', 'posts.title', 'posts.author_id',
                               'posts.description', 'posts.votes', 'posts.image_url',
-                              'users.username')
+                              'posts.created_at', 'users.username')
                       .innerJoin('users', 'users.id', 'posts.author_id')
                       .then(function(posts){
     var postPromises = posts.map(function(post){

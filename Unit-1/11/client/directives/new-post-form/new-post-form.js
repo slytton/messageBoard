@@ -9,7 +9,7 @@ angular.module('RedditClone')
       link: function(scope, element){
         scope.addPost = function(){
           var newPost = angular.copy(scope.vm.postsForm);
-          postsService.addPost(newPost);
+          postsService.create(newPost);
           scope.vm.postsForm = {};
           scope.addPostForm.$setPristine();
           scope.postForm.showAddPostForm = false;

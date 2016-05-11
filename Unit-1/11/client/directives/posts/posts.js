@@ -11,7 +11,16 @@ angular.module('RedditClone')
         link: function(scope, element){
           console.log($timeout);
           scope.vm = {};
-          scope.vm.posts = PostsService.posts
+          PostsService.list().then(function(posts){
+            console.log(posts);
+            scope.vm.posts = posts;
+          })
+          scope.vm.upVote = function(post){
+            PostsService.upVote(post);
+          }
+          scope.vm.downVote = function(post){
+            PostsService.downVote(post);
+          }
         }
       };
     }

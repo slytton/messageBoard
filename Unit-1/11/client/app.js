@@ -1,6 +1,15 @@
-var app = angular.module('RedditClone', ['ui.router','ngAnimate', 'ngMessages', 'angularMoment']);
+(function() {
+  angular.module('RedditClone', ['ui.router','ngAnimate', 'ngMessages', 'angularMoment'])
+  .constant({'API_URL': resolveApiUrl() + '/api/v1'});
 
-app.controller('PostsController', function($scope, $timeout){
+
+  function resolveApiUrl(){
+    if(window.location.origin === "http://localhost:5000") return 'http://localhost:3000';
+  }
+})();
+
+
+angular.module('RedditClone').controller('PostsController', function($scope, $timeout){
 
   $scope.vm = {};
   $scope.vm.filters = {};
@@ -10,6 +19,6 @@ app.controller('PostsController', function($scope, $timeout){
 
 });
 
-app.controller('CommentsController', function($scope){
+angular.module('RedditClone').controller('CommentsController', function($scope){
 
 });

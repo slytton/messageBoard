@@ -35,14 +35,14 @@
   <div ng-show='showComments' class="comments">
     <div class="row comment" ng-repeat="comment in post.comments">
       <div class="col-sm-2">
-        <strong ng-bind="comment.author"></strong>:
+        <strong ng-bind="comment.author.username"></strong>:
       </div>
       <div class="col-sm-5">
         <span ng-bind="comment.text"></span>
       </div>
       <div class="col-sm-offset-1 col-sm-3">
-        <time title="{{ comment.createdAt | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
-          {{ comment.createdAt | amCalendar }}
+        <time title="{{ comment.created_at | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}">
+          {{ comment.created_at | amCalendar }}
         </time>
       </div>
     </div>
