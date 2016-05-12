@@ -14,6 +14,8 @@
       create: createPost,
       upVote: upVote,
       downVote: downVote,
+      createComment: createComment,
+      //removeComment: removeComment
     };
 
     return postsService;
@@ -21,15 +23,17 @@
 
     function upVote(post) {
       post.votes++;
-      return updatePost(post).catch(function(res){
+      return updatePost(post).catch(function(err){
         post.votes--;
+        return Promise.reject("Your vote could not be counted.");
       });
     }
 
     function downVote(post) {
       post.votes--;
-      return updatePost(post).catch(function(res){
+      return updatePost(post).catch(function(err){
         post.votes++;
+        return Promise.reject("Your vote could not be counted.");
       });
     }
 
@@ -55,6 +59,15 @@
           return Promise.reject('Unable to submit post.')
         }
       })
+    }
+
+    function createComment(post, comment){
+      comment.post_id = post.id;
+      return $http.post(POSTS_API_URL + "/" + post.id + "/comments", comment)
+                  .then(function(res){
+        
+        post.comments.push(res.data);
+      });
     }
   }
 })();

@@ -12,7 +12,6 @@ angular.module('RedditClone')
           console.log($timeout);
           scope.vm = {};
           PostsService.list().then(function(posts){
-            console.log(posts);
             scope.vm.posts = posts;
           })
           scope.vm.upVote = function(post){
@@ -20,6 +19,9 @@ angular.module('RedditClone')
           }
           scope.vm.downVote = function(post){
             PostsService.downVote(post);
+          }
+          scope.vm.createComment = function(post, comment){
+            return PostsService.createComment(post, comment);
           }
         }
       };

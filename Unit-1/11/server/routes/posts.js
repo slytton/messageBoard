@@ -43,4 +43,16 @@ router.post('/:id', function(req, res, next){
   });
 })
 
+router.post('/:id/comments', function(req, res, next){
+  var result = {};
+  knex('comments').insert(req.body).returning('*').then(function(comments){
+    result = comments[0];
+    return knex('users').select('id', 'username').where('id', result.author_id).first();
+  }).then(function(user){
+    result.author = user;
+    delete result.author_id;
+    res.json(result);
+  })
+})
+
 module.exports = router;
