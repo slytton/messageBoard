@@ -10,6 +10,11 @@ function authenticated(req, res, next){
 
 router.get('/', function(req, res, next) {
   queries.getPostsWithUserAndComments().then(function(posts){
+    if (req.user) {
+      posts.forEach(function(post){
+        post.deleteable = post.author.id === req.user.id;
+      })
+    }
     res.json(posts);
   }).catch(function(err){
     console.log(err);
@@ -43,7 +48,7 @@ router.post('/', authenticated, function(req, res, next) {
       console.log(err);
       res.json({errors:['Unable to add posts']});
     })
-})
+});
 
 router.post('/:id', authenticated, function(req, res, next){
   var toUpdate = {
@@ -56,7 +61,7 @@ router.post('/:id', authenticated, function(req, res, next){
     console.log(posts);
     res.json(posts[0]);
   });
-})
+});
 
 router.post('/:id/comments', authenticated, function(req, res, next){
   var result = {};
@@ -68,6 +73,29 @@ router.post('/:id/comments', authenticated, function(req, res, next){
     delete result.author_id;
     res.json(result);
   })
-})
+});
+
+router.delete('/:id', authenticated, function(req, res, next){
+  console.log(req.params.id);
+
+  knex('posts')
+    .where('author_id', req.user.id).pluck('id').then(function(ids){
+      // console.log(typeof ids);
+      // console.log(typeof req.params.id);
+      // console.log(ids.indexOf(+req.params.id) >= 0);
+      if(ids.indexOf(+req.params.id) >= 0){
+        console.log('deleting');
+        knex('posts')
+          .where('id', req.params.id)
+          .del().then(function(){
+            res.json(1)
+          });
+      }
+    }).catch(function(err){
+      console.log(err);
+      res.status(400).send({errors: ['You cannot delete this post.']})
+    })
+
+});
 
 module.exports = router;

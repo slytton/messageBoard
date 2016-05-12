@@ -16,6 +16,7 @@
       filters: filters,
       list: listPosts,
       create: createPost,
+      removePost: removePost,
       upVote: upVote,
       downVote: downVote,
       createComment: createComment,
@@ -72,6 +73,13 @@
 
         post.comments.push(res.data);
       });
+    }
+
+    function removePost(post){
+      return $http.delete(POSTS_API_URL + "/" + post.id, {postId: post.id}).then(function(res){
+        var index = posts.indexOf(post);
+        posts.splice(index, 1);
+      })
     }
   }
 })();

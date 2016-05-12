@@ -70,6 +70,26 @@ article {
   padding-bottom: 50px;
 }
 
+.close-post-col {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 25px;
+  color: rgb(187, 187, 187);
+  cursor: pointer;
+}
+
+.close-post-col i:hover {
+  color: rgb(148, 148, 148);
+}
+
+section.row {
+  display: flex;
+  align-items: center;
+
+}
+
 /*Animations*/
 
 /*.ng-enter {
