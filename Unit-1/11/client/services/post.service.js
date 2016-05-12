@@ -8,8 +8,12 @@
     var POSTS_API_URL = API_URL + '/posts';
 
     var posts = [];
-
+    var filters = {
+      sort: 'votes',
+      direction: 'descending'
+    }
     var postsService = {
+      filters: filters,
       list: listPosts,
       create: createPost,
       upVote: upVote,
@@ -65,7 +69,7 @@
       comment.post_id = post.id;
       return $http.post(POSTS_API_URL + "/" + post.id + "/comments", comment)
                   .then(function(res){
-        
+
         post.comments.push(res.data);
       });
     }

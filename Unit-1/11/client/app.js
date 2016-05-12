@@ -1,5 +1,5 @@
 (function() {
-  angular.module('RedditClone', ['ui.router','ngAnimate', 'ngMessages', 'angularMoment'])
+  angular.module('RedditClone', ['ui.router', 'ngAnimate', 'ngMessages', 'angularMoment'])
   .constant({'API_URL': resolveApiUrl() + '/api/v1'});
 
 
@@ -16,9 +16,5 @@ angular.module('RedditClone').controller('PostsController', function($scope, $ti
   $scope.vm.filters.sort = 'votes';
   $scope.vm.filters.direction = 'descending'
   $scope.vm.showAddComments = false;
-
-});
-
-angular.module('RedditClone').controller('CommentsController', function($scope){
 
 });

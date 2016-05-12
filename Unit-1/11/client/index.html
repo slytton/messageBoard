@@ -16,16 +16,20 @@
     <script src="app.js" charset="utf-8"></script>
 
     <!-- Directives -->
-    <script src="directives/comments/comments.directive.js"></script>
-    <script src="directives/posts/posts.js"></script>
-    <script src="directives/header/header.js"></script>
-    <script src="directives/new-post-form/new-post-form.js"></script>
-    <script src="auth/login.directive.js"></script>
-    <script src="auth/signup.directive.js"></script>
+    <script src="/directives/comments/comments.directive.js"></script>
+    <script src="/directives/posts/posts.js"></script>
+    <script src="/layout/header.directive.js"></script>
+    <script src="/layout/layout.directive.js"></script>
+    <script src="/directives/new-post-form/new-post-form.js"></script>
+    <script src="/auth/login.directive.js"></script>
+    <script src="/auth/signup.directive.js"></script>
 
     <!-- Services -->
-    <script src="services/post.service.js"></script>
-    <script src="services/auth.factory.js"></script>
+    <script src="/services/post.service.js"></script>
+    <script src="/services/auth.factory.js"></script>
+
+    <!-- Routes -->
+    <script src="/routes.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/animatecss/3.5.1/animate.min.css" media="screen" title="no title" charset="utf-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -33,10 +37,7 @@
     <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
     <title>Reddit Clone</title>
   </head>
-  <body ng-controller='PostsController'>
-    <rc-header filters='vm.filters'></rc-header>
-    <main class="container">
-      <rc-posts filters='vm.filters'></rc-posts>
-    </main>
+  <body>
+    <ui-view></ui-view>
   </body>
 </html>

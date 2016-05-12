@@ -2,12 +2,11 @@ angular.module('RedditClone')
   .directive('rcHeader', ['postsService', function (postsService) {
     return {
       restrict: 'E',
-      templateUrl: '/directives/header/header.html',
-      scope: {
-        filters: '='
-      },
+      templateUrl: '/layout/header.directive.html',
+      scope: {},
       link: function(scope, element){
         scope.vm = {};
+        scope.filters = postsService.filters;
       }
     };
   }]);
