@@ -17,11 +17,12 @@ router.post('/signup', function(req, res, next) {
   knex('users').insert({username: newUser.username, password: password})
                .returning('*')
                .then(function(users){
-
-    var token = jwt.sign(users[0], process.env.JWT_SECRET, {expiresIn: '2d'})
+    var userId = {userId: users[0].id}
+    var token = jwt.sign(userId, process.env.JWT_SECRET, {expiresIn: '2d'})
     console.log(token);
     res.json({token: token});
   }).catch(function(err){
+    console.log(err);
     res.status(400).send({errors: ['please select a different username']});
   })
 
@@ -39,13 +40,23 @@ router.post('/login', function(req, res, next) {
   knex('users').insert({username: user.username, password: password})
                .returning('*')
                .then(function(users){
-    var token = jwt.sign(users[0], process.env.JWT_SECRET, {expiresIn: '2d'})
+    var userId = {userId: users[0].id}
+    var token = jwt.sign(userId, process.env.JWT_SECRET, {expiresIn: '2d'})
     console.log(token);
     res.json({token: token});
   }).catch(function(err){
     res.status(400).send({errors: ['You have entered an invalid username or password']});
   })
-
 });
+
+router.get('/me', function(req, res, next){
+  var token = req.headers.authentication;
+  var decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+  knex('users').where({id: decoded.userId}).first().then(function(user){
+    delete user.password;
+    res.json(user);
+  })
+})
 
 module.exports = router;

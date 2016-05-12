@@ -9,7 +9,8 @@
     var authFactory = {
       login: login,
       logout: logout,
-      signup: signup
+      signup: signup,
+      me: getMe
     };
 
     return authFactory;
@@ -32,6 +33,13 @@
 
     function logout(){
       localStorage.removeItem('token');
+    }
+
+    function getMe(){
+      return $http.get(AUTH_API_URL + '/me').then(function(res){
+        console.log(res);
+        return res.data;
+      })
     }
 
   }
