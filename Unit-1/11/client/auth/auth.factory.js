@@ -30,6 +30,7 @@
       console.log(credentials);
       return $http.post(AUTH_API_URL + '/login', credentials).then(function(res){
         localStorage.setItem('token', res.data.token);
+        authFactory.me();
       }).catch(function(err){
         return Promise.reject(err.data);
       })
@@ -37,6 +38,7 @@
 
     function logout(){
       localStorage.removeItem('token');
+      _user = null;
     }
 
     function me(){
@@ -44,6 +46,7 @@
         console.log(res);
 
         _user = Object.keys(res.data).length > 0 ? res.data : null;
+        console.log('in me ', _user);
         return _user;
       })
     }

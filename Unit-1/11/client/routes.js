@@ -48,6 +48,7 @@
           },
 
           'response': function(response) {
+            
             return response;
           }
         };
@@ -65,4 +66,5 @@
   function setUser($scope, user){
     $scope.user = user;
   }
+
 })();

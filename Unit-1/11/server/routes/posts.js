@@ -3,7 +3,11 @@ var router = express.Router();
 var knex = require('../db/config');
 var queries = require('../lib/');
 
-/* GET home page. */
+function authenticated(req, res, next){
+  if(req.user) return next();
+  res.status(400).send({errors:["You are not authorized to do that :("]})
+}
+
 router.get('/', function(req, res, next) {
   queries.getPostsWithUserAndComments().then(function(posts){
     res.json(posts);
@@ -13,7 +17,8 @@ router.get('/', function(req, res, next) {
   })
 });
 
-router.post('/', function(req, res, next) {
+
+router.post('/', authenticated, function(req, res, next) {
   var errors = []
   var post = {};
 
@@ -40,7 +45,7 @@ router.post('/', function(req, res, next) {
     })
 })
 
-router.post('/:id', function(req, res, next){
+router.post('/:id', authenticated, function(req, res, next){
   var toUpdate = {
     title: req.body.title,
     description: req.body.description,
@@ -53,7 +58,7 @@ router.post('/:id', function(req, res, next){
   });
 })
 
-router.post('/:id/comments', function(req, res, next){
+router.post('/:id/comments', authenticated, function(req, res, next){
   var result = {};
   knex('comments').insert(req.body).returning('*').then(function(comments){
     result = comments[0];

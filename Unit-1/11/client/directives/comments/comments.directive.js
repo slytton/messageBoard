@@ -11,11 +11,17 @@ angular.module('RedditClone')
         scope.vm = {};
         scope.user = AuthService.getUser();
 
+        scope.$watch(function(){
+          return AuthService.getUser();
+        },
+        function (newUser) {
+          scope.user = newUser;
+        }, true);
+
         scope.vm.createComment = function(post, comment, subScope){
           console.log('createComment directives');
 
           var copiedComment = angular.copy(subScope.commentsForm);
-          copiedComment.author_id = scope.user.id;
           scope.addComment(post, copiedComment).then(function(){
 
             console.log('addComment directives');

@@ -1,10 +1,11 @@
 <span class="comments-container">
-  <span ng-click="showComments = !showComments" class='show-comments'>
-    <i class='fa fa-comment-o'></i>
-    <span ng-bind='post.comments.length'></span>
-    <ng-pluralize count="post.comments.length" when="{1: 'comment',
-                                                      'other': 'comments'}">
-                                                      </ng-pluralize>
+  <span ng-if='user'>
+    <span ng-click="showComments = !showComments" class='show-comments'>
+      <i class='fa fa-comment-o'></i>
+      <span ng-bind='post.comments.length'></span>
+      <ng-pluralize count="post.comments.length" when="{1: 'comment',
+      'other': 'comments'}">
+    </ng-pluralize>
   </span> |
 
   <span class='show-add-comments' ng-click="myState.showAddComments = !myState.showAddComments"><i class='fa fa-pencil'></i> comment</span>
@@ -12,7 +13,7 @@
   <div class="row add-comments" ng-show="myState.showAddComments">
     <form class='form-inline'  class="" name='addCommentForm' ng-submit="vm.createComment(post, comment, this)" novalidate>
       <div class="form-group" ng-class="{ 'has-error': addCommentForm.comment.$invalid && addCommentForm.comment.$dirty,
-                                          'has-success': addCommentForm.comment.$valid}">
+      'has-success': addCommentForm.comment.$valid}">
         <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.text">
         <div ng-messages='addCommentForm.comment.$error' ng-show='addCommentForm.comment.$dirty'>
           <p ng-message='required'>
@@ -38,4 +39,6 @@
       </div>
     </div>
   </div>
+</span>
+  <strong ng-if="!user"><a ui-sref="login">Log in to comment</a></strong>
 </span>
