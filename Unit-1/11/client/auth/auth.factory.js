@@ -6,7 +6,7 @@
 
   function factory($http, API_URL){
     var AUTH_API_URL = API_URL + '/auth';
-    var _user = {};
+    var _user = null;
 
     var authFactory = {
       login: login,
@@ -42,7 +42,8 @@
     function me(){
       return $http.get(AUTH_API_URL + '/me').then(function(res){
         console.log(res);
-        _user = res.data;
+
+        _user = Object.keys(res.data).length > 0 ? res.data : null;
         return _user;
       })
     }

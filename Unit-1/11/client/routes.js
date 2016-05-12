@@ -36,9 +36,6 @@
         controller: setUser,
         parent: 'layout'
       })
-      .state('logout', {
-        
-      })
 
       // register the interceptor via an anonymous factory
       $httpProvider.interceptors.push(interceptors);
@@ -68,6 +65,13 @@
   function setUser($scope, user){
     $scope.user = user;
   }
+  //
+  // logoutController.$inject = ['AuthService', '$state']
+  //
+  // function logoutController(AuthService){
+  //   AuthService.logout();
+  //   $state.go('posts');
+  // }
 
 
 })();
