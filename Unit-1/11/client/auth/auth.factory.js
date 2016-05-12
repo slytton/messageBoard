@@ -6,11 +6,14 @@
 
   function factory($http, API_URL){
     var AUTH_API_URL = API_URL + '/auth';
+    var _user = {};
+
     var authFactory = {
       login: login,
       logout: logout,
       signup: signup,
-      me: getMe
+      me: me,
+      getUser: getUser
     };
 
     return authFactory;
@@ -24,6 +27,7 @@
     }
 
     function login(credentials){
+      console.log(credentials);
       return $http.post(AUTH_API_URL + '/login', credentials).then(function(res){
         localStorage.setItem('token', res.data.token);
       }).catch(function(err){
@@ -35,11 +39,16 @@
       localStorage.removeItem('token');
     }
 
-    function getMe(){
+    function me(){
       return $http.get(AUTH_API_URL + '/me').then(function(res){
         console.log(res);
-        return res.data;
+        _user = res.data;
+        return _user;
       })
+    }
+
+    function getUser() {
+      return _user;
     }
 
   }

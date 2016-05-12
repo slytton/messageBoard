@@ -6,8 +6,10 @@ angular.module('RedditClone')
         templateUrl: '/directives/posts/posts.html',
         //controller: 'PostsController as PostsCtrl',
         scope: {
+          user: '='
         },
         link: function(scope, element){
+          console.log('In posts', scope.user);
           scope.vm = {};
           scope.filters = PostsService.filters;
           PostsService.list().then(function(posts){

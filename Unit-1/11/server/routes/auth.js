@@ -18,7 +18,7 @@ router.post('/signup', function(req, res, next) {
                .returning('*')
                .then(function(users){
     var userId = {userId: users[0].id}
-    var token = jwt.sign(userId, process.env.JWT_SECRET, {expiresIn: '2d'})
+    var token = jwt.sign(userId, process.env.JWT_SECRET, {expiresIn: '2d'});
     console.log(token);
     res.json({token: token});
   }).catch(function(err){
@@ -29,34 +29,38 @@ router.post('/signup', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
+  console.log('test');
   var user = req.body;
   var errors = [];
 
+  console.log(user);
   if(!user.username) errors.push('please enter a username');
   if(!user.password) errors.push('please enter a password');
   if(errors.length > 0) return res.status(400).send({errors: errors});
 
-  var password = bcrypt.hashSync(user.password, 10);
-  knex('users').insert({username: user.username, password: password})
-               .returning('*')
-               .then(function(users){
-    var userId = {userId: users[0].id}
-    var token = jwt.sign(userId, process.env.JWT_SECRET, {expiresIn: '2d'})
-    console.log(token);
-    res.json({token: token});
+  knex('users').where('username', user.username)
+    .first()
+    .then(function(dbUser){
+      console.log(dbUser);
+      if(bcrypt.compareSync(user.password, dbUser.password)){
+        var token = jwt.sign({userId: dbUser.id}, process.env.JWT_SECRET, {expiresIn: '2d'});
+        console.log(token);
+        res.json({token: token});
+      }else{
+        return Promise.reject('invalid password');
+      }
   }).catch(function(err){
+    console.log(err);
     res.status(400).send({errors: ['You have entered an invalid username or password']});
   })
 });
 
 router.get('/me', function(req, res, next){
-  var token = req.headers.authentication;
-  var decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-  knex('users').where({id: decoded.userId}).first().then(function(user){
-    delete user.password;
-    res.json(user);
-  })
+  if (req.user) {
+    res.json(req.user)
+  }else{
+    res.status(200).send({});
+  }
 })
 
 module.exports = router;

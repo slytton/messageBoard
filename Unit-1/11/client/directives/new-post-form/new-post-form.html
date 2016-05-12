@@ -1,19 +1,10 @@
-<form ng-show="postForm.showAddPostForm" class="add-post" name='addPostForm' ng-submit="addPost()" novalidate>
+<form class="add-post" name='addPostForm' ng-submit="addPost()" novalidate>
   <div class="form-group" ng-class="{'has-error': addPostForm.title.$invalid && addPostForm.title.$dirty,
                   'has-success': addPostForm.title.$valid}">
     <input type="text" class="form-control" id="title" placeholder="Post Title" name="title" required ng-model="vm.postsForm.title">
     <div ng-messages='addPostForm.title.$error' ng-if='addPostForm.title.$dirty'>
       <p ng-message='required'>
         Please enter a title.
-      </p>
-    </div>
-  </div>
-  <div class="form-group" ng-class="{'has-error': addPostForm.author.$invalid && addPostForm.author.$dirty,
-                  'has-success': addPostForm.author.$valid}">
-    <input type="text" class="form-control" id="author" placeholder="Author" name="author" required ng-model='vm.postsForm.author_id'>
-    <div ng-messages='addPostForm.author.$error' ng-if='addPostForm.author.$dirty'>
-      <p ng-message='required'>
-        Please enter an author.
       </p>
     </div>
   </div>

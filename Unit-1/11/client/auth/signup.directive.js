@@ -14,7 +14,7 @@
         scope.vm.signup = function(){
           scope.vm.errors = [];
           AuthService.signup(scope.vm.newUser).then(function(res){
-            $state.go('home');
+            $state.go('posts');
           }).catch(function(err){
             scope.vm.errors = err.errors;
           })

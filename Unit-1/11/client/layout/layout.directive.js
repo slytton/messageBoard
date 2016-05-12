@@ -4,13 +4,15 @@
       return {
         restrict: 'E',
         templateUrl: '/layout/layout.directive.html',
-        scope: {},
+        scope: {
+          user: "="
+        },
         controller: controller,
         controllerAs: 'vm'
       };
 
       function controller(){
-
+        //console.log('layout controller ' + this.user);
       }
     });
 })();

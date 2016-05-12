@@ -72,7 +72,7 @@ article {
 
 /*Animations*/
 
-.ng-enter {
+/*.ng-enter {
   animation: bounceInRight .75s;
 }
 
@@ -110,4 +110,4 @@ article {
 .ng-enter-stagger, .ng-leave-stagger {
   animation-delay: .2s;
   animation-duration: 0;
-}
+}*/

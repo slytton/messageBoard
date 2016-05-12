@@ -15,6 +15,8 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   var errors = []
+  var post = {};
+
   if(!req.body.title) errors.push('Please include a title');
   if(!req.body.description) errors.push('Please include a description');
   if(!req.body.image_url) errors.push('Please include an image url.');
@@ -22,7 +24,15 @@ router.post('/', function(req, res, next) {
 
   knex('posts').insert(req.body).returning("*")
     .then(function(posts){
-      res.json(posts[0]);
+      post = posts[0];
+      post.comments = [];
+      return knex('users').select('id', 'username').where('id', post.author_id).first();
+    })
+    .then(function(author){
+      delete post.author_id
+      post.author = author;
+
+      res.json(post);
     })
     .catch(function(err){
       console.log(err);

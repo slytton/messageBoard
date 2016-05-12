@@ -3,6 +3,8 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var jwt = require('jsonwebtoken');
+var knex = require('./db/config');
 
 var users = require('./routes/users.js');
 var posts = require('./routes/posts.js');
@@ -16,6 +18,23 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(function(req, res, next){
+  var token = req.headers.authentication;
+  if(token){
+    var decoded = jwt.verify(token, process.env.JWT_SECRET);
+    console.log(decoded);
+    knex('users').where({id: decoded.userId}).first().then(function(user){
+      delete user.password;
+      req.user = user;
+      next();
+    }).catch(function(err){
+      console.log(err);
+      next();
+    })
+  }else{
+    next();
+  }
+})
 
 app.use('/api/v1/users', users);
 app.use('/api/v1/posts', posts);

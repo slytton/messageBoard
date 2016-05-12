@@ -9,22 +9,36 @@
     $urlRouterProvider.otherwise("/");
 
     $stateProvider
-      .state('layout', {
-        isProtected: true,
-        url: "/",
-        template: "<rc-layout></rc-layout>",
+      .state('layout',{
+        abstract: true,
+        template: '<rc-layout user="user"></rc-layout>',
+        controller: setUser,
         resolve: {
           user: getMe
         }
       })
-      .state('layout.signup', {
-        url: "/signup",
-        template: "<rc-signup></rc-signup>",
+      .state('posts', {
+        url: "/",
+        template: "<rc-posts user='user'></rc-posts>",
+        controller: setUser,
+        parent: 'layout'
       })
-      .state('layout.login', {
+      .state('signup', {
+        // isProtected: true,
+        url: "/signup",
+        template: "<rc-signup user='user'></rc-signup>",
+        controller: setUser,
+        parent: 'layout'
+      })
+      .state('login', {
         url: "/login",
-        template: "<rc-login></rc-login>"
-      });
+        template: "<rc-login user='user'></rc-login>",
+        controller: setUser,
+        parent: 'layout'
+      })
+      .state('logout', {
+        
+      })
 
       // register the interceptor via an anonymous factory
       $httpProvider.interceptors.push(interceptors);
@@ -44,8 +58,16 @@
   }
 
   getMe.$inject = ['AuthService']
+
   function getMe(AuthService) {
     return AuthService.me();
   }
+
+  setUser.$inject = ["$scope", "user"]
+
+  function setUser($scope, user){
+    $scope.user = user;
+  }
+
 
 })();

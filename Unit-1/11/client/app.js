@@ -9,13 +9,15 @@
   }
 
 
-  routeEvent.$inject = ['$rootScope'];
+  routeEvent.$inject = ['$rootScope', '$state'];
 
-  function routeEvent($rootScope){
-    $rootScope.$on('$stateChangeStart', function(event){
-      console.log(event);
-      if(!localStorage.getItem('token') && event){
-
+  function routeEvent($rootScope, $state){
+    $rootScope.$on('$stateChangeStart', function(event, state){
+      console.log(state);
+      if(!localStorage.getItem('token') && state.isProtected){
+        console.log('preventingDefault');
+        event.preventDefault();
+        $state.go('login');
       }
     })
   }

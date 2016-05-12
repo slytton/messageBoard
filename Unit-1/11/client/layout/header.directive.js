@@ -3,7 +3,9 @@ angular.module('RedditClone')
     return {
       restrict: 'E',
       templateUrl: '/layout/header.directive.html',
-      scope: {},
+      scope: {
+        user: "="
+      },
       link: function(scope, element){
         scope.vm = {};
         scope.filters = postsService.filters;
