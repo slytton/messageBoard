@@ -24,6 +24,7 @@ exports.seed = function(knex, Promise) {
 
   function insertWithAuthorName(authorName, post) {
     return knex('users').where('username', authorName).first().then(function(user){
+      console.log(user);
       post.author_id = user.id;
       return knex('posts').insert(post);
     });

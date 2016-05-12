@@ -9,7 +9,6 @@ angular.module('RedditClone')
           filters: '='
         },
         link: function(scope, element){
-          console.log($timeout);
           scope.vm = {};
           PostsService.list().then(function(posts){
             scope.vm.posts = posts;

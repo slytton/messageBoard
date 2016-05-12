@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('users', function(table){
     table.increments();
-    table.string('username');
+    table.string('username').unique();
     table.timestamp('created_at').defaultTo(knex.fn.now());
   })
 };

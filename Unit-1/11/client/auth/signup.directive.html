@@ -1,0 +1,14 @@
+<form class="form" novalidate ng-submit="vm.signup()">
+  <ul ng-if="vm.errors">
+    <li ng-repeat="error in vm.errors" ng-bind="error"></li>
+  </ul>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input ng-model="vm.newUser.username" type="text" class="form-control" id="username" placeholder="Username" required>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input ng-model="vm.newUser.password" type="password" class="form-control" id="password" placeholder="Password" required>
+  </div>
+  <input class="btn btn-primary" type="submit" name="name" value="Sign Up!">
+</form>
