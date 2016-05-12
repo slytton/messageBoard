@@ -24,13 +24,14 @@
         parent: 'layout'
       })
       .state('signup', {
-        // isProtected: true,
+        loggedOutOnly: true,
         url: "/signup",
         template: "<rc-signup user='user'></rc-signup>",
         controller: setUser,
         parent: 'layout'
       })
       .state('login', {
+        loggedOutOnly: true,
         url: "/login",
         template: "<rc-login user='user'></rc-login>",
         controller: setUser,
@@ -48,7 +49,7 @@
           },
 
           'response': function(response) {
-            
+
             return response;
           }
         };

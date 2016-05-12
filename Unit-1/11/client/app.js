@@ -13,10 +13,14 @@
 
   function routeEvent($rootScope, $state){
     $rootScope.$on('$stateChangeStart', function(event, state){
-      if(!localStorage.getItem('token') && state.isProtected){
+      if(!localStorage.getItem('token') && state.loggedInOnly){
         console.log('preventingDefault');
         event.preventDefault();
         $state.go('login');
+      }
+      if(localStorage.getItem('token') && state.loggedOutOnly){
+        event.preventDefault();
+        $state.go('posts');
       }
     })
   }
