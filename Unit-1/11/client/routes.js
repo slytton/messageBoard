@@ -65,13 +65,4 @@
   function setUser($scope, user){
     $scope.user = user;
   }
-  //
-  // logoutController.$inject = ['AuthService', '$state']
-  //
-  // function logoutController(AuthService){
-  //   AuthService.logout();
-  //   $state.go('posts');
-  // }
-
-
 })();

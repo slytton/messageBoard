@@ -11,15 +11,6 @@
 
   <div class="row add-comments" ng-show="myState.showAddComments">
     <form class='form-inline'  class="" name='addCommentForm' ng-submit="vm.createComment(post, comment, this)" novalidate>
-      <div class="form-group" ng-class="{'has-error': addCommentForm.author.$invalid && addCommentForm.author.$dirty,
-      'has-success': addCommentForm.author.$valid}">
-        <input type="number" class="form-control" id="author" placeholder="Author" name="author" required ng-model='commentsForm.author_id'>
-        <div ng-messages='addCommentForm.author.$error' ng-show='addCommentForm.author.$dirty'>
-          <p ng-message='required'>
-            Please enter an author_id.
-          </p>
-        </div>
-      </div>
       <div class="form-group" ng-class="{ 'has-error': addCommentForm.comment.$invalid && addCommentForm.comment.$dirty,
                                           'has-success': addCommentForm.comment.$valid}">
         <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.text">
