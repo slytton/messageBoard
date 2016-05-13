@@ -2,7 +2,7 @@ angular.module('RedditClone')
   .directive('rcNewPostForm', ['postsService', 'AuthService', function(postsService, AuthService){
     return {
       restrict: 'E',
-      templateUrl: '/directives/new-post-form/new-post-form.html',
+      templateUrl: '/posts/new-post-form.directive.html',
       scope: {
         show: "="
       },

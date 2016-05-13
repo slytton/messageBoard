@@ -3,7 +3,7 @@ angular.module('RedditClone')
     function PostsDirective($timeout, PostsService) {
       return {
         restrict: 'E',
-        templateUrl: '/directives/posts/posts.html',
+        templateUrl: '/posts/posts.directive.html',
         //controller: 'PostsController as PostsCtrl',
         scope: {
           user: '='

@@ -1,10 +1,10 @@
 <span class="comments-container">
-  <span ng-if='user'>
+  <span ng-if='vm.user'>
     <span ng-click="showComments = !showComments" class='show-comments'>
       <i class='fa fa-comment-o'></i>
       <span ng-bind='post.comments.length'></span>
-      <ng-pluralize count="post.comments.length" when="{1: 'comment',
-      'other': 'comments'}">
+      <ng-pluralize count="post.comments.length" when="{ 1: 'comment',
+      'other': 'comments' }">
     </ng-pluralize>
   </span> |
 
@@ -43,5 +43,5 @@
     </div>
   </div>
 </span>
-  <strong ng-if="!user"><a ui-sref="login">Log in to comment</a></strong>
+  <strong ng-if="!vm.user"><a ui-sref="login">Log in to comment</a></strong>
 </span>
