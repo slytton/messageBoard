@@ -15,32 +15,32 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li ng-if="user" ng-class="{'active': vm.postForm.showAddPostForm}" ng-click="vm.postForm.showAddPostForm = !vm.postForm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
+          <li ng-if="vm.session.currentUser" ng-class="{'active': vm.postForm.showAddPostForm}" ng-click="vm.postForm.showAddPostForm = !vm.postForm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
 
             <li ng-hide="vm.path != '/'" class="dropdown">
-              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span ng-bind="filters.sort"></span> <strong ng-bind=""></strong> <span class="caret"></span></a>
+              <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span ng-bind="vm.filters.sort"></span> <strong ng-bind=""></strong> <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li ng-class="{'active': filters.sort === 'votes'}" ng-click="filters.sort = 'votes'; filters.direction = 'descending'" ><a href="">Votes</a></li>
-                <li ng-class="{'active': filters.sort === 'title'}" ng-click="filters.sort = 'title'" ><a href="">Title</a></li>
-                <li ng-class="{'active': filters.sort === 'createdAt'}" ng-click="filters.sort = 'createdAt'" ><a href="">Date</a></li>
+                <li ng-class="{'active': vm.filters.sort === 'votes'}" ng-click="vm.filters.sort = 'votes'; vm.filters.direction = 'descending'" ><a href="">Votes</a></li>
+                <li ng-class="{'active': vm.filters.sort === 'title'}" ng-click="vm.filters.sort = 'title'" ><a href="">Title</a></li>
+                <li ng-class="{'active': vm.filters.sort === 'createdAt'}" ng-click="vm.filters.sort = 'createdAt'" ><a href="">Date</a></li>
               </ul>
             </li>
-            <li ng-hide="vm.path != '/'" ng-class="{'active': filters.direction === 'descending'}" ng-click="filters.direction = 'descending'"><a href=""><i class='fa fa-angle-up'></i></a></li>
-            <li ng-hide="vm.path != '/'" ng-class="{'active': filters.direction === null}" ng-click="filters.direction = null"><a href=""><i class='fa fa-angle-down'></i></a></li>
+            <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.direction === 'descending'}" ng-click="vm.filters.direction = 'descending'"><a href=""><i class='fa fa-angle-up'></i></a></li>
+            <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.direction === null}" ng-click="vm.filters.direction = null"><a href=""><i class='fa fa-angle-down'></i></a></li>
         </ul>
         <form ng-hide="vm.path != '/'" class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <label class="sr-only"></label>
             <div class="input-group">
               <div class="input-group-addon"><i class='fa fa-search'></i></div>
-              <input ng-model='filters.search' type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
+              <input ng-model='vm.filters.search' type="text" class="form-control" id="exampleInputAmount" placeholder="Search">
             </div>
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-        <li ng-if="!user"><a ui-sref="signup">Sign Up</a></li> <!-- If not logged in. -->
-        <li ng-if="!user"><a ui-sref="login">Log In</a></li> <!-- If not logged in. -->
-        <li ng-if="user"><a href="" ng-click="vm.logout()"><strong ng-bind='user.username | trim:5:"..."'></strong> | Log Out</a></li> <!-- If logged in. -->
+        <li ng-if="!vm.session.currentUser"><a ui-sref="signup">Sign Up</a></li> <!-- If not logged in. -->
+        <li ng-if="!vm.session.currentUser"><a ui-sref="login">Log In</a></li> <!-- If not logged in. -->
+        <li ng-if="vm.session.currentUser"><a href="" ng-click="vm.logout()"><strong ng-bind='vm.session.currentUser.username | trim:5:"..."'></strong> | Log Out</a></li> <!-- If logged in. -->
       </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

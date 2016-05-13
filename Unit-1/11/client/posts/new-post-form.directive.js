@@ -7,7 +7,7 @@ angular.module('RedditClone')
         show: "="
       },
       link: function(scope, element){
-        scope.user = AuthService.getUser();
+        scope.user = AuthService.currentUser;
         scope.addPost = function(){
           var newPost = angular.copy(scope.vm.postsForm);
           newPost.author_id = scope.user.id;

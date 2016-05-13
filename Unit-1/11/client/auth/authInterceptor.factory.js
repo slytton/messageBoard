@@ -11,8 +11,7 @@ function factory(){
       return req;
     },
 
-    'response': function(response) {
-
+    'response': function(response) {  
       return response;
     }
   };

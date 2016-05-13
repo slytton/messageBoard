@@ -1,15 +1,13 @@
 angular.module('RedditClone')
-  .directive('rcPosts', ['$timeout', 'postsService', PostsDirective]);
-    function PostsDirective($timeout, PostsService) {
+  .directive('rcPosts', ['$timeout', 'postsService', 'AuthService', PostsDirective]);
+    function PostsDirective($timeout, PostsService, AuthService) {
       return {
         restrict: 'E',
         templateUrl: '/posts/posts.directive.html',
         //controller: 'PostsController as PostsCtrl',
-        scope: {
-          user: '='
-        },
+        scope: {},
         link: function(scope, element){
-          console.log('In posts', scope.user);
+          console.log('In posts', AuthService.session);
           scope.vm = {};
           scope.filters = PostsService.filters;
           PostsService.list().then(function(posts){

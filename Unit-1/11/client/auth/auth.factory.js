@@ -9,11 +9,12 @@
     var _user = null;
 
     var authFactory = {
+      session: { currentUser: null },
       login: login,
       logout: logout,
       signup: signup,
       me: me,
-      getUser: getUser
+      //getUser: getUser
     };
 
     return authFactory;
@@ -27,7 +28,6 @@
     }
 
     function login(credentials){
-      console.log(credentials);
       return $http.post(AUTH_API_URL + '/login', credentials).then(function(res){
         localStorage.setItem('token', res.data.token);
         authFactory.me();
@@ -38,22 +38,20 @@
 
     function logout(){
       localStorage.removeItem('token');
-      _user = null;
+      authFactory.session.currentUser = null;
     }
 
     function me(){
       return $http.get(AUTH_API_URL + '/me').then(function(res){
-        console.log(res);
-
-        _user = Object.keys(res.data).length > 0 ? res.data : null;
-        console.log('in me ', _user);
-        return _user;
+        authFactory.session.currentUser = Object.keys(res.data).length > 0 ? res.data : null;
+        console.log('AuthFactory me()' + authFactory.session);
+        return authFactory.session;
       })
     }
 
-    function getUser() {
-      return _user;
-    }
+    // function getUser() {
+    //   return authFactory.session.currentUser;
+    // }
 
   }
 })();

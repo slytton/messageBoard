@@ -5,7 +5,7 @@ angular.module('RedditClone')
   directive.$inject = [];
 
 
-  function directive(postsService){
+  function directive(){
     return {
       restrict: 'E',
       templateUrl: '/posts/comments.directive.html',
@@ -23,17 +23,10 @@ angular.module('RedditClone')
 
   controller.$inject = ['$scope', 'AuthService', 'postsService']
 
-  function controller($scope, AuthService, post){
+  function controller($scope, AuthService, postsService){
     var vm  = this;
 
-    vm.user = AuthService.getUser();
-
-    $scope.$watch(function(){
-      return AuthService.getUser();
-    },
-    function (newUser) {
-      vm.user = newUser;
-    }, true);
+    vm.session = AuthService.session;
 
     vm.createComment = function(post, comment, subScope){
       console.log('createComment directives');

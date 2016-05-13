@@ -1,18 +1,21 @@
 (function() {
   angular.module('RedditClone')
-    .directive('rcLayout', function() {
-      return {
-        restrict: 'E',
-        templateUrl: '/layout/layout.directive.html',
-        scope: {
-          user: "="
-        },
-        controller: controller,
-        controllerAs: 'vm'
-      };
+    .directive('rcLayout', directive)
 
-      function controller(){
-        //console.log('layout controller ' + this.user);
-      }
-    });
+  directive.$inject = [];
+
+  function directive() {
+    return {
+      restrict: 'E',
+      templateUrl: '/layout/layout.directive.html',
+      scope: {},
+      controller: controller,
+      controllerAs: 'vm'
+    };
+
+    function controller(){
+      //console.log('layout controller ' + this.user);
+    }
+  };
+
 })();

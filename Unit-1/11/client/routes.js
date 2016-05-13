@@ -11,30 +11,26 @@
     $stateProvider
       .state('layout',{
         abstract: true,
-        template: '<rc-layout user="user"></rc-layout>',
-        controller: setUser,
+        template: '<rc-layout></rc-layout>',
         resolve: {
           user: getMe
         }
       })
       .state('posts', {
         url: "/",
-        template: "<rc-posts user='user'></rc-posts>",
-        controller: setUser,
+        template: "<rc-posts></rc-posts>",
         parent: 'layout'
       })
       .state('signup', {
         loggedOutOnly: true,
         url: "/signup",
-        template: "<rc-signup user='user'></rc-signup>",
-        controller: setUser,
+        template: "<rc-signup></rc-signup>",
         parent: 'layout'
       })
       .state('login', {
         loggedOutOnly: true,
         url: "/login",
-        template: "<rc-login user='user'></rc-login>",
-        controller: setUser,
+        template: "<rc-login></rc-login>",
         parent: 'layout'
       })
 
@@ -45,12 +41,6 @@
 
   function getMe(AuthService) {
     return AuthService.me();
-  }
-
-  setUser.$inject = ["$scope", "user"]
-
-  function setUser($scope, user){
-    $scope.user = user;
   }
 
 })();
