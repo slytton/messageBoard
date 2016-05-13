@@ -76,9 +76,16 @@
     }
 
     function removePost(post){
-      return $http.delete(POSTS_API_URL + "/" + post.id, {postId: post.id}).then(function(res){
+      return $http.delete(POSTS_API_URL + "/" + post.id).then(function(res){
         var index = posts.indexOf(post);
         posts.splice(index, 1);
+      })
+    }
+
+    function removePost(post, comment){
+      return $http.delete(POSTS_API_URL + "/" + post.id + "/comments/" + comment.id).then(function(res){
+        var index = post.comments.indexOf(comment);
+        post.comments.splice(index, 1);
       })
     }
   }

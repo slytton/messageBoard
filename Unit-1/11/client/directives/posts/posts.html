@@ -37,10 +37,10 @@
         {{ post.created_at | amCalendar }}
       </time> |
 
-      <rc-comments post='post' add-comment='vm.createComment'></rc-comments>
+      <rc-comments post='post' add-comment='vm.createComment' remove-comment='vm.removeComment'></rc-comments>
 
     </div>
-    <div class="close-post-col col-xs-1">
+    <div class="del-col col-xs-1">
       <i ng-if="post.deleteable" ng-click="vm.removePost(post)" class="fa fa-close"></i>
     </div>
   </section>

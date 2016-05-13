@@ -70,7 +70,7 @@ article {
   padding-bottom: 50px;
 }
 
-.close-post-col {
+.del-col {
   display:flex;
   justify-content: center;
   align-items: center;
@@ -80,8 +80,12 @@ article {
   cursor: pointer;
 }
 
-.close-post-col i:hover {
+.del-col i:hover {
   color: rgb(148, 148, 148);
+}
+
+.del-col.del-comment {
+  color: white;
 }
 
 section.row {

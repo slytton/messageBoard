@@ -27,6 +27,9 @@ angular.module('RedditClone')
           scope.vm.removePost = function(post){
             PostsService.removePost(post);
           }
+          scope.vm.removeComment = function(post, comment){
+            PostsService.removePost(post, comment);
+          }
         }
       };
     }

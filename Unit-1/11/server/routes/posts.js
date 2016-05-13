@@ -32,6 +32,8 @@ router.post('/', authenticated, function(req, res, next) {
   if(!req.body.image_url) errors.push('Please include an image url.');
   if(errors.length > 0) return res.json({errors: errors});
 
+  req.body.author_id = req.user.id;
+
   knex('posts').insert(req.body).returning("*")
     .then(function(posts){
       post = posts[0];
@@ -65,6 +67,7 @@ router.post('/:id', authenticated, function(req, res, next){
 
 router.post('/:id/comments', authenticated, function(req, res, next){
   var result = {};
+  req.body.author_id = req.user.id;
   knex('comments').insert(req.body).returning('*').then(function(comments){
     result = comments[0];
     return knex('users').select('id', 'username').where('id', result.author_id).first();
@@ -84,9 +87,33 @@ router.delete('/:id', authenticated, function(req, res, next){
       // console.log(typeof req.params.id);
       // console.log(ids.indexOf(+req.params.id) >= 0);
       if(ids.indexOf(+req.params.id) >= 0){
-        console.log('deleting');
+        console.log('deleting post');
         knex('posts')
           .where('id', req.params.id)
+          .del().then(function(){
+            res.json(1)
+          });
+      }
+    }).catch(function(err){
+      console.log(err);
+      res.status(400).send({errors: ['You cannot delete this post.']})
+    })
+
+});
+
+router.delete('/:postId/comments/:commentId', authenticated, function(req, res, next){
+  var postId = req.params.postId;
+  var commentId = req.params.commentId;
+
+  knex('comments')
+    .where('author_id', req.user.id).pluck('id').then(function(ids){
+      console.log(typeof ids);
+      console.log(typeof commentId);
+      console.log(ids.indexOf(+commentId) >= 0);
+      if(ids.indexOf(+commentId) >= 0){
+        console.log('deleting comment');
+        knex('comments')
+          .where('id', commentId)
           .del().then(function(){
             res.json(1)
           });

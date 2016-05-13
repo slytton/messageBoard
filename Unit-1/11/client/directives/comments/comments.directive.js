@@ -5,7 +5,8 @@ angular.module('RedditClone')
       templateUrl: '/directives/comments/comments.directive.html',
       scope: {
         post: "=",
-        addComment: "="
+        addComment: "=",
+        removeComment: "="
       },
       link: function(scope, element){
         scope.vm = {};
@@ -31,6 +32,11 @@ angular.module('RedditClone')
               delete subScope.commentsForm[key];
             });
           })
+        }
+
+        scope.vm.removeComment = function(post, comment){
+          console.log("calling remove comment");
+          scope.removeComment(post, comment);
         }
       }
     }
