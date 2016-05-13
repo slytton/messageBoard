@@ -40,7 +40,7 @@
         <ul class="nav navbar-nav navbar-right">
         <li ng-if="!user"><a ui-sref="signup">Sign Up</a></li> <!-- If not logged in. -->
         <li ng-if="!user"><a ui-sref="login">Log In</a></li> <!-- If not logged in. -->
-        <li ng-if="user"><a href="" ng-click="vm.logout()"><span ng-bind='user.username | trim:5:"..."'></span> | Log Out</a></li> <!-- If logged in. -->
+        <li ng-if="user"><a href="" ng-click="vm.logout()"><strong ng-bind='user.username | trim:5:"..."'></strong> | Log Out</a></li> <!-- If logged in. -->
       </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
