@@ -45,6 +45,6 @@ angular.module('RedditClone')
 
     vm.removeComment = function(post, comment){
       console.log("calling remove comment");
-      vm.removeComment(post, comment);
+      $scope.removeComment(post, comment);
     }
   }

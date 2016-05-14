@@ -20,7 +20,7 @@
       upVote: upVote,
       downVote: downVote,
       createComment: createComment,
-      //removeComment: removeComment
+      removeComment: removeComment
     };
 
     return postsService;
@@ -82,7 +82,8 @@
       })
     }
 
-    function removePost(post, comment){
+    function removeComment(post, comment){
+      console.log('In remove comment');
       return $http.delete(POSTS_API_URL + "/" + post.id + "/comments/" + comment.id).then(function(res){
         var index = post.comments.indexOf(comment);
         post.comments.splice(index, 1);
