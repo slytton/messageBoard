@@ -1,21 +1,34 @@
 angular.module('RedditClone')
-  .directive('rcNewPostForm', ['postsService', 'AuthService', function(postsService, AuthService){
-    return {
-      restrict: 'E',
-      templateUrl: '/posts/new-post-form.directive.html',
-      scope: {
-        show: "="
-      },
-      link: function(scope, element){
-        scope.session = AuthService.session;
-        scope.addPost = function(){
-          var newPost = angular.copy(scope.vm.postsForm);
-          newPost.author_id = scope.session.currentUser.id;
-          postsService.create(newPost);
-          scope.vm.postsForm = {};
-          scope.addPostForm.$setPristine();
-          scope.show = false;
-        }
+  .directive('rcNewPostForm', directive)
+
+
+directive.$inject = [];
+
+function directive(postsService, AuthService){
+  return {
+    restrict: 'E',
+    templateUrl: '/posts/new-post-form.directive.html',
+    scope: {
+      show: "="
+    },
+    controllerAs: 'vm',
+    controller: controller,
+    link: function(scope, element){
       }
     }
-  }])
+  }
+
+  controller.$inject = ['$scope', 'postsService', 'AuthService'];
+
+  function controller($scope, postsService, AuthService){
+    var vm = this;
+
+    vm.addPost = function(){
+      var newPost = angular.copy(vm.postsForm);
+      newPost.author_id = AuthService.session.currentUser.id;
+      postsService.create(newPost);
+      vm.postsForm = {};
+      $scope.addPostForm.$setPristine();
+      $scope.show = false;
+  }
+}

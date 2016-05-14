@@ -1,4 +1,4 @@
-<form class="add-post" name='addPostForm' ng-submit="addPost()" novalidate>
+<form class="add-post" name='addPostForm' ng-submit="vm.addPost()" novalidate>
   <div class="form-group" ng-class="{'has-error': addPostForm.title.$invalid && addPostForm.title.$dirty,
                   'has-success': addPostForm.title.$valid}">
     <input type="text" class="form-control" id="title" placeholder="Post Title" name="title" required ng-model="vm.postsForm.title">
