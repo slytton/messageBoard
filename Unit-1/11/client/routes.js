@@ -3,10 +3,12 @@
   angular.module('RedditClone')
     .config(routes);
 
-  routes.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
+  routes.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider', '$locationProvider'];
 
-  function routes($stateProvider, $urlRouterProvider, $httpProvider) {
+  function routes($stateProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
     $urlRouterProvider.otherwise("/");
+
+    $locationProvider.html5Mode(true);
 
     $stateProvider
       .state('layout',{
