@@ -22,6 +22,7 @@
     function signup(newUser){
       return $http.post(AUTH_API_URL + '/signup', newUser).then(function(res){
         localStorage.setItem('token', res.data.token);
+        authFactory.me();
       }).catch(function(err){
         return Promise.reject(err.data);
       })

@@ -1,23 +1,22 @@
-angular.module('RedditClone')
+(function() {
+  angular.module('RedditClone')
   .directive('rcComments', directive);
 
-
   directive.$inject = [];
-
 
   function directive(){
     return {
       restrict: 'E',
       templateUrl: '/posts/comments.directive.html',
       scope: {
-        post: "=",
-        addComment: "=",
-        removeComment: "="
+        post: "=?",
+        addComment: "=?",
+        removeComment: "=?"
       },
-      controllerAs: 'vm',
       controller: controller,
-      link: function(scope, element){
-      }
+      controllerAs: 'vm'
+      // link: function(scope, element){
+      // }
     }
   }
 
@@ -27,6 +26,8 @@ angular.module('RedditClone')
     var vm  = this;
 
     vm.session = AuthService.session;
+
+    console.log('comments auth', AuthService.session);
 
     vm.createComment = function(post, comment, subScope){
       console.log('createComment directives');
@@ -48,3 +49,4 @@ angular.module('RedditClone')
       $scope.removeComment(post, comment);
     }
   }
+})();
