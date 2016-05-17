@@ -11,7 +11,7 @@ function authenticated(req, res, next){
 
 // Get all posts
 router.get('/', function(req, res, next) {
-  queries.getPostsWithUserAndComments().then(function(posts){
+  queries.getPostsWithUserAndComments(req.user.id).then(function(posts){
     if (req.user) {
       posts.forEach(function(post){
         post.deleteable = post.author.id === req.user.id;
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
           .where({post_id: post.id, user_id: req.user.id})
           .first()
           .then(function(dbPost){
-            console.log(dbPost);
+            //console.log(dbPost);
             if(dbPost) post.favorite = true;
             return post;
           })
@@ -37,7 +37,6 @@ router.get('/', function(req, res, next) {
     }
   })
   .then(function(posts){
-    console.log(posts);
     res.json(posts);
   })
   .catch(function(err){

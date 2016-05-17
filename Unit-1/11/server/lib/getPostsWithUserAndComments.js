@@ -3,23 +3,39 @@ var queries = require('./');
 
 module.exports = getSinglePostWithUserAndComments
 
-function getSinglePostWithUserAndComments() {
-  return knex('posts').select('posts.id', 'posts.title', 'posts.author_id',
-                              'posts.description', 'posts.votes', 'posts.image_url',
-                              'posts.created_at', 'users.username')
-                      .innerJoin('users', 'users.id', 'posts.author_id')
-                      .then(function(posts){
-    var postPromises = posts.map(function(post){
-      post.author = {id: post.author_id, username: post.username}
-      delete post.author_id;
-      delete post.username;
-      return queries.getPostCommentsWithUser(post.id).then(function(comments){
-        post.comments = comments;
-        return post;
-      })
+function getSinglePostWithUserAndComments(userId) {
+  var results = [];
+  return knex('posts')
+    .select('posts.id', 'posts.title', 'posts.author_id',
+            'posts.description', 'posts.votes', 'posts.image_url',
+            'posts.created_at', 'users.username')
+    .innerJoin('users', 'users.id', 'posts.author_id')
+    .joinRaw('LEFT JOIN favorites on favorites.post_id=posts.id and favorites.user_id=?', userId)
+    .then(function(posts){
+      results.posts = posts
+      return queries.getCommentsWithUser();
     })
-    return Promise.all(postPromises);
-  });
+    .then(function(comments){
+
+      var posts = results.posts;
+
+      var indexedPosts = posts.reduce(function(prev, post){
+        post.author = {id: post.author_id, username: post.username}
+        delete post.author_id;
+        delete post.username;
+        prev[post.id] = post;
+        return prev;
+      }, {})
+
+      comments.forEach(function(comment){
+        var post = indexedPosts[comment.post_id];
+        post.comments ? post.comments.push(comment) : post.comments = [comment];
+      })
+
+      return posts;
+    })
+    //return Promise.all(postPromises);
+  // });
 }
 
 
