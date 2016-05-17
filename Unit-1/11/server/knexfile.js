@@ -2,7 +2,7 @@
 
 module.exports = {
   development: {
-    client: 'postgres',
+    client: 'pg',
     connection: 'postgres://localhost/reddit-clone'
   }
 };

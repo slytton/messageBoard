@@ -13,14 +13,32 @@ router.get('/', function(req, res, next) {
     if (req.user) {
       posts.forEach(function(post){
         post.deleteable = post.author.id === req.user.id;
-
         post.comments.forEach(function(comment){
           comment.deleteable = comment.author.id === req.user.id;
         })
+      });
+
+      var promises = posts.map(function(post){
+        return knex('favorites')
+          .where({post_id: post.id, user_id: req.user.id})
+          .first()
+          .then(function(dbPost){
+            console.log(dbPost);
+            if(dbPost) post.favorite = true;
+            return post;
+          })
       })
+
+      return Promise.all(promises);
+    }else{
+      return posts;
     }
+  })
+  .then(function(posts){
+    console.log(posts);
     res.json(posts);
-  }).catch(function(err){
+  })
+  .catch(function(err){
     console.log(err);
     res.json({errors: ['Unabel to get posts.']});
   })
