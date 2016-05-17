@@ -11,7 +11,8 @@ function authenticated(req, res, next){
 
 // Get all posts
 router.get('/', function(req, res, next) {
-  queries.getPostsWithUserAndComments(req.user.id).then(function(posts){
+  var userId = req.user ? req.user.id : null;
+  queries.getPostsWithUserAndComments(userId).then(function(posts){
     if (req.user) {
       posts.forEach(function(post){
         post.deleteable = post.author.id === req.user.id;
@@ -19,7 +20,7 @@ router.get('/', function(req, res, next) {
           comment.deleteable = comment.author.id === req.user.id;
         })
       });
-
+      console.log(posts);
       var promises = posts.map(function(post){
         return knex('favorites')
           .where({post_id: post.id, user_id: req.user.id})

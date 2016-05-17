@@ -5,6 +5,7 @@ module.exports = getSinglePostWithUserAndComments
 
 function getSinglePostWithUserAndComments(userId) {
   var results = [];
+  
   return knex('posts')
     .select('posts.id', 'posts.title', 'posts.author_id',
             'posts.description', 'posts.votes', 'posts.image_url',
@@ -12,6 +13,7 @@ function getSinglePostWithUserAndComments(userId) {
     .innerJoin('users', 'users.id', 'posts.author_id')
     .joinRaw('LEFT JOIN favorites on favorites.post_id=posts.id and favorites.user_id=?', userId)
     .then(function(posts){
+      console.log(posts);
       results.posts = posts
       return queries.getCommentsWithUser();
     })
