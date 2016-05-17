@@ -85,6 +85,7 @@ article {
 
 .container {
   padding-bottom: 50px;
+  margin: auto;
 }
 
 .del-col {
@@ -105,10 +106,8 @@ article {
   color: white;
 }
 
-section.row {
-  display: flex;
-  align-items: center;
-
+nav .fa-star, nav .fa-star-o {
+  font-size: 1.5em;
 }
 
 /*Animations*/
