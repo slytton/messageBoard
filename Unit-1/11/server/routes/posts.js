@@ -8,6 +8,8 @@ function authenticated(req, res, next){
   res.status(400).send({errors:["You are not authorized to do that :("]})
 }
 
+
+// Get all posts
 router.get('/', function(req, res, next) {
   queries.getPostsWithUserAndComments().then(function(posts){
     if (req.user) {
@@ -45,6 +47,7 @@ router.get('/', function(req, res, next) {
 });
 
 
+// Add a post
 router.post('/', authenticated, function(req, res, next) {
   var errors = []
   var post = {};
@@ -74,7 +77,7 @@ router.post('/', authenticated, function(req, res, next) {
     })
 });
 
-
+// Add a comment
 router.post('/:id/comments', authenticated, function(req, res, next){
   var result = {};
   req.body.author_id = req.user.id;
@@ -89,6 +92,7 @@ router.post('/:id/comments', authenticated, function(req, res, next){
   })
 });
 
+// Update a post
 router.post('/:id', authenticated, function(req, res, next){
   var toUpdate = {
     title: req.body.title,
@@ -102,6 +106,7 @@ router.post('/:id', authenticated, function(req, res, next){
   });
 });
 
+// Delete a comment
 router.delete('/:postId/comments/:commentId', authenticated, function(req, res, next){
   var postId = req.params.postId;
   var commentId = req.params.commentId;
@@ -126,6 +131,7 @@ router.delete('/:postId/comments/:commentId', authenticated, function(req, res, 
 
 });
 
+// Delete a post
 router.delete('/:id', authenticated, function(req, res, next){
   console.log(req.params.id);
 
@@ -147,6 +153,29 @@ router.delete('/:id', authenticated, function(req, res, next){
     res.status(400).send({errors: ['You cannot delete this post.']})
   })
 
+});
+
+router.post('/:id/favorite', function(req, res, next){
+  knex('favorites')
+    .insert({post_id: req.params.id, user_id: req.user.id})
+    .then(function(){
+      res.json({})
+    })
+    .catch(function(){
+      res.status(400).send({errors: ['Your request could not be processed.']})
+    })
+});
+
+router.post('/:id/unfavorite', function(req, res, next){
+  knex('favorites')
+    .where({post_id: req.params.id, user_id: req.user.id})
+    .delete()
+    .then(function(){
+      res.json({})
+    })
+    .catch(function(){
+      res.status(400).send({errors: ['Your request could not be processed.']})
+    })
 });
 
 

@@ -7,11 +7,11 @@ angular.module('RedditClone')
         //controller: 'PostsController as PostsCtrl',
         scope: {},
         link: function(scope, element){
-          console.log('In posts', AuthService.session);
           scope.vm = {};
           scope.filters = PostsService.filters;
           PostsService.list().then(function(posts){
             scope.vm.posts = posts;
+            console.log('In posts', posts);
           })
           scope.vm.upVote = function(post){
             PostsService.upVote(post);
@@ -27,6 +27,12 @@ angular.module('RedditClone')
           }
           scope.vm.removeComment = function(post, comment){
             PostsService.removeComment(post, comment);
+          }
+          scope.vm.unFavorite = function(post){
+            PostsService.unFavorite(post);
+          }
+          scope.vm.favorite = function(post){
+            PostsService.favorite(post);
           }
         }
       };

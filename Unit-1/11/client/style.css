@@ -17,9 +17,16 @@ time {
   -ms-user-select: none; /* IE10+ */
 }
 
-nav .fa-angle-up, nav .fa-angle-down {
+nav .fa-angle-up, nav .fa-angle-down, .posts .fa-star, .posts .fa-star-o {
   font-size: 1.5em;
+  cursor:pointer;
 }
+
+.posts .fa-star, .posts .fa-star-o {
+  color: #FFB100
+}
+
+
 
 .bold {
   font-weight:bold;

@@ -20,7 +20,9 @@
       upVote: upVote,
       downVote: downVote,
       createComment: createComment,
-      removeComment: removeComment
+      removeComment: removeComment,
+      unFavorite: unFavorite,
+      favorite: favorite
     };
 
     return postsService;
@@ -88,6 +90,22 @@
         var index = post.comments.indexOf(comment);
         post.comments.splice(index, 1);
       })
+    }
+
+    function unFavorite(post){
+      post.favorite = !post.favorite;
+      return $http.post(POSTS_API_URL + "/" + post.id + "/unfavorite").catch(function(err){
+        console.log(err);
+        post.favorite = !post.favorite;
+      });
+    }
+
+    function favorite(post){
+      post.favorite = !post.favorite;
+      return $http.post(POSTS_API_URL + "/" + post.id + "/favorite").catch(function(err){
+        console.log(err);
+        post.favorite = !post.favorite;
+      });
     }
   }
 })();
