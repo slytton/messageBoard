@@ -26,6 +26,10 @@
       .state('favorites', {
         url: "/favorites",
         template: "<rc-posts></rc-posts>",
+        controller: ['postsService', function(postsService) {
+          postsService.filters.favorites = true;
+          console.log('route favorites');
+        }],
         parent: 'layout'
       })
       .state('signup', {

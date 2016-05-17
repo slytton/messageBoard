@@ -9,10 +9,7 @@ angular.module('RedditClone')
         link: function(scope, element){
           scope.vm = {};
           console.log($location);
-          if ($location.$$path === '/favorites') {
-            PostsService.filters.favorites = true;
-            console.log('path is favorites');
-          }
+          scope.vm.session = AuthService.session;
           scope.filters = PostsService.filters;
           PostsService.list().then(function(posts){
             scope.vm.posts = posts;

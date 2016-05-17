@@ -10,7 +10,7 @@ angular.module('RedditClone')
   })
   .filter('favorites', function(){
     return function(items, filterByFav){
-      if(filterByFav){
+      if(filterByFav && items){
         return items.filter(function(item){
           return !!item.favorite;
         })

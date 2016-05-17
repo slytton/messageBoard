@@ -17,7 +17,7 @@
         <ul class="nav navbar-nav">
           <li ng-if="vm.session.currentUser" ng-class="{'active': vm.postForm.showAddPostForm}" ng-click="vm.postForm.showAddPostForm = !vm.postForm.showAddPostForm"><a href=""><i class="fa fa-plus"></i> Post</a></li>
 
-            <li ng-hide="vm.path != '/'" class="dropdown">
+            <li ng-show="vm.showFilters" class="dropdown">
               <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort By: <span ng-bind="vm.filters.sort"></span> <strong ng-bind=""></strong> <span class="caret"></span></a>
               <ul class="dropdown-menu">
                 <li ng-class="{'active': vm.filters.sort === 'votes'}" ng-click="vm.filters.sort = 'votes'; vm.filters.direction = 'descending'" ><a href="">Votes</a></li>
@@ -25,11 +25,13 @@
                 <li ng-class="{'active': vm.filters.sort === 'createdAt'}" ng-click="vm.filters.sort = 'createdAt'" ><a href="">Date</a></li>
               </ul>
             </li>
-            <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.direction === 'descending'}" ng-click="vm.filters.direction = 'descending'"><a href=""><i class='fa fa-angle-up'></i></a></li>
-            <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.direction === null}" ng-click="vm.filters.direction = null"><a href=""><i class='fa fa-angle-down'></i></a></li>
-            <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.favorites === true}" ng-click="vm.filters.favorites = !vm.filters.favorites"><a href="">
-              <i ng-if="vm.filters.favorites" class='fa fa-star'></i>
-              <i ng-if="!vm.filters.favorites" class='fa fa-star-o'></i>
+            <li ng-show="vm.showFilters" ng-class="{'active': vm.filters.direction === 'descending'}" ng-click="vm.filters.direction = 'descending'"><a href=""><i class='fa fa-angle-up'></i></a></li>
+            <li ng-show="vm.showFilters" ng-class="{'active': vm.filters.direction === null}" ng-click="vm.filters.direction = null"><a href=""><i class='fa fa-angle-down'></i></a></li>
+            <li ng-if="vm.filters.favorites && vm.session.currentUser" ng-show="vm.showFilters" ng-class="{'active': vm.filters.favorites === true}" ng-click="vm.filters.favorites = !vm.filters.favorites"><a ui-sref="posts">
+              <i class='fa fa-star'></i>
+            </a></li>
+            <li ng-if="!vm.filters.favorites && vm.session.currentUser" ng-show="vm.showFilters" ng-class="{'active': vm.filters.favorites === true}" ng-click="vm.filters.favorites = !vm.filters.favorites"><a ui-sref="favorites">
+              <i class='fa fa-star-o'></i>
             </a></li>
         </ul>
         <form ng-hide="vm.path != '/'" class="navbar-form navbar-left" role="search">

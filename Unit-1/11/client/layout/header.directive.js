@@ -19,9 +19,11 @@ function directive() {
 
   function controller($scope, postsService, AuthService, $interval, $location) {
     var vm = this;
-    vm.path = $location.path();
+    vm.showFilters = ($location.$$path === '/' || $location.$$path === '/favorites');
+    console.log('show filters ', vm.showFilters);
+
     $scope.$on('$stateChangeSuccess', function(event, state){
-      vm.path = $location.path();
+      vm.showFilters = ($location.$$path === '/' || $location.$$path === '/favorites');
     })
 
     vm.session = AuthService.session;
@@ -30,5 +32,6 @@ function directive() {
     vm.logout = function(){
       vm.user = AuthService.logout();
     }
+
   }
 };

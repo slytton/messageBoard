@@ -12,8 +12,8 @@
       <div class="row">
         <div class="col-xs-9">
           <h4>
-            <i ng-if='post.favorite' ng-click='vm.unFavorite(post)' class="fa fa-star"></i>
-            <i ng-if='!post.favorite' ng-click='vm.favorite(post)' class="fa fa-star-o"></i>
+            <i ng-if='post.favorite && vm.session.currentUser' ng-click='vm.unFavorite(post)' class="fa fa-star"></i>
+            <i ng-if='!post.favorite && vm.session.currentUser' ng-click='vm.favorite(post)' class="fa fa-star-o"></i>
             <span ng-bind='post.title'></span>
           </h4>
         </div>
