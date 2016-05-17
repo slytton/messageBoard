@@ -1,8 +1,0 @@
-{
-  "root": "/",
-  "debug": true,
-  "cache_control": false,
-  "rewrites": [
-    {"source":"**","destination":"index.html"}
-  ]
-}
