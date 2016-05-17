@@ -1,6 +1,6 @@
 angular.module('RedditClone')
-  .directive('rcPosts', ['$timeout', 'postsService', 'AuthService', PostsDirective]);
-    function PostsDirective($timeout, PostsService, AuthService) {
+  .directive('rcPosts', ['$timeout', 'postsService', 'AuthService', '$location', PostsDirective]);
+    function PostsDirective($timeout, PostsService, AuthService, $location) {
       return {
         restrict: 'E',
         templateUrl: '/posts/posts.directive.html',
@@ -8,6 +8,11 @@ angular.module('RedditClone')
         scope: {},
         link: function(scope, element){
           scope.vm = {};
+          console.log($location);
+          if ($location.$$path === '/favorites') {
+            PostsService.filters.favorites = true;
+            console.log('path is favorites');
+          }
           scope.filters = PostsService.filters;
           PostsService.list().then(function(posts){
             scope.vm.posts = posts;

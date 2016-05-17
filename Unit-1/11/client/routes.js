@@ -23,6 +23,11 @@
         template: "<rc-posts></rc-posts>",
         parent: 'layout'
       })
+      .state('favorites', {
+        url: "/favorites",
+        template: "<rc-posts></rc-posts>",
+        parent: 'layout'
+      })
       .state('signup', {
         loggedOutOnly: true,
         url: "/signup",

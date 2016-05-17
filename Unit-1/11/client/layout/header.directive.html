@@ -27,6 +27,10 @@
             </li>
             <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.direction === 'descending'}" ng-click="vm.filters.direction = 'descending'"><a href=""><i class='fa fa-angle-up'></i></a></li>
             <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.direction === null}" ng-click="vm.filters.direction = null"><a href=""><i class='fa fa-angle-down'></i></a></li>
+            <li ng-hide="vm.path != '/'" ng-class="{'active': vm.filters.favorites === true}" ng-click="vm.filters.favorites = !vm.filters.favorites"><a href="">
+              <i ng-if="vm.filters.favorites" class='fa fa-star'></i>
+              <i ng-if="!vm.filters.favorites" class='fa fa-star-o'></i>
+            </a></li>
         </ul>
         <form ng-hide="vm.path != '/'" class="navbar-form navbar-left" role="search">
           <div class="form-group">

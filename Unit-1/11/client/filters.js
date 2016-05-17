@@ -8,3 +8,14 @@ angular.module('RedditClone')
       return newItem;
     }
   })
+  .filter('favorites', function(){
+    return function(items, filterByFav){
+      if(filterByFav){
+        return items.filter(function(item){
+          return !!item.favorite;
+        })
+      }else{
+        return items
+      }
+    }
+  })

@@ -1,7 +1,8 @@
 <div class="posts">
-<article ng-repeat='post in vm.posts |
+<article ng-repeat='post in vm.filteredPosts = (vm.posts |
                     filter:filters.search |
-                    orderBy:filters.sort:filters.direction'>
+                    orderBy:filters.sort:filters.direction |
+                    favorites:filters.favorites)'>
   <section class='unselectabel row'>
 
     <div class="col-sm-3 .center-cropped">
@@ -49,4 +50,5 @@
     </div>
   </section>
 </article>
+<h3 ng-if="vm.filteredPosts.length === 0">No posts to show  :(</h3>
 </div>
