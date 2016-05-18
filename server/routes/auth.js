@@ -5,6 +5,24 @@ var router = express.Router();
 require('dotenv').load();
 var knex = require('../db/config');
 
+router.get('/', function(req, res, next){
+  var host = req.protocol+'://'+req.get('host')+'/api/v1/'+'auth/';
+  res.json({
+    signup: {
+      link: host + 'signup',
+      methods: [
+        'POST'
+      ]
+    },
+    loging: {
+      link: host + 'login',
+      methods: [
+        'POST'
+      ]
+    }
+  })
+})
+
 router.post('/signup', function(req, res, next) {
   var newUser = req.body;
   var errors = [];

@@ -1,5 +1,5 @@
 <div class="posts">
-<article ng-repeat='post in vm.filteredPosts = (vm.posts |
+<article class="post" ng-repeat='post in vm.filteredPosts = (vm.posts |
                     filter:filters.search |
                     orderBy:filters.sort:filters.direction |
                     favorites:filters.favorites)'>

@@ -21,7 +21,11 @@
       .state('posts', {
         url: "/",
         template: "<rc-posts></rc-posts>",
-        parent: 'layout'
+        parent: 'layout',
+        controller: ['postsService', function(postsService) {
+          postsService.filters.favorites = false;
+          console.log('route favorites');
+        }],
       })
       .state('favorites', {
         url: "/favorites",

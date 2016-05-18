@@ -6,6 +6,8 @@
 
   function resolveApiUrl(){
     if(window.location.origin === "http://localhost:5000") return 'http://localhost:3000';
+
+    return 'https://message-board-sl.herokuapp.com'
   }
 
 

@@ -11,10 +11,10 @@
   <span class='show-add-comments' ng-click="myState.showAddComments = !myState.showAddComments"><i class='fa fa-pencil'></i> comment</span>
 
   <div class="row add-comments" ng-show="myState.showAddComments">
-    <form class='form-inline'  class="" name='addCommentForm' ng-submit="vm.createComment(post, comment, this)" novalidate>
+    <form class='form'  class="" name='addCommentForm' ng-submit="vm.createComment(post, comment, this)" novalidate>
       <div class="form-group" ng-class="{ 'has-error': addCommentForm.comment.$invalid && addCommentForm.comment.$dirty,
       'has-success': addCommentForm.comment.$valid}">
-        <input type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.text">
+        <textarea type="text" class="form-control" id="comment" placeholder="Enter Comment" name="comment" required ng-model="commentsForm.text"></textarea>
         <div ng-messages='addCommentForm.comment.$error' ng-show='addCommentForm.comment.$dirty'>
           <p ng-message='required'>
             Please enter a comment.

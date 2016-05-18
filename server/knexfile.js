@@ -4,7 +4,7 @@ require('dotenv').config();
 module.exports = {
   development: {
     client: 'pg',
-    connection: 'postgres://localhost/reddit-clone'
+    connection: 'postgres://localhost/message-board'
   },
   production: {
     client: 'pg',

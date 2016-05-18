@@ -6,7 +6,7 @@ var cors = require('cors');
 var jwt = require('jsonwebtoken');
 var knex = require('./db/config');
 
-var users = require('./routes/users.js');
+var api = require('./routes/api.js');
 var posts = require('./routes/posts.js');
 var comments = require('./routes/comments.js');
 var auth = require('./routes/auth.js');
@@ -36,7 +36,7 @@ app.use(function(req, res, next){
   }
 })
 
-app.use('/api/v1/users', users);
+app.use('/api/v1/', api);
 app.use('/api/v1/posts', posts);
 app.use('/api/v1/comments', comments);
 app.use('/api/v1/auth', auth);

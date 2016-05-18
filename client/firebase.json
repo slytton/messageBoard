@@ -1,5 +1,5 @@
 {
-  "firebase": "reddit-clone-sl",
+  "firebase": "message-board-sl",
   "public": ".",
   "ignore": [
     "firebase.json",

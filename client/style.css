@@ -26,8 +26,6 @@ nav .fa-angle-up, nav .fa-angle-down, .posts .fa-star, .posts .fa-star-o {
   color: #FFB100
 }
 
-
-
 .bold {
   font-weight:bold;
 }
@@ -46,11 +44,9 @@ article {
   border-bottom: 1px solid rgb(189, 189, 189);
 }
 
-
 .author {
   font-size: 10px;
 }
-
 
 .comments, .add-comments{
   margin-top: 30px;
@@ -95,6 +91,7 @@ article {
   height: 100%;
   font-size: 25px;
   color: rgb(187, 187, 187);
+  text-shadow: 0 0 1px black;
   cursor: pointer;
 }
 
@@ -110,14 +107,19 @@ nav .fa-star, nav .fa-star-o {
   font-size: 1.5em;
 }
 
+
+
 /*Animations*/
 
-/*.ng-enter {
-  animation: bounceInRight .75s;
+.posts .ng-enter {
+  animation: bounceInRight .5s;
+}
+.posts .ng-leave {
+  animation: fadeOut .5s;
 }
 
-.ng-leave {
-  animation: hinge 1s;
+.fa-star.ng-enter, .fa-star-o.ng-enter, .fa-star.ng-leave, .fa-star-o.ng-leave {
+  animation: none;
 }
 
 .form-group p.ng-leave {
@@ -128,19 +130,19 @@ nav .fa-star, nav .fa-star-o {
   animation: shake .5s;
 }
 
-.add-post.ng-hide-remove, .add-comments.ng-hide-remove{
-  animation: lightSpeedIn .75s;
+.add-post.ng-enter, .add-comments.ng-hide-remove{
+  animation: lightSpeedIn .5s;
 }
 
 .add-post.ng-hide-add, .add-comments.ng-hide-add{
-  animation: lightSpeedOut .75s;
+  animation: lightSpeedOut .5s;
 }
 
 .comments.ng-hide-remove {
-  animation: flipInX 1s;
+  animation: flipInX .75s;
 }
 .comments.ng-hide-add {
-  animation: flipOutX 1s;
+  animation: flipOutX .75s;
 }
 
 .ng-move {
@@ -150,4 +152,4 @@ nav .fa-star, nav .fa-star-o {
 .ng-enter-stagger, .ng-leave-stagger {
   animation-delay: .2s;
   animation-duration: 0;
-}*/
+}

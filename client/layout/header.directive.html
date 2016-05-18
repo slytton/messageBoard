@@ -27,14 +27,14 @@
             </li>
             <li ng-show="vm.showFilters" ng-class="{'active': vm.filters.direction === 'descending'}" ng-click="vm.filters.direction = 'descending'"><a href=""><i class='fa fa-angle-up'></i></a></li>
             <li ng-show="vm.showFilters" ng-class="{'active': vm.filters.direction === null}" ng-click="vm.filters.direction = null"><a href=""><i class='fa fa-angle-down'></i></a></li>
-            <li ng-if="vm.filters.favorites && vm.session.currentUser" ng-show="vm.showFilters" ng-class="{'active': vm.filters.favorites === true}" ng-click="vm.filters.favorites = !vm.filters.favorites"><a ui-sref="posts">
+            <li ng-if="vm.filters.favorites && vm.session.currentUser" ng-show="vm.showFilters" ng-class="{'active': vm.filters.favorites === true}" ><a ui-sref="posts">
               <i class='fa fa-star'></i>
             </a></li>
-            <li ng-if="!vm.filters.favorites && vm.session.currentUser" ng-show="vm.showFilters" ng-class="{'active': vm.filters.favorites === true}" ng-click="vm.filters.favorites = !vm.filters.favorites"><a ui-sref="favorites">
+            <li ng-if="!vm.filters.favorites && vm.session.currentUser" ng-show="vm.showFilters" ng-class="{'active': vm.filters.favorites === true}" ><a ui-sref="favorites">
               <i class='fa fa-star-o'></i>
             </a></li>
         </ul>
-        <form ng-hide="vm.path != '/'" class="navbar-form navbar-left" role="search">
+        <form ng-show="vm.showFilters" class="navbar-form navbar-left" role="search">
           <div class="form-group">
             <label class="sr-only"></label>
             <div class="input-group">
